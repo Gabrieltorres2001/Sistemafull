@@ -1,0 +1,175 @@
+﻿      body {
+        padding-top: 60px;
+		background: url("../images/photo_bg.jpg") no-repeat center center fixed;
+		background-size: cover;
+      }
+	#acciones {
+
+		  width:100%;
+		  float:left;
+		  border:1px solid #555;
+		  overflow: auto;
+		  background-color:#CCC;
+	}
+	#portada {
+		  float:left; 
+		  width:66%;
+		  height:280px;
+		  border:1px solid #555;
+		  overflow: auto;
+		  background-color:#CCC;
+		  font-size: 0.75em;
+	}
+	#listaLegajos {
+		  margin-left:66%;
+		  height:280px;
+		  border:1px solid #555;
+		  overflow: auto;
+		  background-color:#CCC;
+		  font-size: 0.75em;
+	}
+	
+
+	#detallesdecomprobante {
+		  float:left; 
+		  width:100%;
+		  border:1px solid #555;
+		  overflow: auto;
+		  background-color:#CCC;
+		  font-size: 0.75em;
+	}
+
+	#informepresupuesto {
+		  width:100%;
+		  float:left;
+		  border:1px solid #555;
+		  overflow: auto;
+		  background-color:#CCC;
+		  font-size: 0.75em;
+	}
+	
+	#informeRemito {
+		  width:100%;
+		  float:left;
+		  border:1px solid #555;
+		  overflow: auto;
+		  background-color:#CCC;
+		  font-size: 0.75em;
+	}
+	
+	.input{
+		  border: 1px solid gray;
+		  border-radius: 4px;
+	  }
+	  .input:focus{
+		  border: 1px solid red;
+	  }
+	 
+	  input[type=button] {
+		font-family: 'Open Sans', sans-serif;
+		font-size: 14px;
+		background: #b2c831;
+		color: #fff;
+		border: none;
+		padding: 2px 8px 2px 10px;
+		  *-webkit-border-radius: 4px;
+		 -moz-border-radius: 4px;
+			  border-radius: 4px;
+	
+		}
+		input[type=button]:disabled {
+		background: #aaa;
+		}
+		
+	digiclock {
+		font-size: 14px;
+		color: #fff;
+		text-align: right;
+		line-height: 24px;
+		padding-top: 160px;
+		margin-left: right		
+}
+		
+		#detallesdemovimientos {
+		  border:1px solid #555;
+		  font-size: 0.75em;
+		  background-color:#fff;
+		  position:fixed;
+		  left:20%;
+		  top:49px;
+		  height:600px;
+		  width:700px;
+		  visibility:hidden;
+		  border-radius: 9px;
+		}
+		
+		#fondoClaro {
+		  border:1px solid #555;
+		  font-size: 0.75em;
+		  background-color:#fff;
+		  position:fixed;
+		  left:0px;
+		  top:0px;
+		  height:100%;
+		  width:100%;
+		  visibility:hidden;
+		  border-radius: 9px;
+		  opacity:0.5;
+		}
+		
+		#agregarItemAlComprobante {
+		  border:1px solid #555;
+		  font-size: 0.75em;
+		  background-color:#fff;
+		  position:fixed;
+		  left:20%;
+		  top:49px;
+		  height:400px;
+		  width:700px;
+		  visibility:hidden;
+		  border-radius: 9px;
+		  opacity:1;
+		}
+		
+		#unificarFormaPagoCliente, #unificarTipoFacturaCliente {
+		  border:1px solid #555;
+		  font-size: 0.75em;
+		  background-color:#fff;
+		  position:fixed;
+		  left:20%;
+		  top:69px;
+		  height:190px;
+		  width:700px;
+		  visibility:hidden;
+		  border-radius: 9px;
+		  opacity:1;
+		}
+		
+	select{
+		  border: 1px solid gray;
+		  border-radius: 4px;
+	  }
+	  
+	legend {
+		  display: block;
+		  width: auto;
+		  padding: 10;
+		  margin-bottom: 0px;
+		  font-size: inherit;
+		  line-height: inherit;
+		  color: #333333;
+		  border: none;
+		  border-bottom: none;
+		}
+		
+	fieldset {
+	  padding: 0.35em 0.625em 0.75em;
+	  margin: 5px;
+	  border: 2px solid #aaa;
+	  border-radius: 5px;
+	  display: inline-block;
+	  /*padding: 0;
+	  margin: 0;
+	  border: 0;
+	  */
+	}

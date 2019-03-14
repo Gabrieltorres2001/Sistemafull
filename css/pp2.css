@@ -1,0 +1,34 @@
+﻿      body {
+        padding-top: 60px;
+		background: url("../images/photo_bg.jpg") no-repeat center center fixed;
+		background-size: cover;
+      }
+	  digiclock {
+	font-size: 14px;
+	color: #fff;
+	text-align: right;
+	line-height: 24px;
+	padding-top: 160px;
+	margin-left: right		
+}
+
+<style>
+	*{margin:0px; padding:0px; font-family:Calibri;}
+ 
+	.cycle-main{border:solid 1px #333; width:100%; margin:10px auto 0px;}
+	
+	.cycle-main div{width:98%; padding:5px 10px;}
+ 
+	.cycle-title{background-color:#099;}
+	
+	.cycle-title label{color:#FFF; margin-left:5px; font-weight:bold;}
+	
+	.cycle-content{height:30px; text-align:center; }
+ 
+	.cycle-pie{border-top:solid 1px #333;}
+	
+	.cycle-pie a{display:inline-block; padding:5px 10px; background-color:#000; color:#FFF; text-decoration:none;}
+	
+	.cycle-pie a:hover{color:#900;}
+		
+</style>

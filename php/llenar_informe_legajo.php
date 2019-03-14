@@ -1,0 +1,35 @@
+<?php 
+
+echo"<fieldset style='width:99%'>";
+	echo"<legend>Opciones de impresion de LEGAJO:</legend>";
+		//echo"<fieldset style='width:150px'>";
+		//	echo"<legend>Descripción extendida:</legend>";	
+		//	echo"<input type='radio' id='radio11' name='descrip'>Automática</option>";
+		//	echo"<br>";
+		//	echo"<input type='radio' id='radio12' name='descrip' checked>Ninguna</option>";
+		//echo"</fieldset>";
+		//echo"<fieldset style='width:120px'>";
+		//	echo"<legend>IVA:</legend>";	
+		//	echo"<input type='radio' id='radio21' name='iva' checked>Informarlo</option>";
+		//	echo"<br>";
+		//	echo"<input type='radio' id='radio22' name='iva'>Incluído</option>";
+		//echo"</fieldset>";
+		//echo"<fieldset style='width:180px'>";
+		//	echo"<legend>Moneda:</legend>";	
+		//	echo"<input type='radio' id='radio31' name='moneda' checked>Del producto</option>";
+		//	echo"<br>";
+		//	echo"<input type='radio' id='radio32' name='moneda'>En Pesos</option>";
+		//	echo"<label id='lbltc' style='visibility: hidden;' for='TipoDeCambio'>. Cambio:</label>";
+		//	echo"<input id='TipoDeCambio' class='input' name='TipoDeCambio' type='text' size='4' style='text-align:right; visibility: hidden;' value=1>";
+		//echo"</fieldset>";
+		//echo"<fieldset style='width:170px'>";
+		//	echo"<legend>Plazo de entrega:</legend>";	
+		//	echo"<input type='radio' id='radio41' name='plazo' checked>Por presupuesto</option>";
+		//	echo"<br>";
+		//	echo"<input type='radio' id='radio42' name='plazo'>Por Producto (automático)</option>";
+		//echo"</fieldset>";
+		echo"<fieldset style='width:150px; border: 0px;'>";	
+			echo"<input type='button' id='informe' value='Emitir Legajo'/>";
+		echo"</fieldset>";
+echo"</fieldset>";
+echo"<br>";

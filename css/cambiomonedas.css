@@ -1,0 +1,101 @@
+﻿      body {
+        padding-top: 60px;
+		background: url("../images/photo_bg.jpg") no-repeat center center fixed;
+		background-size: cover;
+      }
+	#HistorialCambiosMoneda {
+		  width:60%;
+		  float:left;
+		  height:555px;
+		  border:1px solid #555;
+		  overflow: auto;
+		  background-color:#CCC;
+	}
+	
+	#CambioMonedaNuevo {
+		  margin-left:60%;
+		  height:215px;
+		  border:1px solid #555;
+		  overflow: auto;
+		  background-color:#CFC;
+		  font-size: 1.05em;
+	}
+	
+	#CambioMonedaActual {
+		  margin-left:60%;
+		  height:155px;
+		  border:1px solid #555;
+		  overflow: auto;
+		  background-color:#CCC;
+		  font-size: 1em;
+	}
+	#datosAfip {
+		  margin-left:60%;
+		  height:185px;
+		  border:1px solid #555;
+		  overflow: auto;
+		  background-color:#CCC;
+		  font-size: 1em;
+	}
+
+	.input{
+		  border: 1px solid gray;
+		  border-radius: 4px;
+	  }
+	  .input:focus{
+		  border: 1px solid red;
+	  }
+	 
+	  input[type=button] {
+		font-family: 'Open Sans', sans-serif;
+		font-size: 14px;
+		background: #b2c831;
+		color: #fff;
+		border: none;
+		padding: 2px 8px 2px 10px;
+		  *-webkit-border-radius: 4px;
+		 -moz-border-radius: 4px;
+			  border-radius: 4px;
+	
+		}
+		input[type=button]:disabled {
+		background: #aaa;
+		}
+		
+	digiclock {
+		font-size: 14px;
+		color: #fff;
+		text-align: right;
+		line-height: 24px;
+		padding-top: 160px;
+		margin-left: right		
+}
+		
+	select{
+		  border: 1px solid gray;
+		  border-radius: 4px;
+	  }
+	  
+	legend {
+		  display: block;
+		  width: auto;
+		  padding: 10;
+		  margin-bottom: 0px;
+		  font-size: inherit;
+		  line-height: inherit;
+		  color: #333333;
+		  border: none;
+		  border-bottom: none;
+		}
+		
+	fieldset {
+	  padding: 0.35em 0.625em 0.75em;
+	  margin: 5px;
+	  border: 2px solid #aaa;
+	  border-radius: 5px;
+	  display: inline-block;
+	  /*padding: 0;
+	  margin: 0;
+	  border: 0;
+	  */
+	}

@@ -1,0 +1,154 @@
+﻿body {
+	padding-top: 60px;
+	background: url("../images/photo_bg.jpg") no-repeat center center fixed;
+	background-size: cover;
+}
+#acciones {
+	width:490px;
+	float:left;
+	height:87px;
+	border:1px solid #555;
+	overflow: auto;
+	background-color:#CCC;
+}
+#accionesDetalle {
+	margin-left:490px;
+	height:87px;
+	border:1px solid #555;
+	overflow: auto;
+	background-color:#CCC;
+}
+
+/*campos en comun para contactos, articulos, empresas, ControlPanelMenu*/
+#contactos, #articulos, #empresas, #ControlPanelMenu, #ComprobantesEmitidosMenu {
+	margin-left:0px;
+	float:left; 
+	height:77vh;
+	border:1px solid #555;
+	overflow: auto;
+	font-size: 0.75em;
+	background-color:#CCC;
+}	
+	/*campos DIFERENTES para contactos, articulos, empresas*/
+	#contactos, #empresas {
+		width:400px;
+	}	
+	#articulos {
+		width:460px;
+	}
+	#ControlPanelMenu {
+		width:240px;
+		font-size: 1em;
+	}
+	
+	#ComprobantesEmitidosMenu {
+		width:140px;
+		font-size: 1em;
+	}
+
+	/*campos en comun para contactos, articulos, empresas*/
+	#detallesdecontacto, #detallesdearticulo, #detallesdeempresas, #ControlPanelDetalles, #ComprobantesEmitidosDetalles {
+	  height:77vh;
+	  border:1px solid #555;
+	  overflow: auto;
+	  font-size: 0.75em;
+	  background-color:#CCC;
+	}
+	/*campos DIFERENTES para contactos, articulos, empresas*/
+	#detallesdecontacto, #detallesdeempresas {
+	  margin-left:400px;
+	}	
+	#detallesdearticulo {
+	  margin-left:460px;
+	}
+	#ControlPanelDetalles {
+	  margin-left:240px;
+	  font-size: 0.95em;
+	}	
+
+	#ComprobantesEmitidosDetalles {
+	  margin-left:140px;
+	  font-size: 0.75em;
+	}	
+	
+	/*campos en comun para contactos, articulos, empresas*/	
+	#movimientosdecontacto, #movimientosdearticulo, #empresaenafip, #movimientosControlP {
+	  margin-left:400px;
+	  top:auto;
+	  height:0vh;
+	  border:1px solid #555;
+	  overflow: auto;
+	  font-size: 0.75em;
+	  background-color:#CCC;
+
+	}
+/*campos DIFERENTES para contactos, articulos, empresas*/
+	#movimientosdecontacto, #empresaenafip {
+	  margin-left:400px;
+	}
+	#movimientosdearticulo {
+	  margin-left:460px;
+	}
+	#movimientosControlP {
+	  margin-left:300px;
+	}
+	
+	.input{
+		  border: 1px solid gray;
+		  border-radius: 4px;
+	  }
+	  .input:focus{
+		  border: 1px solid red;
+	  }
+	 
+	  input[type=button] {
+	font-family: 'Open Sans', sans-serif;
+	font-size: 14px;
+	background: #b2c831;
+	color: #fff;
+	border: none;
+	padding: 2px 8px 2px 10px;
+	  *-webkit-border-radius: 4px;
+     -moz-border-radius: 4px;
+          border-radius: 4px;
+
+}
+		input[type=button]:disabled {
+		background: #aaa;
+		}
+		  digiclock {
+			font-size: 14px;
+			color: #fff;
+			text-align: right;
+			line-height: 24px;
+			padding-top: 160px;
+			margin-left: right		
+		}
+		
+		#caja2 {
+		  font-size:1em;
+		  position:absolute;
+		  left:196px;
+		  top:109px;
+		  height:255px;
+		  width:300px;
+		  background-color:#ffffa0;
+		  border-width:1px;
+		  border-style:solid;
+		  border-color:#000000;
+		  visibility:hidden;
+		  /**/
+		}
+		#detallesdemovimientos {
+		  border:1px solid #555;
+		  font-size: 0.75em;
+		  background-color:#fff;
+		  position:fixed;
+		  left:14%;
+		  top:109px;
+		  height:480px;
+		  width:71%;
+		  visibility:hidden;
+		  border-radius: 9px;
+		}
+

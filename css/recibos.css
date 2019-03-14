@@ -1,0 +1,13 @@
+﻿		#nuevoItem {
+		  border:1px solid #555;
+		  font-size: 0.75em;
+		  background-color:#fff;
+		  position:fixed;
+		  left:1%;
+		  top:200px;
+		  height:125px;
+		  width:98%;
+		  visibility:hidden;
+		  border-radius: 9px;
+		}
+		
