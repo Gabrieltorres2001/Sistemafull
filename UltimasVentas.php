@@ -58,7 +58,7 @@ sec_session_start();
   <body>
     
     <!-- SI ESTOY LOGEADO. BIEN. PUEDO INGRESAR. -->
-    <?php if (login_check($mysqli) == true) : ?>
+    <?php if ((login_check($mysqli) == true) && (formulario_habilitado("UltimasVentas") == true)) : ?>
 	<?php barraSuperior('UltimasVentas') ?>
 
     <div class="container">

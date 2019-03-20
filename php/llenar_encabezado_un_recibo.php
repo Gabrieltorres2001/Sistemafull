@@ -85,7 +85,7 @@ $conexion_db=mysqli_connect(HOST,USER,PASSWORD,DATABASE) or
 	echo"</select>";
 	echo"<br>";
 	echo"<label for='preimpreso'>Nº recibo preimpreso:</label>";
-	if ($soyYo==0) {echo"<input id='preimpreso' class='input' name='preimpreso' type='text' size='15' value='".$reg['NumeroComprobante02']."' disabled>";} else {echo"<input id='preimpreso' class='input' name='preimpreso' type='text' size='15' value='".$reg['NumeroComprobante02']."'>";}
+	echo"<input id='preimpreso' class='input' name='preimpreso' type='text' size='15' value='".$reg['NumeroComprobante02']."'>";
 	echo"<br>";
 	echo"<label for='Notas'>Notas:</label>";
 	if ($soyYo==0) {echo"<textarea id='Notas' class='input' overflow='scroll' name='Notas' resize='none' cols='60' rows='1' disabled>".$reg['Notas']."</textarea>";} else {echo"<textarea id='Notas' class='input' overflow='scroll' name='Notas' resize='none' cols='60' rows='1'>".$reg['Notas']."</textarea>";}

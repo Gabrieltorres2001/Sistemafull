@@ -175,36 +175,48 @@ sec_session_start();
       </div><!-- /row -->
       
       
-	  <!-- SEGUNDA FILA DE BLOCKS -->     
-      <div class="row">
-        <div class="col-sm-3 col-lg-3">
-			<a href="Cuentascorrientes.php">
+<!-- SEGUNDA FILA DE BLOCKS -->     
+<div class="row">
+	<!-- Primer Block -->       
+	<div class="col-sm-3 col-lg-3">
+		<!-- Primer Medio Block: Cuentas Corrientes-->   
+		<?php if (formulario_habilitado("CuentasCorrientes") == true): ?>     
+				<a href="Cuentascorrientes.php">
+			<?php else : ?>
+				<a href="no_habilitado.php">
+			<?php endif; ?>
 			<div class="half-unit">
-	      		<dtitle>Cuentas corrientes</dtitle>
-	      		<hr>
-	      		<div class="cont">
+				<dtitle>Cuentas corrientes</dtitle>
+				<hr>
+				<div class="cont">
 					<p><bold>
 					Cuentas corrientes
 					</bold></p>
 				</div>
 			</div>
 			</a>
-			
+		<!-- Fin Cuentas Corrientes -->	
+		<!-- Segundo Medio Block: Recibos--> 		
+		<?php if (formulario_habilitado("Recibo") == true): ?>   
 			<a href="Recibos.php">
+			<?php else : ?>
+				<a href="no_habilitado.php">
+			<?php endif; ?>
 			<div class="half-unit">
-	      		<dtitle>Recibos</dtitle>
-	      		<hr>
-	      		<div class="cont">
+	      <dtitle>Recibos</dtitle>
+	      <hr>
+	      <div class="cont">
 					<p><bold>
 					Recibos
 					</bold></p>
 				</div>
 			</div>
 			</a>
-        </div>
+			<!-- Fin Recibos --> 
+		</div>
+		<!-- Fin Primer Block --> 
 
-
-		<!-- Ventas --> 
+		<!-- Segundo Block --> 
     <div class="col-sm-3 col-lg-3">
 			<a href="Remitos.php">
 			<div class="half-unit">
@@ -218,7 +230,11 @@ sec_session_start();
 			</div>
 			</a>
 			
+			<?php if (formulario_habilitado("ComprobantesGenerados") == true): ?>     
 			<a href="Ferrreto.php">
+			<?php else : ?>
+				<a href="no_habilitado.php">
+			<?php endif; ?>
 			<div class="half-unit">
 	      		<dtitle>Resumen de comprobantes emitidos</dtitle>
 	      		<hr>
@@ -245,7 +261,11 @@ sec_session_start();
 			</div>
 			</a>
 			
+			<?php if (formulario_habilitado("ComprobantesGenerados") == true): ?>     
 			<a href="AjustesStock.php">
+			<?php else : ?>
+				<a href="no_habilitado.php">
+			<?php endif; ?>
 			<div class="half-unit">
 	      		<dtitle>Ajustes de Stock</dtitle>
 	      		<hr>
@@ -260,7 +280,11 @@ sec_session_start();
 	
 	  <!-- Ordenes de compra -->    
         <div class="col-sm-3 col-lg-3">		
+			<?php if (formulario_habilitado("OrdenesCompra") == true): ?>     
 			<a href="OrdenesCompra.php">
+			<?php else : ?>
+				<a href="no_habilitado.php">
+			<?php endif; ?>
 			<div class="dash-unit">
 	      		<dtitle>Ordenes de compra</dtitle>
 	      		<hr>
@@ -278,7 +302,11 @@ sec_session_start();
 	  <!-- TERCERA FILA DE BLOCKS -->     
       <div class="row">
       	<div class="col-sm-3 col-lg-3">
-		<a href="listadoClientes.php">
+				<?php if (formulario_habilitado("listadoClientes") == true): ?>     
+				<a href="listadoClientes.php">
+			<?php else : ?>
+				<a href="no_habilitado.php">
+			<?php endif; ?>				
 	  <!-- BARS CHART - lineandbars.js file -->     
       		<div class="dash-unit">
 	      		<dtitle>Listado de contactos</dtitle>
@@ -293,7 +321,11 @@ sec_session_start();
       	</div>
 
 	<div class="col-sm-3 col-lg-3">
-		<a href="Legajos.php">
+	<?php if (formulario_habilitado("Legajos") == true): ?>     
+			<a href="Legajos.php">
+			<?php else : ?>
+				<a href="no_habilitado.php">
+			<?php endif; ?>	
 	  <!-- BARS CHART - lineandbars.js file -->     
       		<div class="dash-unit">
 	      		<dtitle>Legajos digitales</dtitle>
@@ -337,7 +369,11 @@ sec_session_start();
       	</div>
 		
         <div class="col-sm-3 col-lg-3">
-			<a href="RemitosSinFactura.php">
+			<?php if (formulario_habilitado("RemitosSinFactura") == true): ?>     
+				<a href="RemitosSinFactura.php">
+			<?php else : ?>
+				<a href="no_habilitado.php">
+			<?php endif; ?>					
 			<div class="half-unit">
 	      		<dtitle>Ventas sin facturar</dtitle>
 	      		<hr>
@@ -349,7 +385,11 @@ sec_session_start();
 			</div>
 			</a>
 			
+			<?php if (formulario_habilitado("UltimasVentas") == true): ?>     
 			<a href="UltimasVentas.php">
+			<?php else : ?>
+				<a href="no_habilitado.php">
+			<?php endif; ?>	
 			<div class="half-unit">
 	      		<dtitle>Ultimas ventas por proveedor</dtitle>
 	      		<hr>

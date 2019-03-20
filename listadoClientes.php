@@ -97,7 +97,7 @@ sec_session_start();
 </head>
 <body>  
     <!-- SI ESTOY LOGEADO. BIEN. PUEDO INGRESAR. -->
-    <?php if (login_check($mysqli) == true) : ?>   
+    <?php if ((login_check($mysqli) == true) && (formulario_habilitado("listadoClientes") == true)) : ?>   
 	<?php barraSuperior('ListasClientes') ?>
 
     <div class="container">

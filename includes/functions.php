@@ -185,6 +185,17 @@ function login_check($mysqli) {
         return false;
     }
 }
+
+function formulario_habilitado($formulario) {
+    include_once 'sp_connect.php';
+    $conexion_sp=mysqli_connect(HOSTSP,USERSP,PASSWORDSP,DATABASESP) or die("Problemas con la conexión");
+    mysqli_query($conexion_sp,"set names 'utf8'");
+    if(!$result = mysqli_query($conexion_sp, "select habilitacion, clave from formularios where formulario='".$formulario."' limit 1")) die("Problemas con la consulta formularios");
+    $row = mysqli_fetch_array($result);
+    $password = hash('sha512', $formulario . $row['clave']);
+    if ($row['habilitacion']==$password) {return true;} else {return false;}
+}
+
 function esc_url($url) {
  
     if ('' == $url) {

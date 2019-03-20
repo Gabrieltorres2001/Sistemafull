@@ -226,13 +226,12 @@ function procesarEventos4()
 
 			
 		  setTimeout(function(){var datosce=document.getElementById('soyyoono');
-		  esMio=document.getElementById('soyyoono').value;
+			esMio=document.getElementById('soyyoono').value;
+			document.getElementById('preimpreso').addEventListener('blur',guardaCambiosEncabezadoRecibo,false); 
 		  if (datosce.value == '1') {
 			document.getElementById('Solicita').addEventListener('change',guardaCambiosEncabezadoRecibo,false); 
 			document.getElementById('CondicionesPago').addEventListener('change',guardaCambiosEncabezadoRecibo,false);
 			document.getElementById('Notas').addEventListener('blur',guardaCambiosEncabezadoRecibo,false); 	
-			document.getElementById('preimpreso').addEventListener('blur',guardaCambiosEncabezadoRecibo,false); 	
-
 			  } else {	  
 					document.getElementById('asignarmeRemit').addEventListener('click',asignarmeRemito,false); 	
 		  };}, 100);		  

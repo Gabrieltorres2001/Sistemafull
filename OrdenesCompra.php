@@ -36,8 +36,8 @@ sec_session_start();
 		<!-- [DO NOT DEPLOY] --><script src="./editablegrid/editablegrid_charts.js" ></script> 
 		<link rel="stylesheet" href="./editablegrid/editablegrid.css" type="text/css" media="screen">
     <!-- de EDITABLEGRID-->
-    <style type="text/css">
-	<!-- de EDITABLEGRID-->
+
+	<!-- de EDITABLEGRID
 			body { font-family:'lucida grande', tahoma, verdana, arial, sans-serif; font-size:11px; }
 			h1 { font-size: 15px; }
 			a { color: #548dc4; text-decoration: none; }
@@ -46,7 +46,7 @@ sec_session_start();
 			table.testgrid td, table.testgrid th { padding: 5px; border: 1px solid #E0E0E0; }
 			table.testgrid th { background: #E5E5E5; text-align: left; }
 			input.invalid { background: red; color: #FDFDFD; }
-	<!-- de EDITABLEGRID-->
+	 de EDITABLEGRID-->
 	<link href="css/select2.min.css" rel="stylesheet">
     </style>
 
@@ -93,7 +93,7 @@ sec_session_start();
   <body>
 
     <!-- SI ESTOY LOGEADO. BIEN. PUEDO INGRESAR. -->
-    <?php if (login_check($mysqli) == true) : ?>   
+    <?php if ((login_check($mysqli) == true) && (formulario_habilitado("OrdenesCompra") == true)) : ?>   
 	<?php barraSuperior('OrdenesCompra') ?>
 
     <div class="container">

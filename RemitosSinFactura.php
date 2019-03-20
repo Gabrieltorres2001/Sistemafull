@@ -38,7 +38,7 @@ sec_session_start();
 		<!-- [DO NOT DEPLOY] --><script src="./editablegrid/editablegrid_charts.js" ></script> 
 		<link rel="stylesheet" href="./editablegrid/editablegrid.css" type="text/css" media="screen">
     <!-- de EDITABLEGRID-->
-    <style type="text/css">
+
 	<!-- de EDITABLEGRID
 			body { font-family:'lucida grande', tahoma, verdana, arial, sans-serif; font-size:11px; }
 			h1 { font-size: 15px; }
@@ -94,7 +94,7 @@ sec_session_start();
   <body>
     
     <!-- SI ESTOY LOGEADO. BIEN. PUEDO INGRESAR. -->
-    <?php if (login_check($mysqli) == true) : ?>   
+    <?php if ((login_check($mysqli) == true) && (formulario_habilitado("RemitosSinFactura") == true)) : ?>   
 	<?php barraSuperior('Remitos sin facturar') ?>
 
     <div class="container">
