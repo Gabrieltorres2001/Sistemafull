@@ -100,11 +100,11 @@ function imprimir_detalle_articulos($resultc, $conexion_sp) {
 	if(!$resultCP = mysqli_query($conexion_sp, "select min(contactos2.idContacto) as mindeidContacto, organizaciones.Organizacion from contactos2 INNER JOIN organizaciones ON contactos2.idOrganizacion = organizaciones.id group by organizaciones.Organizacion")) die("Problemas con la consulta contactos2 Organizacion"); 
 	echo"<label for='IdProveedor'>Proveedor:</label>";
 	echo"<select id='IdProveedor' class='input' name='IdProveedor'>";
-	while ($rowCP = mysqli_fetch_row($resultCP)){
-		if ($reg['IdProveedor']==$rowCP[1]){
-			echo"<option selected value=".$rowCP[0].">".substr($rowCP[1],0,23)."</option>";
+	while ($rowCP = mysqli_fetch_array($resultCP)){
+		if ($reg['IdProveedor']==$rowCP['Organizacion']){
+			echo"<option selected value=".$rowCP['mindeidContacto'].">".substr($rowCP['Organizacion'],0,23)."</option>";
 			}else{
-				echo"<option value=".$rowCP[0].">".substr($rowCP[1],0,23)."</option>";
+				echo"<option value=".$rowCP['mindeidContacto'].">".substr($rowCP['Organizacion'],0,23)."</option>";
 			}	
 	}
 	if ($reg['IdProveedor']=='' or $reg['IdProveedor']=='0'){
@@ -235,32 +235,32 @@ function imprimir_movimientos_articulos($resultc, $conexion_sp) {
 	echo "<th  width='50'>SubTotal</th>"; 
 	echo "<th  width='50'>Cumpl.</th>"; 
 	echo "</tr>";  
-	while ($row = mysqli_fetch_row($resultc)){   
+	while ($row = mysqli_fetch_array($resultc)){   
 		echo "<tr>";  
-		if(!$resultCompro = mysqli_query($conexion_sp, "select TipoComprobante,FechaComprobante,NonmbreEmpresa,NumeroComprobante from comprobantes where IdComprobante='".$row[1]."'")) die("Problemas con la consulta comprobantes"); 
+		if(!$resultCompro = mysqli_query($conexion_sp, "select TipoComprobante,FechaComprobante,NonmbreEmpresa,NumeroComprobante from comprobantes where IdComprobante='".$row['IdComprobante']."'")) die("Problemas con la consulta comprobantes"); 
 		$regCompro = mysqli_fetch_array($resultCompro);
 		if(!$resultTP = mysqli_query($conexion_sp, "select TipoComprobante from z_tipocomprobante where IdTipoComprobante='".$regCompro['TipoComprobante']."'")) die("Problemas con la consulta z_tipocomprobante"); 
 		$regTP = mysqli_fetch_array($resultTP);
 		if(!$resultEmp = mysqli_query($conexion_sp, "select organizaciones.Organizacion from contactos2 INNER JOIN organizaciones ON contactos2.idOrganizacion = organizaciones.id where contactos2.IdContacto='".$regCompro['NonmbreEmpresa']."'")) die("Problemas con la consulta contactos2"); 
 		$regEmp = mysqli_fetch_array($resultEmp);
-		if(!$resultMon = mysqli_query($conexion_sp, "select Simbolo from monedaorigen where IdRegistroCambio='".$row[6]."'")) die("Problemas con la consulta monedaorigen"); 
+		if(!$resultMon = mysqli_query($conexion_sp, "select Simbolo from monedaorigen where IdRegistroCambio='".$row['Moneda']."'")) die("Problemas con la consulta monedaorigen"); 
 		$regMon = mysqli_fetch_array($resultMon);
 		//el id de los td tiene que ser el id de comprobante asi busco por ese numero en ambas tablas (comprobantes y detalle)
-		echo "<td name='xxxx' id=$row[1]>".$regTP['TipoComprobante']."</td>";   
-		echo "<td name='xxxx' id=$row[1]>".$regCompro['NumeroComprobante']."</td>";
-		echo "<td name='xxxx' id=$row[1]>".$regCompro['FechaComprobante']."</td>"; 
-		echo "<td name='xxxx' id=$row[1]>".$regEmp['Organizacion']."</td>";  
-		echo "<td name='xxxx' id=$row[1]>$row[2]</td>"; 
-		echo "<td name='xxxx' id=$row[1]>".$regMon['Simbolo']."</td>";		 
-		echo "<td name='xxxx' id=$row[1]>$row[3]</td>"; 
-		echo "<td name='xxxx' id=$row[1]>$row[4]</td>"; 
-		if ($row[5]=='0')
+		echo "<td name='xxxx' id=".$row['IdComprobante'].">".$regTP['TipoComprobante']."</td>";   
+		echo "<td name='xxxx' id=".$row['IdComprobante'].">".$regCompro['NumeroComprobante']."</td>";
+		echo "<td name='xxxx' id=".$row['IdComprobante'].">".$regCompro['FechaComprobante']."</td>"; 
+		echo "<td name='xxxx' id=".$row['IdComprobante'].">".$regEmp['Organizacion']."</td>";  
+		echo "<td name='xxxx' id=".$row['IdComprobante'].">".$row['Cantidad']."</td>"; 
+		echo "<td name='xxxx' id=".$row['IdComprobante'].">".$regMon['Simbolo']."</td>";		 
+		echo "<td name='xxxx' id=".$row['IdComprobante'].">".$row['CostoUnitario']."</td>"; 
+		echo "<td name='xxxx' id=".$row['IdComprobante'].">".$row['SubTotal']."</td>"; 
+		if ($row['Cumplido']=='0')
 			{
-				echo "<td name='xxxx' id=$row[1]><input type='checkbox' / disabled></td>"; 
+				echo "<td name='xxxx' id=".$row['IdComprobante']."><input type='checkbox' / disabled></td>"; 
 			}
 			else
 			{
-				echo "<td name='xxxx' id=$row[1]><input type='checkbox' checked disabled></td>"; 
+				echo "<td name='xxxx' id=".$row['IdComprobante']."><input type='checkbox' checked disabled></td>"; 
 			}
 		echo "</tr>";  
 	};

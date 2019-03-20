@@ -55,6 +55,7 @@ function procesarEventos11()
 }
 
 var conexion7;
+var conexion3_2019;
 function imprimir() {
 	document.getElementById('informe').disabled=true;
 	//Primero tengo que ver si la suma de las facturas y la suma de los pagos dan igual. Sino no sigo
@@ -70,29 +71,36 @@ function imprimir() {
 			var numRemit=document.getElementById('NumeroComprobante');
 			//alert(numRemit.value);
 			var aleatorio=Math.random();
-			//SEptiembre 2018. Me tengo que fijar para que empresa esta trabajando el sistema
-			//Esto tiene que estar grabado en la tabla controlPanel
-			var empresaActual=document.getElementById('estaEmpresa').value;
-			//alert(empresaActual);
-			if (empresaActual=="Tecnoplus") {
-				esMio=document.getElementById('soyyoono').value;
-				if (esMio == '1') {
-					//Recibo YA generado, o el recibo NO es mio, en ambos casos, sólo puedo emitir el informe
-					window.open('./informes/Tecnoplus_informe_recibo.php?idrecibo='+numRemit.value+"&rnadom="+aleatorio);
+			var direccionEmpresa=document.getElementById('direcRemito').value;
+			esMio=document.getElementById('soyyoono').value;
+			if (esMio == '0') {
+				//Recibo YA generado, o el recibo NO es mio, en ambos casos, sólo puedo emitir el informe
+				//Lo pongo fuera del IF porque de todas maneras lo voy a ejecutar
 				} else {
-					//Recibo NO generado, Y el recibo es mio, si se suman ambos casos, cargo los pagos a cada una de las facturas, y además emito el informe
-
+				//Recibo NO generado, Y el recibo es mio, si se suman ambos casos, cargo los pagos a cada una de las facturas, y además emito el informe
+					conexion3_2019=new XMLHttpRequest(); 
+					conexion3_2019.onreadystatechange = procesarEventos3_2019;
+					var aleatorio_2019=Math.random();
+					conexion3_2019.open('GET','./php/agrego_pago_a_factura_por_recibo.php?idrecibo='+numRemit.value+'&rnadom='+aleatorio_2019, true);
+					conexion3_2019.send();
 				}
-				}
-			if (empresaActual=="Cimse") {
-				mostrarAvisos("Cimse todavía no tiene recibos");
-				document.getElementById('informe').disabled=false;}
-					
-		
-		
+			window.open('./informes/Informe.php?idrecibo='+numRemit.value+"&rnadom="+aleatorio+"&direcc="+direccionEmpresa+"&tipoInforme=Recibo");
+			document.getElementById('informe').disabled=false;
 		}  
 }
 
+function procesarEventos3_2019()
+{
+    if(conexion3_2019.readyState == 4)
+  { 
+	  if(conexion3_2019.status == 200)
+	  { 
+			if (conexion3_2019.responseText=="Todos los pagos agregados correctamente"){actualizArticuloRemit();}
+			alert(conexion3_2019.responseText);
+			
+		}
+	}
+}
 
 var conexion301;
 function listarRecibosMios(){

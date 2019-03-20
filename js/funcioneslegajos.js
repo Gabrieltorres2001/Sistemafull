@@ -639,7 +639,7 @@ function procesarEventos18()
 
 function imprimir() {
 	  var aleatorio=Math.random();
-	  window.open('./informes/informe_legajo.php?idlegajo='+nCom+"&rnadom="+aleatorio);
+	  window.open('./informes/Informe.php?idlegajo='+nCom+"&rnadom="+aleatorio+"&tipoInforme=Legajo");
 	  //Tengo que hacer andar este
 	  //window.open('./PDFMerger-master/sample.php');
 }

@@ -1,5 +1,5 @@
 <?php
-include_once './includes/psl-config.php';
+include_once 'psl-config.php';
 
 function Buscar_Usuario($user_id) {
     // Usar declaraciones preparadas significa que la inyección de SQL no será posible.

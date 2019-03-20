@@ -519,23 +519,12 @@ function procesarEventos7()
 		if (document.getElementById('radio22').checked) {var preccios='1'}; 
 		
 		setTimeout(function(){mostrarDetalles(nCom);}, 100);
-
-		var empresaActual=document.getElementById('estaEmpresa').value;
 		
-		if (empresaActual=="Tecnoplus") {
 		var aleatorio=Math.random();
-		window.open('./informes/Tecnoplus_informe_OC_Proveedor.php?idppto='+numPresup.value+"&descr="+descripExtendda+"&precios="+preccios+"&rnadom="+aleatorio);
-		  
+		window.open('./informes/Informe.php?idppto='+numPresup.value+"&descr="+descripExtendda+"&precios="+preccios+"&rnadom="+aleatorio+"&tipoInforme=OC_Proveedor");
+			
 		aleatorio=Math.random();
-		window.open('./informes/Tecnoplus_informe_OC_Interna.php?idppto='+numPresup.value+"&descr="+descripExtendda+"&precios="+preccios+"&rnadom="+aleatorio);
-		}
-		if (empresaActual=="Cimse") {
-			var aleatorio=Math.random();
-			window.open('./informes/Cimse_informe_OC_Proveedor.php?idppto='+numPresup.value+"&descr="+descripExtendda+"&precios="+preccios+"&rnadom="+aleatorio);
-				
-			aleatorio=Math.random();
-			window.open('./informes/Cimse_informe_OC_Interna.php?idppto='+numPresup.value+"&descr="+descripExtendda+"&precios="+preccios+"&rnadom="+aleatorio);
-		}
+		window.open('./informes/Informe.php?idppto='+numPresup.value+"&descr="+descripExtendda+"&precios="+preccios+"&rnadom="+aleatorio+"&tipoInforme=OC_Interna");
 	  }
   }
 }

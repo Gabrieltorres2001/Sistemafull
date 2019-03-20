@@ -2,7 +2,7 @@
 
 function Llenar_Euro() {
 //Creamos la conexión
-include_once 'includes/sp_connect.php';
+include_once 'sp_connect.php';
 $conexion_sp=mysqli_connect(HOSTSP,USERSP,PASSWORDSP,DATABASESP) or
     die("Problemas con la conexión");
 	mysqli_query($conexion_sp,"set names 'utf8'");
@@ -14,7 +14,7 @@ $conexion_sp=mysqli_connect(HOSTSP,USERSP,PASSWORDSP,DATABASESP) or
 
 function Llenar_Dolar() {
 //Creamos la conexión
-include_once 'includes/sp_connect.php';
+include_once 'sp_connect.php';
 $conexion_sp=mysqli_connect(HOSTSP,USERSP,PASSWORDSP,DATABASESP) or
     die("Problemas con la conexión");
 	mysqli_query($conexion_sp,"set names 'utf8'");

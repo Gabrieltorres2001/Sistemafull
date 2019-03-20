@@ -555,7 +555,7 @@ function informeMovimientosCCC(){
 		conexion12=new XMLHttpRequest(); 
 		conexion12.onreadystatechange = procesarEventos12;
 		var aleatorio=Math.random();
-		window.open('./informes/informe_Cuenta_Cliente.php?&rnadom='+aleatorio+"&CUIT="+clienteCCC+"&desde="+desdeCCC+"&hasta="+hastaCCC+"&Canceladas="+cancCCC, true);
+		window.open('./informes/Informe.php?&rnadom='+aleatorio+"&CUIT="+clienteCCC+"&desde="+desdeCCC+"&hasta="+hastaCCC+"&Canceladas="+cancCCC+"&tipoInforme=Cuenta_Cliente", true);
 		conexion12.send();	
 }
 
@@ -580,7 +580,7 @@ function informeDeudoresPDF(){
 		conexion13=new XMLHttpRequest(); 
 		conexion13.onreadystatechange = procesarEventos13;
 		var aleatorio=Math.random();
-		window.open('./informes/informe_Deudores.php?&rnadom='+aleatorio, true);
+		window.open('./informes/Informe.php?&rnadom='+aleatorio+"&tipoInforme=Deudores", true);
 		conexion13.send();	
 }
 

@@ -30,8 +30,12 @@ if ($_REQUEST['idcomprobante']=='99999999017') {
 			if(!$resultComprobante = mysqli_query($conexion_sp, "select FechaFactura, TipoFactura, NumeroFactura, ImporteTotal, IdEnviado, CAE from caeafip where Id='".$_REQUEST['idcomprobante']."' limit 1")) die("Problemas con la consulta2");
 			$rowComprobante = mysqli_fetch_array($resultComprobante);
 			//Luego busco el tipo de cambio usado, en la tabla 
-			if(!$tipoCambioUsado = mysqli_query($conexion_sp, "select tipoCambio from datosauxfacturasemitidas where CAE = '".$rowComprobante['CAE']."' limit 1")) die("Problemas con la consulta forma de pago en datosauxfacturasemitidas");	
-			$rowtipoCambioUsado = mysqli_fetch_array($tipoCambioUsado);
+			//OJO!! Puedo anotar el tipo de cambio que usé para hacer la factura, pero la factura ser en pesos (en ese caso NO debo multiplicar el importe por el TC)
+			if (!($rowComprobante['IdEnviado']==0)) {
+				if(!$tipoCambioUsado = mysqli_query($conexion_sp, "select tipoCambio from datosauxfacturasemitidas where CAE = '".$rowComprobante['CAE']."' limit 1")) die("Problemas con la consulta forma de pago en datosauxfacturasemitidas");	
+				$rowtipoCambioUsado = mysqli_fetch_array($tipoCambioUsado);} else {
+					$rowtipoCambioUsado['tipoCambio']=1;
+			}
 
 			//Luego busco el símbolo para la moneda facturada
 			$codigoMoneda=$rowComprobante['IdEnviado']+1;

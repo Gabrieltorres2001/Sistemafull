@@ -609,14 +609,9 @@ function imprimir() {
   var dirRemit=document.getElementById('direcRemito');
   //alert (dirRemit.value);
   var aleatorio=Math.random();
-  //SEptiembre 2018. Me tengo que fijar para que empresa esta trabajando el sistema
-  //Esto tiene que estar grabado en la tabla controlPanel
-  var empresaActual=document.getElementById('estaEmpresa').value;
   //Nueva 2018. Remito con preimpreso
   if (document.getElementById('radio131').checked) {
-		if (empresaActual=="Tecnoplus") {window.open('./informes/Tecnoplus_informe_remito.php?idrto='+numRemit.value+"&descr="+descripExtendda+"&serie="+serrie+"&rnadom="+aleatorio+"&diRemito="+dirRemit.value);}
-		if (empresaActual=="Cimse") {window.open('./informes/Cimse_informe_remito.php?idrto='+numRemit.value+"&descr="+descripExtendda+"&serie="+serrie+"&rnadom="+aleatorio+"&diRemito="+dirRemit.value);}
-	  }
+		window.open('./informes/Informe.php?idrto='+numRemit.value+"&descr="+descripExtendda+"&serie="+serrie+"&rnadom="+aleatorio+"&diRemito="+dirRemit.value+"&tipoInforme=Remito");}
   //Nueva 2018. Remito con hoja en blanco
   if (document.getElementById('radio132').checked) {
 	  //para esta opcion SI O SI tiene que existir numero de preimpreso
@@ -624,9 +619,7 @@ function imprimir() {
 	  if((isNaN(document.getElementById('preimpreso').value))||(document.getElementById('preimpreso').value.length<1)){
 		  mostrarAvisos("Tiene que existir un número de preimpreso válido");}
 		  else {
-				if (empresaActual=="Tecnoplus") {window.open('./informes/Tecnoplus_informe_remito_hoja_limpia.php?idrto='+numRemit.value+"&descr="+descripExtendda+"&serie="+serrie+"&rnadom="+aleatorio+"&diRemito="+dirRemit.value+"&numPreimpreso="+document.getElementById('preimpreso').value);}
-				if (empresaActual=="Cimse") {window.open('./informes/Cimse_informe_remito_hoja_limpia.php?idrto='+numRemit.value+"&descr="+descripExtendda+"&serie="+serrie+"&rnadom="+aleatorio+"&diRemito="+dirRemit.value+"&numPreimpreso="+document.getElementById('preimpreso').value);}
-			  
+				window.open('./informes/Informe.php?idrto='+numRemit.value+"&descr="+descripExtendda+"&serie="+serrie+"&rnadom="+aleatorio+"&diRemito="+dirRemit.value+"&numPreimpreso="+document.getElementById('preimpreso').value+"&tipoInforme=remito_hoja_limpia");			  
 			}}
   
   document.getElementById('informe').disabled=false;
@@ -2116,17 +2109,11 @@ function procesarEventos414()
 			var aleatorio=Math.random();
 			document.getElementById('informeFac').disabled=false;
 			//Dependiendo la moneda que va a tener la factura veo a que formulario tengo que llamar
-		  //SEptiembre 2018. Me tengo que fijar para que empresa esta trabajando el sistema
-		  //Esto tiene que estar grabado en la tabla controlPanel
-		  var empresaActual=document.getElementById('estaEmpresa').value;
 		  var dirRemit=document.getElementById('direcRemito');
 			if (monedaFactura=='0') {
-				if (empresaActual=="Tecnoplus") {window.open('./informes/Tecnoplus_informe_factura.php?idcomprobante='+nCom + "&descr="+descripExtenddaFac + "&serie="+serrieFac + "&rnadom="+aleatorio + "&monedaFactura="+monedaFactura + "&tipoCambio="+cambioPesosAMonedaExtr + "&tipoFactura="+tipoFactura + "&tipoComprobante="+tipoComprobante + "&numCAE="+ultCAE + "&monedaOriginal="+monedaItemsFact+ "&TipoCompFactura="+tipoComprobyFac+"&diRemito="+dirRemit.value);}
-				if (empresaActual=="Cimse") {window.open('./informes/Cimse_informe_factura.php?idcomprobante='+nCom + "&descr="+descripExtenddaFac + "&serie="+serrieFac + "&rnadom="+aleatorio + "&monedaFactura="+monedaFactura + "&tipoCambio="+cambioPesosAMonedaExtr + "&tipoFactura="+tipoFactura + "&tipoComprobante="+tipoComprobante + "&numCAE="+ultCAE + "&monedaOriginal="+monedaItemsFact+ "&TipoCompFactura="+tipoComprobyFac+"&diRemito="+dirRemit.value);}	
+				window.open('./informes/Informe.php?idcomprobante='+nCom + "&descr="+descripExtenddaFac + "&serie="+serrieFac + "&rnadom="+aleatorio + "&monedaFactura="+monedaFactura + "&tipoCambio="+cambioPesosAMonedaExtr + "&tipoFactura="+tipoFactura + "&tipoComprobante="+tipoComprobante + "&numCAE="+ultCAE + "&monedaOriginal="+monedaItemsFact+ "&TipoCompFactura="+tipoComprobyFac+"&diRemito="+dirRemit.value+"&tipoInforme=factura");
 			} else {
-				if (empresaActual=="Tecnoplus") {window.open('./informes/Tecnoplus_informe_Factura_Extranjera.php?idcomprobante='+nCom + "&descr="+descripExtenddaFac + "&serie="+serrieFac + "&rnadom="+aleatorio + "&monedaFactura="+monedaFactura + "&tipoCambio="+cambioPesosAMonedaExtr + "&tipoFactura="+tipoFactura + "&tipoComprobante="+tipoComprobante + "&numCAE="+ultCAE + "&monedaOriginal="+monedaItemsFact+ "&TipoCompFactura="+tipoComprobyFac+"&diRemito="+dirRemit.value);}
-				if (empresaActual=="Cimse") {window.open('./informes/Cimse_informe_Factura_Extranjera.php?idcomprobante='+nCom + "&descr="+descripExtenddaFac + "&serie="+serrieFac + "&rnadom="+aleatorio + "&monedaFactura="+monedaFactura + "&tipoCambio="+cambioPesosAMonedaExtr + "&tipoFactura="+tipoFactura + "&tipoComprobante="+tipoComprobante + "&numCAE="+ultCAE + "&monedaOriginal="+monedaItemsFact+ "&TipoCompFactura="+tipoComprobyFac+"&diRemito="+dirRemit.value);}	
-			}	
+				window.open('./informes/Informe.php?idcomprobante='+nCom + "&descr="+descripExtenddaFac + "&serie="+serrieFac + "&rnadom="+aleatorio + "&monedaFactura="+monedaFactura + "&tipoCambio="+cambioPesosAMonedaExtr + "&tipoFactura="+tipoFactura + "&tipoComprobante="+tipoComprobante + "&numCAE="+ultCAE + "&monedaOriginal="+monedaItemsFact+ "&TipoCompFactura="+tipoComprobyFac+"&diRemito="+dirRemit.value+"&tipoInforme=Factura_Extranjera");}	
 		  } else {//error
 				mostrarAvisos("Se produjo un error al mostrar el comprobante. "+conexion414.responseText);
 				document.getElementById('informeFac').disabled=false;
@@ -2188,8 +2175,80 @@ function procesarEventos430()
 		  for (i=0; i<tags_td.length; i++) {
 				tags_td[i].addEventListener('click',mostrarBotonPResionadoME,false);
 				r=i;
-		  } 
+			} 
+		  //Marzo 2019. Genera un recibo directamente desde la factura emitida
+		  var tags_td = new Array();
+		  var tags_td=document.getElementsByName('informeReciboDirecto');
+		  var r=0;
+		  for (i=0; i<tags_td.length; i++) {
+				tags_td[i].addEventListener('click',generarReciboDirecto,false);
+				r=i;
+		  } 			
 	  }
+	  }
+  }
+}
+
+var conexion312;
+var CaeParaAgregar;
+function generarReciboDirecto(celda){
+	//Los mismos pasos que cuando hago un remito desde un presupuesto. Primero el recibo, luego el item de factura, y por ultimo envío al usuario a la venta recibos
+	conexion312=new XMLHttpRequest(); 
+	conexion312.onreadystatechange = procesarEventos312;
+	var aleatorio=Math.random();
+	var obnn=document.getElementById('numberses').value;
+	CaeParaAgregar=celda.target.id;
+	conexion312.open('GET','./php/nuevo_recibo_desde_factura_emitida.php?&rnadom='+aleatorio+"&numCAE="+CaeParaAgregar+"&sesses="+obnn, true);
+	conexion312.send();
+}
+
+conexion313;
+var reciboNuevo;
+function procesarEventos312()
+{
+    if(conexion312.readyState == 4)
+  { 
+	  if(conexion312.status == 200)
+	  {   
+			if (conexion312.responseText.substr(0,16)=="Recibo NO creado") 
+				{mostrarAvisos("Ocurrió un error al generar el recibo");}
+				else {
+						reciboNuevo=conexion312.responseText;
+						//busco el número de factura a agregar, sólo tengo el CAE
+						conexion313=new XMLHttpRequest(); 
+						conexion313.onreadystatechange = procesarEventos313;
+						var aleatorio=Math.random();
+						conexion313.open('GET','./php/buscar_factura_x_cae.php?&rnadom='+aleatorio+"&numCAE="+CaeParaAgregar, true);
+						conexion313.send();
+
+				}
+		}
+	}
+}
+
+conexion314;
+function procesarEventos313()
+{
+    if(conexion313.readyState == 4)
+  { 
+	  if(conexion313.status == 200)
+	  {   
+			conexion314=new XMLHttpRequest(); 
+			conexion314.onreadystatechange = procesarEventos314;
+			var aleatorio=Math.random();
+			conexion314.open('GET','./php/agrego_detalle_recibo_factura.php?&rnadom='+aleatorio+"&idcomprobante="+conexion313.responseText+"&idRecibo="+reciboNuevo, true);
+			conexion314.send();
+		}
+	}
+}
+
+function procesarEventos314()
+{
+    if(conexion314.readyState == 4)
+  { 
+	  if(conexion314.status == 200)
+	  {
+			window.open('Recibos.php',"_self");			
 	  }
   }
 }
@@ -2203,13 +2262,8 @@ function mostrarBotonPResionado(celda){
 			if (document.getElementById('radio221').checked) {var serrieFac='1'};
 			if (document.getElementById('radio222').checked) {var serrieFac='0'};
 			var aleatorio=Math.random();	
-			//SEptiembre 2018. Me tengo que fijar para que empresa esta trabajando el sistema
-			//Esto tiene que estar grabado en la tabla controlPanel
-			var empresaActual=document.getElementById('estaEmpresa').value;
 			var dirRemit=document.getElementById('direcRemito');
-			if (empresaActual=="Tecnoplus") {window.open('./informes/Tecnoplus_reimprimir_Factura.php?rnadom='+aleatorio + "&numCAE="+celda.target.id + "&descr="+descripExtenddaFac + "&serie="+serrieFac+"&diRemito="+dirRemit.value);}
-			if (empresaActual=="Cimse") {window.open('./informes/Cimse_reimprimir_Factura.php?rnadom='+aleatorio + "&numCAE="+celda.target.id + "&descr="+descripExtenddaFac + "&serie="+serrieFac+"&diRemito="+dirRemit.value);}		
-  }
+			window.open('./informes/Informe.php?rnadom='+aleatorio + "&numCAE="+celda.target.id + "&descr="+descripExtenddaFac + "&serie="+serrieFac+"&diRemito="+dirRemit.value+"&tipoInforme=reimprimir_Factura");}
 
   function mostrarBotonPResionadoME(celda){
 			//leer los radio options (en primera medida solo moneda y cambio ya que los otros no afectan al resultado final)
@@ -2220,12 +2274,8 @@ function mostrarBotonPResionado(celda){
 			if (document.getElementById('radio221').checked) {var serrieFac='1'};
 			if (document.getElementById('radio222').checked) {var serrieFac='0'};
 			var aleatorio=Math.random();
-			//SEptiembre 2018. Me tengo que fijar para que empresa esta trabajando el sistema
-			//Esto tiene que estar grabado en la tabla controlPanel
-			var empresaActual=document.getElementById('estaEmpresa').value;
 			var dirRemit=document.getElementById('direcRemito');
-			if (empresaActual=="Tecnoplus") {window.open('./informes/Tecnoplus_reimprimir_Factura_Extranjera.php?rnadom='+aleatorio + "&numCAE="+celda.target.id + "&descr="+descripExtenddaFac + "&serie="+serrieFac+"&diRemito="+dirRemit.value);}
-			if (empresaActual=="Cimse") {window.open('./informes/Cimse_reimprimir_Factura_Extranjera.php?rnadom='+aleatorio + "&numCAE="+celda.target.id + "&descr="+descripExtenddaFac + "&serie="+serrieFac+"&diRemito="+dirRemit.value);}		
+			window.open('./informes/Informe.php?rnadom='+aleatorio + "&numCAE="+celda.target.id + "&descr="+descripExtenddaFac + "&serie="+serrieFac+"&diRemito="+dirRemit.value+"&tipoInforme=reimprimir_Factura_Extranjera");		
   }
   
 
@@ -2486,19 +2536,13 @@ function procesarEventos412sim()
 		if (document.getElementById('radio222').checked) {var serrieFac='0'};
 		//mostrarDetalles(nCom);
 		var aleatorio=Math.random();
-		//SEptiembre 2018. Me tengo que fijar para que empresa esta trabajando el sistema
-		//Esto tiene que estar grabado en la tabla controlPanel
-		var empresaActual=document.getElementById('estaEmpresa').value;
 		var dirRemit=document.getElementById('direcRemito');
 		//alert (dirRemit.value);
 		//Dependiendo la moneda que va a tener la factura veo a que formulario tengo que llamar
 		if (monedaFacturasim=='0') {
-		  		if (empresaActual=="Tecnoplus") {window.open('./informes/Tecnoplus_simulacion_factura.php?idcomprobante='+nCom + "&descr="+descripExtenddaFac + "&serie="+serrieFac + "&rnadom="+aleatorio + "&monedaFactura="+monedaFacturasim + "&tipoCambio="+cambioPesosAMonedaExtrsim + "&tipoFactura="+tipoFacturasim + "&tipoComprobante="+tipoComprobanteSim + "&numCAE="+ultCAEsim + "&monedaOriginal="+monedaItemsFactsim+ "&TipoCompFactura="+tipoComprobyFacSim + "&NumeroFactura="+datosRecib.NumeroFactura + "&VtoCAE="+datosRecib.VtoCAE+"&diRemito="+dirRemit.value);	}
-				if (empresaActual=="Cimse") {window.open('./informes/Cimse_simulacion_factura.php?idcomprobante='+nCom + "&descr="+descripExtenddaFac + "&serie="+serrieFac + "&rnadom="+aleatorio + "&monedaFactura="+monedaFacturasim + "&tipoCambio="+cambioPesosAMonedaExtrsim + "&tipoFactura="+tipoFacturasim + "&tipoComprobante="+tipoComprobanteSim + "&numCAE="+ultCAEsim + "&monedaOriginal="+monedaItemsFactsim+ "&TipoCompFactura="+tipoComprobyFacSim + "&NumeroFactura="+datosRecib.NumeroFactura + "&VtoCAE="+datosRecib.VtoCAE+"&diRemito="+dirRemit.value);	}			
-		} else {
-		  		if (empresaActual=="Tecnoplus") {window.open('./informes/Tecnoplus_simulacion_Factura_Extranjera.php?idcomprobante='+nCom + "&descr="+descripExtenddaFac + "&serie="+serrieFac + "&rnadom="+aleatorio + "&monedaFactura="+monedaFacturasim + "&tipoCambio="+cambioPesosAMonedaExtrsim + "&tipoFactura="+tipoFacturasim + "&tipoComprobante="+tipoComprobanteSim + "&numCAE="+ultCAEsim + "&monedaOriginal="+monedaItemsFactsim+ "&TipoCompFactura="+tipoComprobyFacSim + "&NumeroFactura="+datosRecib.NumeroFactura + "&VtoCAE="+datosRecib.VtoCAE+"&diRemito="+dirRemit.value);}
-				if (empresaActual=="Cimse") {window.open('./informes/Cimse_simulacion_Factura_Extranjera.php?idcomprobante='+nCom + "&descr="+descripExtenddaFac + "&serie="+serrieFac + "&rnadom="+aleatorio + "&monedaFactura="+monedaFacturasim + "&tipoCambio="+cambioPesosAMonedaExtrsim + "&tipoFactura="+tipoFacturasim + "&tipoComprobante="+tipoComprobanteSim + "&numCAE="+ultCAEsim + "&monedaOriginal="+monedaItemsFactsim+ "&TipoCompFactura="+tipoComprobyFacSim + "&NumeroFactura="+datosRecib.NumeroFactura + "&VtoCAE="+datosRecib.VtoCAE+"&diRemito="+dirRemit.value);}			
-		}	
+					window.open('./informes/Informe.php?idcomprobante='+nCom + "&descr="+descripExtenddaFac + "&serie="+serrieFac + "&rnadom="+aleatorio + "&monedaFactura="+monedaFacturasim + "&tipoCambio="+cambioPesosAMonedaExtrsim + "&tipoFactura="+tipoFacturasim + "&tipoComprobante="+tipoComprobanteSim + "&numCAE="+ultCAEsim + "&monedaOriginal="+monedaItemsFactsim+ "&TipoCompFactura="+tipoComprobyFacSim + "&NumeroFactura="+datosRecib.NumeroFactura + "&VtoCAE="+datosRecib.VtoCAE+"&diRemito="+dirRemit.value+"&tipoInforme=simulacion_factura");}
+					else {
+		  		window.open('./informes/Informe.php?idcomprobante='+nCom + "&descr="+descripExtenddaFac + "&serie="+serrieFac + "&rnadom="+aleatorio + "&monedaFactura="+monedaFacturasim + "&tipoCambio="+cambioPesosAMonedaExtrsim + "&tipoFactura="+tipoFacturasim + "&tipoComprobante="+tipoComprobanteSim + "&numCAE="+ultCAEsim + "&monedaOriginal="+monedaItemsFactsim+ "&TipoCompFactura="+tipoComprobyFacSim + "&NumeroFactura="+datosRecib.NumeroFactura + "&VtoCAE="+datosRecib.VtoCAE+"&diRemito="+dirRemit.value+"&tipoInforme=simulacion_Factura_Extranjera");}	
 	  }
   }
 }

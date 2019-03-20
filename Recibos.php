@@ -87,7 +87,7 @@ sec_session_start();
 		<!-- [DO NOT DEPLOY] --> <script src="./editablegrid/editablegrid_editors.js" ></script>
 		<!-- [DO NOT DEPLOY] --> <script src="./editablegrid/editablegrid_validators.js" ></script>
 		<!-- [DO NOT DEPLOY] --> <script src="./editablegrid/	editablegrid_utils.js" ></script>
-		<!-- [DO NOT DEPLOY] --> <script src="js/editablegrid_charts.js" ></script>
+		<!-- [DO NOT DEPLOY] --> <script src="./js/editablegrid_charts.js" ></script>
 		<!--<link rel="stylesheet" href="css/editablegrid.css" type="text/css" media="screen"> -->
 
 		<!--  include javascript and css files for jQuery UI, in order to have the datepicker -->
@@ -457,7 +457,7 @@ sec_session_start();
 					<td name='xxxx00' id='00&Moneda'> </td>
 					<td name='xxxx00' id='00&Importe'> </td>
 					<td name='xxxx00' id='00&Descripcion'> </td>
-					<td name='xxxx00' id='00&0&action'><img name='xxxxA' src='./images/Ok.jpg' width='32' height='32'></td>
+					<td name='xxxx00' id='00&0&action'><img name='xxxxA' src='images/Ok.jpg' width='32' height='32'></td>
 					</tr>
 					</table>  
     </div><!-- /detallesdemovimientosFRMAcciones -->
@@ -486,7 +486,6 @@ sec_session_start();
 	
 <div id="estapsesion" style="visibility:hidden;">
 <input type="text" id="numberses" name="number" value="<?php echo htmlentities($_SESSION['user_id']);?>"/>
-<input type="text" id="estaEmpresa" name="estaEmpresa" value="<?php que_empresa_soy();?>"/>
 </div> <!-- /estapsesion -->
 
     <!-- Le javascript

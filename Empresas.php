@@ -151,7 +151,6 @@ llenar_listado_empresas();
 
 <div id="estapsesion" style="visibility:hidden;">
 <input type="text" id="numberses" name="number" value="<?php echo htmlentities($_SESSION['user_id']);?>"/>
-<input type="text" id="estaEmpresa" name="estaEmpresa" value="<?php que_empresa_soy();?>"/>
 </div> <!-- /estapsesion -->
 
 	<!-- /mensaje auto ocultable -->

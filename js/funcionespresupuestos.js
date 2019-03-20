@@ -599,11 +599,7 @@ function procesarEventos7a()
 						
 						var cambioPesosAMonedaExtr=document.getElementById('TipoDeCambio').value;
 					  var aleatorio=Math.random();
-					  //SEptiembre 2018. Me tengo que fijar para que empresa esta trabajando el sistema
-					  //Esto tiene que estar grabado en la tabla controlPanel
-					  var empresaActual=document.getElementById('estaEmpresa').value;
-					  if (empresaActual=="Tecnoplus") {window.open('./informes/Tecnoplus_informe_presupuesto.php?idppto='+numPresup.value+"&descr="+descripExtendda+"&iva="+ivva+"&moneda="+monneda+"&cambioPesosAMoneda="+cambioPesosAMonedaExtr+"&plazo="+plazzo+"&rnadom="+aleatorio);}
-					  if (empresaActual=="Cimse") {window.open('./informes/Cimse_informe_presupuesto.php?idppto='+numPresup.value+"&descr="+descripExtendda+"&iva="+ivva+"&moneda="+monneda+"&cambioPesosAMoneda="+cambioPesosAMonedaExtr+"&plazo="+plazzo+"&rnadom="+aleatorio);}
+					  window.open('./informes/Informe.php?idppto='+numPresup.value+"&descr="+descripExtendda+"&iva="+ivva+"&moneda="+monneda+"&cambioPesosAMoneda="+cambioPesosAMonedaExtr+"&plazo="+plazzo+"&rnadom="+aleatorio+"&tipoInforme=Presupuesto");
 					}
 			}
 	  }

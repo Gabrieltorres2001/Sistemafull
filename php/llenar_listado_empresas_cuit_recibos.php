@@ -14,7 +14,7 @@
 	while ($rowFyF = mysqli_fetch_row($resultFondosyFacturas)){
 		if(!$result = mysqli_query($conexion_sp, "select distinct Organizacion, CUIT, id from organizaciones where CUIT='".$rowFyF[0]."' ORDER BY Organizacion asc")) die("Problemas con la consulta");
 		while ($reg = mysqli_fetch_array($result)){
-			  echo"<option value=".$reg['id'].">".substr($reg['Organizacion'],0,33)." (".substr($reg['CUIT'],0,18).")</option>";
+			  echo"<option value=".$reg['id'].">".substr($reg['Organizacion'],0,53)." (".substr($reg['CUIT'],0,18).")</option>";
 		}  
 	}
 	echo"</select>";

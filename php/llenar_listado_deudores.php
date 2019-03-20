@@ -138,7 +138,7 @@
 			echo "<th width='12'>Total</th>"; 
 			echo "</tr>"; 
 			echo "<tr>";
-			echo "<td> $ ".$totalGeneral."</td>";
+			echo "<td> $ ".number_format($totalGeneral,2,'.',',')."</td>";
 			echo "</tr>"; 
 	echo "</table>";
 	echo"<input type='button' id='imprimirDeudoresPDF' value='Exportar PDF'>";

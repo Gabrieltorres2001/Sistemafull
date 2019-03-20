@@ -41,12 +41,17 @@
 							echo"<input id='importeFacEmitida' class='input' name='importeFacEmitida' type='text' size='10' style='text-align:right;' disabled value='USD ".number_format($reg[5],2,',','.')."'>"; } else {
 								echo"<input id='importeFacEmitida' class='input' name='importeFacEmitida' type='text' size='10' style='text-align:right;' disabled value='$ ".number_format($reg[5],2,',','.')."'>"; }
 				echo"</fieldset>";
-				echo"<fieldset style='width:150px; border: 0px;'>";		
+				echo"<fieldset style='width:110px; border: 0px;'>";		
 					if ($reg[7]==60) {					
 					echo"<input type='button' name='informeReFacNme'  id='".$reg[3]."' value='Reimprimir'/>"; } elseif ($reg[7]==1) {
 							echo"<input type='button' name='informeReFacNme'  id='".$reg[3]."' value='Reimprimir'/>"; } else {
 								echo"<input type='button' name='informeReFacN'  id='".$reg[3]."' value='Reimprimir'/>"; }				
 				echo"</fieldset>";
+				//Marzo 2019. Recibo directo desde esta factura
+				if (!($reg[2]=="NCA")){
+					echo"<fieldset style='width:110px; border: 0px;'>";					
+					echo"<input type='button' name='informeReciboDirecto' id='".$reg[3]."' value='Generar recibo'/>"; 
+					echo"</fieldset>";}
 		echo"</fieldset>";
 		echo"<br>";
 	//} else {
