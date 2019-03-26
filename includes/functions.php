@@ -1,4 +1,8 @@
 <?php
+ // Import PHPMailer classes into the global namespace
+ // These must be at the top of your script, not inside a function
+ use PHPMailer\PHPMailer\PHPMailer;
+ use PHPMailer\PHPMailer\Exception;
 include_once 'psl-config.php';
  
 function sec_session_start() {
@@ -225,4 +229,54 @@ function esc_url($url) {
     } else {
         return $url;
     }
+}
+
+function enviarEmail($email, $nombre, $asunto, $cuerpo){
+
+    /* Exception class. */
+    require '../PHPMailer/src/Exception.php';
+    
+    /* The main PHPMailer class. */
+    require '../PHPMailer/src/PHPMailer.php';
+    
+    /* SMTP class, needed if you want to use SMTP. */
+    require '../PHPMailer/src/SMTP.php';
+		
+    //require_once '../PHPMailer/src/PHPMailerAutoload.php';
+    
+    $mail = new PHPMailer();
+    $mail->isSMTP();
+    $mail->SMTPAuth = true;
+    $mail->SMTPSecure = false; //Modificar
+    $mail->Host = 'mail.tecnoplusonline.com.ar'; //Modificar
+    $mail->Port = 25; //Modificar
+    //Tomado de: https://alexwebdevelop.com/phpmailer-tutorial/
+    $mail->SMTPOptions = array(
+        'ssl' => array(
+        'verify_peer' => false,
+        'verify_peer_name' => false,
+        'allow_self_signed' => true
+        )
+     );
+    
+    $mail->Username = 'gabrieltorres@tecnoplusonline.com.ar'; //Modificar
+    $mail->Password = 'aA12345678'; //Modificar
+    
+    $mail->setFrom('gabrieltorres@tecnoplusonline.com.ar', 'Gabriel Torres - SistemaFull'); //Modificar
+    $mail->addAddress($email, $nombre);
+    
+    $mail->Subject = $asunto;
+    $mail->Body    = $cuerpo;
+    $mail->IsHTML(true);
+
+
+    if($mail->send()) {
+        echo $mail->ErrorInfo;
+    return true;}
+    else {
+        echo $mail->ErrorInfo;
+        return false;
+    }
+
+
 }

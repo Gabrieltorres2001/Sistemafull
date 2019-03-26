@@ -449,7 +449,7 @@ function transfEnEditableNueva()
 				editableGridTemp.load({ metadata: [
 					{ name: "Fecha", datatype: "date", editable: true },
 					{ name: "TipoValor", datatype: "double", editable: true, values: 
-					  	{ 8 : "Efectivo", 12 : "Cheque", 13 : "Tarjeta de débito", 14 : "Tarjeta de crédito", 15 : "Transferencia bancaria", 16 : "Nota de crédito", 17 : "Redondeo", 20 : "Otro", 25 : "A cuenta"}  },
+					  	{ 8 : "Efectivo", 12 : "Cheque", 13 : "Tarjeta de débito", 14 : "Tarjeta de crédito", 15 : "Transferencia bancaria", 16 : "Nota de crédito", 20 : "Otro"}  },
 					{ name: "MonedaPago", datatype: "double", editable: false, values: 
 					  	{ 1 : "$", 2 : "USD", 61 : "€"} },
 					{ name: "Importe", datatype: "double(2)", editable: true },
@@ -815,7 +815,6 @@ function guardaCambiosEncabezadoRecibo()
 	var numCPago=document.getElementById('CondicionesPago').value;
 	var txtNotas=encodeURIComponent(document.getElementById('Notas').value);
 	var txtPreimpreso=encodeURIComponent(document.getElementById('preimpreso').value);	
-		//Este en recibo se va a ir
 	//Febrero2019
 	var txtNumFac="";	
 	
