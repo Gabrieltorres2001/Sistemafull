@@ -405,24 +405,24 @@ sec_session_start();
       </div><!-- /row -->
       
 	  <!-- FOURTH ROW OF BLOCKS -->     
-	<div class="row" style=" visibility:hidden;">
+<div class="row">
 	
-	<div class="col-sm-3 col-lg-3"  style=" visibility:hidden;">
-		<a href="AjustesStock.php">
+	<div class="col-sm-3 col-lg-3">
+	<?php if (formulario_habilitado("ProductosAlPublico") == true): ?> <a href="ArticulosPublicos.php"> <?php else : ?>	<a href="no_habilitado.php"> <?php endif; ?>	
 	  <!-- AJUSTE DE STOCK BLOCK -->     
       		<div class="dash-unit">
-	      		<dtitle>Ajustes de Stock</dtitle>
+	      		<dtitle>Ventas online</dtitle>
 	      		<hr>
 	      		<div class="cont">
 					<p><bold>
-					Ajustes de Stock
+					Productos al público
 					</bold></p>
 				</div>
       		</div>
 		</a>
     </div>
 	  <!-- TWITTER WIDGET BLOCK -->     
-		<div class="col-sm-3 col-lg-3">
+		<div class="col-sm-3 col-lg-3"  style=" visibility:hidden;">
 			<div class="dash-unit">
 	      		<dtitle>Twitter Widget</dtitle>
 	      		<hr>
@@ -443,7 +443,7 @@ sec_session_start();
 		</div>
 
 	  <!-- NOTIFICATIONS BLOCK -->     
-		<div class="col-sm-3 col-lg-3">
+		<div class="col-sm-3 col-lg-3"  style=" visibility:hidden;">
 			<div class="dash-unit">
 	      		<dtitle>Notifications</dtitle>
 	      		<hr>
@@ -459,7 +459,7 @@ sec_session_start();
 		</div>
 
 	  <!-- SWITCHES BLOCK -->     
-		<div class="col-sm-3 col-lg-3">
+		<div class="col-sm-3 col-lg-3"  style=" visibility:hidden;">
 			<div class="dash-unit">
 	      		<dtitle>Switches</dtitle>
 	      		<hr>
@@ -493,7 +493,7 @@ sec_session_start();
 		</div>
 
 	  <!-- GAUGE CHART BLOCK -->     
-		<div class="col-sm-3 col-lg-3">
+		<div class="col-sm-3 col-lg-3"  style=" visibility:hidden;">
 			<div class="dash-unit">
 	      		<dtitle>Gauge Chart</dtitle>
 	      		<hr>
@@ -646,7 +646,7 @@ sec_session_start();
 
       		</div><!-- /row -->
       	</div><!-- /container -->		
-	</div><!-- /footerwrap -->
+</div><!-- /footerwrap -->
 
 <div id="estapsesion" style="visibility:hidden;">
 <input type="text" id="numberses" name="number" value="<?php echo htmlentities($_SESSION['user_id']);?>"/>

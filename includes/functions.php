@@ -233,6 +233,24 @@ function esc_url($url) {
 
 function enviarEmail($email, $nombre, $asunto, $cuerpo){
 
+    include_once 'sp_connect.php';
+    $conexion_sp=mysqli_connect(HOSTSP,USERSP,PASSWORDSP,DATABASESP) or die("Problemas con la conexión");
+    mysqli_query($conexion_sp,"set names 'utf8'");
+	if(!$resultSMTPAuth = mysqli_query($conexion_sp, "select ContenidoValor from controlpanel where Descripcion = 'SMTPAuth' and padre = '104' limit 1")){die("Problemas con la consulta de CONTROLPANEL");}
+	$rowSMTPAuth = mysqli_fetch_array($resultSMTPAuth);
+	if(!$resultSMTPSecure = mysqli_query($conexion_sp, "select ContenidoValor from controlpanel where Descripcion = 'SMTPSecure' and padre = '104' limit 1")){die("Problemas con la consulta de CONTROLPANEL");}
+    $rowSMTPSecure = mysqli_fetch_array($resultSMTPSecure);
+	if(!$resultHost = mysqli_query($conexion_sp, "select ContenidoValor from controlpanel where Descripcion = 'Host' and padre = '104' limit 1")){die("Problemas con la consulta de CONTROLPANEL");}
+    $rowHost = mysqli_fetch_array($resultHost);
+	if(!$resultPort = mysqli_query($conexion_sp, "select ContenidoValor from controlpanel where Descripcion = 'Port' and padre = '104' limit 1")){die("Problemas con la consulta de CONTROLPANEL");}
+    $rowPort = mysqli_fetch_array($resultPort);
+	if(!$resultUsername = mysqli_query($conexion_sp, "select ContenidoValor from controlpanel where Descripcion = 'Username' and padre = '104' limit 1")){die("Problemas con la consulta de CONTROLPANEL");}
+    $rowUsername = mysqli_fetch_array($resultUsername);
+	if(!$resultPassword = mysqli_query($conexion_sp, "select ContenidoValor from controlpanel where Descripcion = 'Password' and padre = '104' limit 1")){die("Problemas con la consulta de CONTROLPANEL");}
+    $rowPassword = mysqli_fetch_array($resultPassword);
+	if(!$resultsetFrom = mysqli_query($conexion_sp, "select ContenidoValor from controlpanel where Descripcion = 'setFrom' and padre = '104' limit 1")){die("Problemas con la consulta de CONTROLPANEL");}
+	$rowsetFrom = mysqli_fetch_array($resultsetFrom);    
+
     /* Exception class. */
     require '../PHPMailer/src/Exception.php';
     
@@ -246,10 +264,10 @@ function enviarEmail($email, $nombre, $asunto, $cuerpo){
     
     $mail = new PHPMailer();
     $mail->isSMTP();
-    $mail->SMTPAuth = true;
-    $mail->SMTPSecure = false; //Modificar
-    $mail->Host = 'mail.tecnoplusonline.com.ar'; //Modificar
-    $mail->Port = 25; //Modificar
+    $mail->SMTPAuth = $rowSMTPAuth['ContenidoValor'];
+    $mail->SMTPSecure = $rowSMTPSecure['ContenidoValor']; //Modificar
+    $mail->Host = $rowHost['ContenidoValor']; //Modificar
+    $mail->Port = $rowPort['ContenidoValor']; //Modificar
     //Tomado de: https://alexwebdevelop.com/phpmailer-tutorial/
     $mail->SMTPOptions = array(
         'ssl' => array(
@@ -259,10 +277,10 @@ function enviarEmail($email, $nombre, $asunto, $cuerpo){
         )
      );
     
-    $mail->Username = 'gabrieltorres@tecnoplusonline.com.ar'; //Modificar
-    $mail->Password = 'aA12345678'; //Modificar
+    $mail->Username = $rowUsername['ContenidoValor']; //Modificar
+    $mail->Password = $rowPassword['ContenidoValor']; //Modificar
     
-    $mail->setFrom('gabrieltorres@tecnoplusonline.com.ar', 'Gabriel Torres - SistemaFull'); //Modificar
+    $mail->setFrom($rowsetFrom['ContenidoValor'], 'Administrador - SistemaFull'); //Modificar
     $mail->addAddress($email, $nombre);
     
     $mail->Subject = $asunto;

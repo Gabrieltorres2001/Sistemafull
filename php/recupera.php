@@ -21,10 +21,10 @@ $conexion_db=mysqli_connect(HOST,USER,PASSWORD,DATABASE) or
 		$token = hash('sha512', $_REQUEST['email'] . $_REQUEST['rnadom']);
 		if(!$resultToken = mysqli_query($conexion_db, "update members set Token = '".$token."', venceToken = ".time()." where email='".$_REQUEST['email']."'")) die("Problemas con la consulta members2");
 		
-		$url = 'http://'.$_SERVER["SERVER_NAME"].'/login/cambia_pass.php?user_id='.$user_id.'&token='.$token;
+		$url = 'http://'.$_SERVER["SERVER_NAME"].'/sistemafull/cambia_pass.php?user_id='.$user_id.'&token='.$token;
 	
 		$asunto = 'Recuperar Password - SistemaPlus';
-		$cuerpo = "Hola $nombre: <br /><br />Se ha solicitado un reinicio de contrase&ntilde;a. <br/><br/>Para restaurar la contrase&ntilde;a, visita la siguiente direcci&oacute;n: <a href='$url'>$url</a><br /><br />Tiene 10 minutos desde que se envi&oacute; el correo, sino debera volver a solicitar otro reinicio.";
+		$cuerpo = "<html> Hola $nombre: <br /><br />Se ha solicitado un reinicio de contrase&ntilde;a. <br/><br/>Para restaurar la contrase&ntilde;a, visita la siguiente direcci&oacute;n: <a href='$url'>$url</a><br /><br />Tiene 10 minutos desde que se envi&oacute; el correo, sino debera volver a solicitar otro reinicio.</html>";
 		
 		if(enviarEmail($email, $nombre, $asunto, $cuerpo)){
 			echo "Hemos enviado un correo electronico a la direcion $email para restablecer tu password.<br />";

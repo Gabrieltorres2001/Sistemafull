@@ -172,9 +172,18 @@ function imprimir_detalle_articulos($resultc, $conexion_sp) {
 	echo"<input id='Estanteria' class='input' name='Estanteria' type='text' size='17' value='".$rowUbic['Estanteria']."'>";
 	echo"<label for='Estante'>Estante:</label>";
 	echo"<input id='Estante' class='input' name='Estante' type='text' size='17' value='".$rowUbic['Estante']."'>";
-	
-	/*echo"<br />";
 	echo"<br />";
+	echo"<label for='HojaFabricante'>HojaFabricante:</label>";
+	echo"<input id='HojaFabricante' class='input' name='HojaFabricante' type='text' size='50' value='".$reg['HojaFabricante']."'>";
+	if (strlen($reg['HojaFabricante'])>0) {echo"<input type='button' id='verHT' value='Ver...'/>";} else {echo"<input type='button' id='verHT' value='Ver...' disabled/>";}
+	echo"<input type='button' id='buscarHT' value='Buscar...'/>";
+	echo"<br />";	
+	echo"<label for='Imagen'>Imagen:</label>";
+	echo"<input id='Imagen' class='input' name='Imagen' type='text' size='50' value='".$reg['Imagen']."'>";
+	if (strlen($reg['Imagen'])>0) {echo"<input type='button' id='verImagen' value='Ver...'/>";} else {echo"<input type='button' id='verImagen' value='Ver...' disabled/>";}
+	echo"<input type='button' id='buscarHT' value='Buscar...'/>";
+
+	/*echo"<br />";
 	echo"<br />";
 	echo"<br />";*/
 	
@@ -190,9 +199,6 @@ function imprimir_detalle_articulos($resultc, $conexion_sp) {
 	echo"<label  style='visibility:hidden' for='IdImagen'>IdImagen:</label>";
 	echo"<input  style='visibility:hidden' id='IdImagen' class='input' name='IdImagen' type='text' size='40' value='".$reg['IdImagen']."'>";
 	
-	echo"<label  style='visibility:hidden' for='HojaFabricante'>HojaFabricante:</label>";
-	echo"<input  style='visibility:hidden' id='HojaFabricante' class='input' name='HojaFabricante' type='text' size='40' value='".$reg['HojaFabricante']."'>";
-	
 	echo"<label  style='visibility:hidden' for='HojaOtra'>HojaOtra:</label>";
 	echo"<input  style='visibility:hidden' id='HojaOtra' class='input' name='HojaOtra' type='text' size='40' value='".$reg['HojaOtra']."'>";
 	
@@ -207,9 +213,7 @@ function imprimir_detalle_articulos($resultc, $conexion_sp) {
 	
 	echo"<label  style='visibility:hidden' for='UsuarioFM'>UsuarioFM:</label>";
 	echo"<input  style='visibility:hidden' id='UsuarioFM' class='input' name='UsuarioFM' type='text' size='40' value='".$reg['UsuarioFM']."'>";
-	
-	echo"<label  style='visibility:hidden' for='Imagen'>Imagen:</label>";
-	echo"<input  style='visibility:hidden' id='Imagen' class='input' name='Imagen' type='text' size='97' value='".$reg['Imagen']."'>";
+
 
 	echo"<label  style='visibility:hidden' for='FechaActualizacion'>FechaActualizacion:</label>";
 	echo"<input style='visibility:hidden' id='FechaActualizacion' class='input' name='FechaActualizacion' type='text' size='40' value='".$reg['FechaActualizacion']."'>";	
