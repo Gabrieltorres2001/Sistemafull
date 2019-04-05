@@ -13,7 +13,6 @@ var esMio;
 function inicializarEventos()
 {
 	listarPresupuestosMios();
-	llenarInformeOC();
 	llenarAccionesPresupuestoJS();
     document.getElementById('cierraMovs').addEventListener('click',cerrarVentanaMovs,false); 
 	document.getElementById('cierraAgregarIt').addEventListener('click',cerrarVentanaAgregaIt,false); 
@@ -81,6 +80,7 @@ function procesarEventos3()
 var conexion4;
 var conexion5;
 function mostrarDetalles(celda){
+	document.getElementById('informepresupuesto').innerHTML="";
 if (isNaN(celda))
   {
 	if(!isNaN(nCom)){if(!(document.getElementById(nCom)==null)){document.getElementById(nCom).style.backgroundColor="transparent";}}
@@ -107,7 +107,7 @@ if (isNaN(celda))
   aleatorio=Math.random();
   conexion5.open('GET','./php/llenar_detalle_OC.php?idcomprobante='+numeroComprobante+"&rnadom="+aleatorio+"&sesses="+obnn, true);
   conexion5.send();
-
+	llenarInformeOC();
 }
 
 function procesarEventos4()

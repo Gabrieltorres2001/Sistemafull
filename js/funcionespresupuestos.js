@@ -13,12 +13,10 @@ var esMio;
 function inicializarEventos()
 {
 	listarPresupuestosMios();
-	llenarInformePresupuestoJS();
-	llenarInformeRemitoEnPresupuestoJS();
 	llenarAccionesPresupuestoJS();
-    document.getElementById('cierraMovs').addEventListener('click',cerrarVentanaMovs,false); 
+  document.getElementById('cierraMovs').addEventListener('click',cerrarVentanaMovs,false); 
 	document.getElementById('cierraAgregarIt').addEventListener('click',cerrarVentanaAgregaIt,false); 
-    document.getElementById('botonActualizaArticuloEnPresupuesto').addEventListener('click',actualizoArticulo,false);
+  document.getElementById('botonActualizaArticuloEnPresupuesto').addEventListener('click',actualizoArticulo,false);
 	document.getElementById('itemABuscar').addEventListener('keypress',teclaEnter,false);
 	document.getElementById('botonBuscarArticuloEnPresupuesto').addEventListener('click',busco,false);
 	document.getElementById('cierraMovsAgArt').addEventListener('click',cerrarVentanaNuevoArt,false); 
@@ -84,6 +82,8 @@ function procesarEventos3()
 var conexion4;
 var conexion5;
 function mostrarDetalles(celda){
+	document.getElementById('informepresupuesto').innerHTML="";
+	document.getElementById('informeRemito').innerHTML="";
 if (isNaN(celda))
   {
 	if(!isNaN(nCom)){if(!(document.getElementById(nCom)==null)){document.getElementById(nCom).style.backgroundColor="transparent";}}
@@ -110,7 +110,8 @@ if (isNaN(celda))
   aleatorio=Math.random();
   conexion5.open('GET','./php/llenar_detalle_presupuesto.php?idcomprobante='+numeroComprobante+"&rnadom="+aleatorio+"&sesses="+obnn, true);
   conexion5.send();
-
+	llenarInformePresupuestoJS();
+	llenarInformeRemitoEnPresupuestoJS();
 }
 
 function procesarEventos4()

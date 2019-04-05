@@ -21,10 +21,6 @@ function inicializarEventos()
   document.getElementById('botonBuscarPor').addEventListener('click',parametrosDeBusqueda,false);
   document.getElementById('botonAceptarBuscarPor').addEventListener('click',aceptarParametrosDeBusqueda,false);   
   document.getElementById('cierraMovs').addEventListener('click',cerrarVentanaMovs,false);
-  document.getElementById('botonActualizaContacto').addEventListener('click',actualizoContacto,false);
-  document.getElementById('botonCopiaContacto').addEventListener('click',copioContacto,false);
-  document.getElementById('botonNuevoContacto').addEventListener('click',nuevoContacto,false);
-  document.getElementById('checkMostrarMovimientos').addEventListener('change',mostrarMovimientos,false);
 }
 
 function mostrarMovimientos()
@@ -73,7 +69,8 @@ var conexion2;
 var conexion6;
 var numerocto;
 function mostrarDetalles(celda){
-  document.getElementById('detallesdecontacto').innerHTML="";
+	document.getElementById('detallesdecontacto').innerHTML="";
+	document.getElementById('accionesDetalle').innerHTML="";
   numerocto=celda.target.id;
   id_actual=numerocto;
   conexion2=new XMLHttpRequest(); 
@@ -94,6 +91,7 @@ function mostrarDetalles(celda){
 	if(!isNaN(nCom)){if(!(document.getElementById(nCom)==null)){document.getElementById(nCom).style.backgroundColor="transparent";}}
 	document.getElementById(celda.target.id).style.backgroundColor="#809fff";
 	nCom=celda.target.id;
+	llenarAccionesContactosJS();
 }
 
 function procesarEventos2()
@@ -197,7 +195,8 @@ function procesarEventos()
 			//		tags_td[i].addEventListener('click',valor_celda,false);
 		 // } 
 		  document.getElementById('detallesdecontacto').innerHTML="";
-		  document.getElementById('movimientosdecontacto').innerHTML="";
+			document.getElementById('movimientosdecontacto').innerHTML="";
+			document.getElementById('accionesDetalle').innerHTML="";
 		  tags_cambios = []; 
 		  id_actual="";
 		  var tags_inputm = new Array();
@@ -212,7 +211,8 @@ function procesarEventos()
 					tags_input[i].addEventListener('change',algoCambio,false);
 		  } 
 		  tags_cambios = []; 
-		  document.getElementById('Organizacion').addEventListener('change',cambiarEmpresa,false);
+			document.getElementById('Organizacion').addEventListener('change',cambiarEmpresa,false);
+			llenarAccionesContactosJS();
 	  }
   } 
 
@@ -506,8 +506,10 @@ function procesarEventos9()
 	  if(conexion9.status == 200)
 	  { 
 		  document.getElementById('accionesDetalle').innerHTML=conexion9.responseText;
-		  mostrarAvisos("ee");
-
+			document.getElementById('botonActualizaContacto').addEventListener('click',actualizoContacto,false);
+			document.getElementById('botonCopiaContacto').addEventListener('click',copioContacto,false);
+			document.getElementById('botonNuevoContacto').addEventListener('click',nuevoContacto,false);
+			document.getElementById('checkMostrarMovimientos').addEventListener('change',mostrarMovimientos,false);
 	  }
   } 
 

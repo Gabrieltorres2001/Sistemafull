@@ -15,9 +15,7 @@ var palabras1;
 function inicializarEventos()
 {
 	listarRemitosMios();
-	llenarInformeRemitoJS();
 	llenarAccionesRemitoJS();
-	llenarInformeFacturaJS();
 	document.getElementById('cierraMovs').addEventListener('click',cerrarVentanaMovs,false); 
 	document.getElementById('cierraAgregarIt').addEventListener('click',cerrarVentanaAgregaIt,false); 
 	document.getElementById('cierralistaFacturas').addEventListener('click',cerrarVentanalistaFacturas,false); 
@@ -87,6 +85,8 @@ function procesarEventos3()
 var conexion4;
 var conexion5;
 function mostrarDetalles(celda){
+	document.getElementById('informeRemito').innerHTML="";
+	document.getElementById('informeFactura').innerHTML="";
 if (isNaN(celda))
   {
 	if(!isNaN(nCom)){if(!(document.getElementById(nCom)==null)){document.getElementById(nCom).style.backgroundColor="transparent";}}
@@ -112,7 +112,9 @@ if (isNaN(celda))
   conexion5.onreadystatechange = procesarEventos5;
   aleatorio=Math.random();
   conexion5.open('GET','./php/llenar_detalle_remito.php?idcomprobante='+numeroComprobante+"&rnadom="+aleatorio+"&sesses="+obnn, true);
-  conexion5.send();
+	conexion5.send();
+	llenarInformeRemitoJS();
+	llenarInformeFacturaJS();
   mostrarFacturaProcesada();
 }
 

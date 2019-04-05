@@ -14,9 +14,7 @@ function inicializarEventos()
   for (i=0; i<tags_td.length; i++) {
             tags_td[i].addEventListener('click',mostrarDetalles,false);
   } 
-  document.getElementById('botonActualizaEmpresa').addEventListener('click',actualizoEmpresa,false);
-  document.getElementById('checkMostrarAFIP').addEventListener('change',mostrarMovimientos,false);
-  document.getElementById('botonNuevaEmpresa').addEventListener('click',nuevaEmpresa,false);
+
 }
 
 function busco()
@@ -29,7 +27,8 @@ function busco()
   while(--rowCount) tabla.deleteRow(rowCount);
   cambiarDatos(criterio.value);
   document.getElementById('detallesdeempresas').innerHTML="";
-  document.getElementById('empresaenafip').innerHTML="";
+	document.getElementById('empresaenafip').innerHTML="";
+	document.getElementById('accionesDetalle').innerHTML="";
 }
 
 var conexion1;
@@ -92,6 +91,7 @@ function mostrarMovimientos()
 
 var conexion2;
 var conexion6;
+var conexion7;
 var numeroEmp;
 function mostrarDetalles(celda){
   document.getElementById('detallesdeempresas').innerHTML="";
@@ -105,7 +105,31 @@ function mostrarDetalles(celda){
 	if(!isNaN(nCom)){if(!(document.getElementById(nCom)==null)){document.getElementById(nCom).style.backgroundColor="transparent";}}
 	document.getElementById(celda.target.id).style.backgroundColor="#809fff";
 	nCom=celda.target.id;
+	//Abril 2019. Las acciones también se borran
+	document.getElementById('accionesDetalle').innerHTML="";
+	conexion7=new XMLHttpRequest(); 
+  conexion7.onreadystatechange = procesarEventos7;
+	var aleatorio=Math.random();
+	var obnn=document.getElementById('numberses').value;
+  conexion7.open('GET','./php/accionesempresa.php?idsesion='+obnn+"&rnadom="+aleatorio, true);
+  conexion7.send();
 }
+
+
+function procesarEventos7()
+{
+    if(conexion7.readyState == 4)
+	{
+	  if(conexion7.status == 200)
+	  {
+			document.getElementById('accionesDetalle').innerHTML=conexion7.responseText;
+			document.getElementById('botonActualizaEmpresa').addEventListener('click',actualizoEmpresa,false);
+			document.getElementById('checkMostrarAFIP').addEventListener('change',mostrarMovimientos,false);
+			document.getElementById('botonNuevaEmpresa').addEventListener('click',nuevaEmpresa,false);			
+		}
+	}
+}
+
 
 function procesarEventos2()
 {

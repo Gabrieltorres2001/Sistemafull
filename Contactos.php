@@ -98,9 +98,7 @@ sec_session_start();
          </p>
         </div> <!-- /acciones -->
         <div id="accionesDetalle">
-        <?php
-         llenar_acciones_contactos(htmlentities($_SESSION['user_id']));
-		 ?>
+
         </div> <!-- /accionesDetalle -->
 	<div id="contactos">
 <?php

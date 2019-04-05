@@ -115,7 +115,27 @@ function imprimir_detalle_empresas($resultc, $conexion_sp, $idEmpresaTemp) {
 	if ($reg['tipoComprobante']=='' or $reg['tipoComprobante']=='0'){
 	echo"<option selected value=''></option>";
 	}
-    echo"</select><br />";
+	echo"</select><br />";
+	//Abril 2019. Precios y descuentos
+	//Hago una tabla para separar visualmente
+	echo"<label><u>Descuentos y recargos:</u></label>";
+	echo"<br />";
+	//ver si es cliente o proveedor
+	//1: Cliente. Los descuentos/recargos se aplicarán al comprobante
+	//2: Proveedor. Los descuentos/recargos se aplicarán al artículo
+	//3 y 4: Varios o Cli/prov. NO SE. Por ahora nada.
+
+	if ($reg['IdTipoContacto']=='2'){
+	echo "<label>Cliente:</label> Los descuentos/recargos se aplicarán al comprobante (presupuesto/venta) al momento de generarlo.<br />";
+	echo "<label>Proveedor:</label> Los descuentos/recargos se aplicarán a todos los artículos de este proveedor. También se aplicarán los de tipo Lista a las OC.<br />";
+	echo "<label>Varios o Cli/prov:</label> No se aplicarán descuentos o recargos automáticos.<br />";
+
+	}
+	echo"<label>Descuentos y recargos vigentes:</label><br />";
+	echo"<br />";
+
+	echo"<label>Descuentos y recargos anteriores:</label><br />";
+	echo"<br />";
 	
 	//Siguen las direcciones. Hacer una tabla.
 	if(!$resultDirec = mysqli_query($conexion_sp, "select id, Direccion, Ciudad, Codigopostal, Provoestado, Pais from direcciones where CUIT = '".$reg['id']."' and Direccion not Like '%@%' and ((Direccion is not null) and (Ciudad is not null) and (Codigopostal is not null) and (Provoestado is not null) and (Pais is not null)) order by id asc")) die("Problemas con la consulta Direcciones");
@@ -171,32 +191,5 @@ function imprimir_detalle_empresas($resultc, $conexion_sp, $idEmpresaTemp) {
 	}
 	echo"</table>";	
 }
-	
-function llenar_acciones_empresas($estaSesion){
-    //Creamos la conexión
-	include_once 'includes/sp_connect.php';
-	include_once 'includes/db_connect.php';
-	
-	$conexion_sp=mysqli_connect(HOSTSP,USERSP,PASSWORDSP,DATABASESP) or
-		die("Problemas con la conexión");
-		mysqli_query($conexion_sp,"set names 'utf8'");
-	$conexion_db=mysqli_connect(HOST,USER,PASSWORD,DATABASE) or
-		die("Problemas con la conexión");
-		mysqli_query($conexion_db,"set names 'utf8'");
-		
-		//tengo que tenerpermiso para modificar
-		if(!$permisoModificar = mysqli_query($conexion_db, "select PuedeModificarContactos from members where id='".$estaSesion."' limit 1")) die("Problemas con la consultamembers");
-		$rowPermisoModificar = mysqli_fetch_array($permisoModificar);
-		$puedoModificar=0;
-		if($rowPermisoModificar['PuedeModificarContactos']!=0)$puedoModificar=1;
-		
-		echo "<p>";
-		if ($puedoModificar==0) {echo"<input type='button' id='botonActualizaEmpresa' value='Actualizar datos' disabled>";} else {echo"<input type='button' id='botonActualizaEmpresa' value='Actualizar datos'/>";}
-		echo " ";
-		if ($puedoModificar==0) {echo"<input type='button' id='botonNuevaEmpresa' value='Nueva empresa' disabled>";} else {echo"<input type='button' id='botonNuevaEmpresa' value='Nueva empresa'/>";}
-		echo"</br>";
-		echo"</br>";
-		echo"<input type='checkbox' id='checkMostrarAFIP' value='MostrarAFIP'/>Mostrar datos en AFIP";
-		echo"</p>";
-}
+
 	

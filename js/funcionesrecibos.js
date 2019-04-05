@@ -20,7 +20,7 @@ function inicializarEventos()
 	document.getElementById('cierralistaFacturas').addEventListener('click',cerrarVentanalistaFacturas,false); 
 	document.getElementById('cierrapreguntoDeudaOTipoCambio').addEventListener('click',cerrarVentanaDeudaOTipoCambio,false); 
 	document.getElementById('cierraMovsAgPago').addEventListener('click',cerrarVentanaNuevoPago,false); 
-	llenarInformeReciboJS();
+
 
 
 	//exRemitos
@@ -175,6 +175,7 @@ var conexion4;
 var conexion5;
 var conexion2019_5;
 function mostrarDetalles(celda){
+	document.getElementById('informeRecibo').innerHTML="";
 if (isNaN(celda))
   {
 	if(!isNaN(nCom)){if(!(document.getElementById(nCom)==null)){document.getElementById(nCom).style.backgroundColor="transparent";}}
@@ -208,7 +209,8 @@ if (isNaN(celda))
   conexion2019_5.onreadystatechange = procesarEventos2019_5;
   aleatorio=Math.random();
   conexion2019_5.open('GET','./php/llenar_detalle_recibo_VALORES.php?idcomprobante='+numeroComprobante+"&rnadom="+aleatorio+"&sesses="+obnn, true);
-  conexion2019_5.send();
+	conexion2019_5.send();
+	llenarInformeReciboJS();
 }
 
 function procesarEventos4()

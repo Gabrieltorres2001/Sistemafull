@@ -21,10 +21,33 @@ function inicializarEventos()
   document.getElementById('botonBuscarPor').addEventListener('click',parametrosDeBusqueda,false);
   document.getElementById('botonAceptarBuscarPor').addEventListener('click',aceptarParametrosDeBusqueda,false);  
   document.getElementById('cierraMovs').addEventListener('click',cerrarVentanaMovs,false); 
-  document.getElementById('botonActualizaArticulo').addEventListener('click',actualizoArticulo,false);
-  document.getElementById('botonCopiaArticulo').addEventListener('click',copioArticulo,false);
-  document.getElementById('botonNuevoArticulo').addEventListener('click',nuevoArticulo,false);
-  document.getElementById('checkMostrarMovimientos').addEventListener('change',mostrarMovimientos,false); 
+}
+
+var conexion91;
+function llenarAccionesArticulosJS(){
+  conexion91=new XMLHttpRequest(); 
+  conexion91.onreadystatechange = procesarEventos91;
+  var obnn=document.getElementById('numberses').value;
+  //alert(obnn);
+  var aleatorio=Math.random();
+  conexion91.open('GET','./php/llenar_acciones_articulos.php?&sesses='+obnn+"&rnadom="+aleatorio, true);
+  conexion91.send();
+}
+
+function procesarEventos91()
+{
+    if(conexion91.readyState == 4)
+  { 
+	  if(conexion91.status == 200)
+	  { 
+		  document.getElementById('accionesDetalle').innerHTML=conexion91.responseText;
+      document.getElementById('botonActualizaArticulo').addEventListener('click',actualizoArticulo,false);
+      document.getElementById('botonCopiaArticulo').addEventListener('click',copioArticulo,false);
+      document.getElementById('botonNuevoArticulo').addEventListener('click',nuevoArticulo,false);
+      document.getElementById('checkMostrarMovimientos').addEventListener('change',mostrarMovimientos,false); 
+	  }
+  } 
+
 }
 
 function mostrarMovimientos()
@@ -75,6 +98,7 @@ var conexion6;
 function mostrarDetalles(celda){
   //alert(celda.target.id);
   document.getElementById('detallesdearticulo').innerHTML="";
+  document.getElementById('accionesDetalle').innerHTML="";
   var numeroartic=celda.target.id;
   id_actual=numeroartic;
   conexion2=new XMLHttpRequest(); 
@@ -91,7 +115,8 @@ function mostrarDetalles(celda){
   conexion6.send();
 	if(!isNaN(nCom)){if(!(document.getElementById(nCom)==null)){document.getElementById(nCom).style.backgroundColor="transparent";}}
 	document.getElementById(celda.target.id).style.backgroundColor="#809fff";
-	nCom=celda.target.id;
+  nCom=celda.target.id;
+  llenarAccionesArticulosJS();
 }
 
 function procesarEventos2()
@@ -174,7 +199,8 @@ function procesarEventos()
 			//		tags_td[i].addEventListener('click',valor_celda,false);
 		 // } 
 		  document.getElementById('detallesdearticulo').innerHTML="";
-		  document.getElementById('movimientosdearticulo').innerHTML="";
+      document.getElementById('movimientosdearticulo').innerHTML="";
+      document.getElementById('accionesDetalle').innerHTML="";
 		  tags_cambios = []; 
 		  id_actual="";
 	  }

@@ -14,7 +14,7 @@ function inicializarEventos()
 {
 	listarLegajosPorPresupuesto();
 	llenarAccionesLegajo();
-	llenarInformeLegajoJS();
+	
 	
 	//De Presupuestos
 	document.getElementById('cierraAgregarIt').addEventListener('click',cerrarVentanaAgregaIt,false); 
@@ -247,6 +247,7 @@ function procesarEventos14()
 
 var conexion5;
 function mostrarDetalles(celda){
+	document.getElementById('informepresupuesto').innerHTML="";
 if (isNaN(celda))
   {
 	//alert(celda.target.id);
@@ -265,7 +266,8 @@ if (isNaN(celda))
   var aleatorio=Math.random();
   var obnn=document.getElementById('numberses').value;
   conexion5.open('GET','./php/llenar_encabezado_un_legajo.php?idcomprobante='+numeroComprobante+"&rnadom="+aleatorio+"&sesses="+obnn, true);
-  conexion5.send();
+	conexion5.send();
+	llenarInformeLegajoJS();
 }
 
 function procesarEventos5()
@@ -628,8 +630,7 @@ function procesarEventos18()
   { 
 	  if(conexion18.status == 200)
 	  { 
-		  var datosc=document.getElementById('informepresupuesto');
-		  datosc.innerHTML=conexion18.responseText;
+		  document.getElementById('informepresupuesto').innerHTML=conexion18.responseText;
 		  //habilito la funcion del boton "Informe"
 		  document.getElementById('informe').addEventListener('click',imprimir,false);
 	  }
