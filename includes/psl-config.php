@@ -3,8 +3,8 @@
  * Estos son los detalles de inicio de sesi�n de la base de datos: 
  */  
 define("HOST", "localhost");     // El alojamiento al que deseas conectarte
-define("USER", "sec_user");    // El nombre de usuario de la base de datos
-define("PASSWORD", "eKcGZr59zAa2BEWU");    // La contrase�a de la base de datos
+define("USER", "root");    // El nombre de usuario de la base de datos
+define("PASSWORD", "");    // La contrase�a de la base de datos
 define("DATABASE", "secure_login");    // El nombre de la base de datos
  
 define("CAN_REGISTER", "any");

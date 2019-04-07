@@ -6,9 +6,9 @@
 include_once 'psl-config.php';
  
 function sec_session_start() {
-    $session_name = 'sec_session_id';   // Configura un nombre de sesi�n personalizado.
+    $session_name = 'sec_session_id';   // Configura un nombre de sesión personalizado.
     $secure = SECURE;
-    // Esto detiene que JavaScript sea capaz de acceder a la identificaci�n de la sesi�n.
+    // Esto detiene que JavaScript sea capaz de acceder a la identificación de la sesión.
     $httponly = true;
     // Obliga a las sesiones a solo utilizar cookies.
     if (ini_set('session.use_only_cookies', 1) === FALSE) {
@@ -23,20 +23,20 @@ function sec_session_start() {
         $cookieParams["domain"], 
         $secure,
         $httponly);
-    // Configura el nombre de sesi�n al configurado arriba.
+    // Configura el nombre de sesión al configurado arriba.
     session_name($session_name);
-    session_start();            // Inicia la sesi�n PHP.
-    session_regenerate_id();    // Regenera la sesi�n, borra la previa. 
+    session_start();            // Inicia la sesión PHP.
+    session_regenerate_id();    // Regenera la sesión, borra la previa. 
 }
 
 
 function login($email, $password, $mysqli) {
-    // Usar declaraciones preparadas significa que la inyecci�n de SQL no ser� posible.
+    // Usar declaraciones preparadas significa que la inyección de SQL no será posible.
     if ($stmt = $mysqli->prepare("SELECT id, username, password, salt 
         FROM members
        WHERE email = ?
         LIMIT 1")) {
-        $stmt->bind_param('s', $email);  // Une �$email� al par�metro.
+        $stmt->bind_param('s', $email);  // Une $email al parámetro.
         $stmt->execute();    // Ejecuta la consulta preparada.
         $stmt->store_result();
  
@@ -44,30 +44,28 @@ function login($email, $password, $mysqli) {
         $stmt->bind_result($user_id, $username, $db_password, $salt);
         $stmt->fetch();
  
-        // Hace el hash de la contrase�a con una sal �nica.
+        // Hace el hash de la contraseña con una sal única.
         $password = hash('sha512', $password . $salt);
         if ($stmt->num_rows == 1) {
-            // Si el usuario existe, revisa si la cuenta est� bloqueada
-            // por muchos intentos de conexi�n.
+            // Si el usuario existe, revisa si la cuenta está bloqueada
+            // por muchos intentos de conexión.
  
             if (checkbrute($user_id, $mysqli) == true) {
-                // La cuenta est� bloqueada.
-                // Env�a un correo electr�nico al usuario que le informa que su cuenta est� bloqueada.
+                // La cuenta está bloqueada.
+                // Envía un correo electrónico al usuario que le informa que su cuenta está bloqueada.
                 return false;
             } else {
-                // Revisa que la contrase�a en la base de datos coincida 
-                // con la contrase�a que el usuario envi�.
+                // Revisa que la contraseña en la base de datos coincida 
+                // con la contraseña que el usuario envió.
                 if ($db_password == $password) {
-                    // �La contrase�a es correcta!
-                    // Obt�n el agente de usuario del usuario.
+                    // La contraseña es correcta!
+                    // Obtén el agente de usuario del usuario.
                     $user_browser = $_SERVER['HTTP_USER_AGENT'];
-                    //  Protecci�n XSS ya que podr�amos imprimir este valor.
+                    //  Protección XSS ya que podríamos imprimir este valor.
                     $user_id = preg_replace("/[^0-9]+/", "", $user_id);
                     $_SESSION['user_id'] = $user_id;
-                    // Protecci�n XSS ya que podr�amos imprimir este valor.
-                    $username = preg_replace("/[^a-zA-Z0-9_\-]+/", 
-                                                                "", 
-                                                                $username);
+                    // Protección XSS ya que podríamos imprimir este valor.
+                    $username = preg_replace("/[^a-zA-Z0-9_\-]+/","",$username);
                     $_SESSION['username'] = $username;
                     $_SESSION['login_string'] = hash('sha512', 
                     $password . $user_browser);
@@ -87,10 +85,10 @@ function login($email, $password, $mysqli) {
 						}  
                     $mysqli->query("INSERT INTO login_exitosos(user_id, time, IP)
                                     VALUES ('$user_id', '$now', '$ip')");
-                    // Inicio de sesi�n exitoso
+                    // Inicio de sesión exitoso
                     return true;
                 } else {
-                    // La contrase�a no es correcta.
+                    // La contraseña no es correcta.
                     // Se graba este intento en la base de datos.
                     $now = time();
 						if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) { 
@@ -121,7 +119,7 @@ function checkbrute($user_id, $mysqli) {
     // Obtiene el timestamp del tiempo actual.
     $now = time();
  
-    // Todos los intentos de inicio de sesi�n se cuentan desde las 2 horas anteriores.
+    // Todos los intentos de inicio de sesión se cuentan desde las 2 horas anteriores.
     $valid_attempts = $now - (2 * 60 * 60);
  
     if ($stmt = $mysqli->prepare("SELECT time 
@@ -134,7 +132,7 @@ function checkbrute($user_id, $mysqli) {
         $stmt->execute();
         $stmt->store_result();
  
-        // Si ha habido m�s de 5 intentos de inicio de sesi�n fallidos.
+        // Si ha habido más de 5 intentos de inicio de sesión fallidos.
         if ($stmt->num_rows > 5) {
             return true;
         } else {
@@ -143,7 +141,7 @@ function checkbrute($user_id, $mysqli) {
     }
 }
 function login_check($mysqli) {
-    // Revisa si todas las variables de sesi�n est�n configuradas.
+    // Revisa si todas las variables de sesión están configuradas.
     if (isset($_SESSION['user_id'], 
                         $_SESSION['username'], 
                         $_SESSION['login_string'])) {
@@ -158,7 +156,7 @@ function login_check($mysqli) {
         if ($stmt = $mysqli->prepare("SELECT password 
                                       FROM members 
                                       WHERE id = ? LIMIT 1")) {
-            // Une �$user_id� al par�metro.
+            // Une $user_id al parámetro.
             $stmt->bind_param('i', $user_id);
             $stmt->execute();   // Ejecuta la consulta preparada.
             $stmt->store_result();
@@ -170,7 +168,7 @@ function login_check($mysqli) {
                 $login_check = hash('sha512', $password . $user_browser);
  
                 if ($login_check == $login_string) {
-                    // ��Conectado!! 
+                    // Conectado!! 
                     return true;
                 } else {
                     // No conectado.

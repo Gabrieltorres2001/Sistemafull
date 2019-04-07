@@ -1,25 +1,14 @@
 <?php
-include_once 'includes/register.inc.php';
-include_once 'includes/functions.php';
+$titulo = "Ingreso diario";
+include 'header.php';
 ?>
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-	<meta http-equiv="content-type" content="text/html; charset=utf-8">
-	<title>Ingreso diario: Formulario de registro</title>
-
-	<!-- Google Fonts -->
-	<link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700|Lato:400,100,300,700,900' rel='stylesheet' type='text/css'>
-
-	<link rel="stylesheet" href="css/animate.css">
-	<!-- Custom Stylesheet -->
+	<!-- page Stylesheet -->
 	<link rel="stylesheet" href="css/styleAncho.css">
-    <script type="text/JavaScript" src="js/sha512.js"></script> 
-    <script type="text/JavaScript" src="js/forms.js"></script>
-    <script type="text/JavaScript" src="js/Untitled.js"></script>
 
-	<script type="text/javascript">
+	<!-- page js libs -->
+    <script src="js/Untitled.js"></script>
+
+	<script>
       addEventListener('load',inicio,false);
     </script>
 	
