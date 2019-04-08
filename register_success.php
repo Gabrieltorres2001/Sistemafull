@@ -1,53 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
+$titulo = "Inicio de sesión segura: Registro exitoso";
+include 'header.php';
+?>
 
-<head>
-	<meta http-equiv="content-type" content="text/html; charset=utf-8">
-	<title>Inicio de sesión segura: Registro exitoso</title>
+<!-- page Stylesheet -->
 
-	<!-- Google Fonts -->
-	<link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700|Lato:400,100,300,700,900' rel='stylesheet' type='text/css'>
-
-	<link rel="stylesheet" href="css/animate.css">
-	<!-- Custom Stylesheet -->
-	<link rel="stylesheet" href="css/styleAncho.css">
-
-
+<!-- page js libs -->
 	
 </head>
 
 <body>
-
-	<div class="container">
-		<div class="top">
-			<h1 id="title" class="hidden"><span id="logo">log<span>in</span></span></h1>
+	<div class="container login">
+		<div class="mx-auto text-center animated fadeInDown">
+			<h1 id="title"><span id="logo">log<span>in</span></span></h1>
 		</div>
-		<div class="login-box animated fadeInUp">
-			<div class="box-header">
+		<div class="card w-50 animated fadeInUp text-center mx-auto">
+			<div class="card-header">
 				<h2>Registro exitoso!</h2>
 			</div>
-			<p>Ahora podrás regresar a <a href="index.html">la página de login </a> e iniciar la sesión.</p>
+		<p>Ahora podrás regresar a la página de <a class = "btn btn-light" href="index.html"> login </a> e iniciar la sesión.</p>
 		</div>
 	</div>
 </body>
-
-<script>
-	$(document).ready(function () {
-    	$('#logo').addClass('animated fadeInDown');
-    	$("input:text:visible:first").focus();
-	});
-	$('#username').focus(function() {
-		$('label[for="username"]').addClass('selected');
-	});
-	$('#username').blur(function() {
-		$('label[for="username"]').removeClass('selected');
-	});
-	$('#password').focus(function() {
-		$('label[for="password"]').addClass('selected');
-	});
-	$('#password').blur(function() {
-		$('label[for="password"]').removeClass('selected');
-	});
-</script>
 
 </html>
