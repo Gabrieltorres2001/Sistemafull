@@ -98,7 +98,7 @@ function mostrarDetalles(celda){
   conexion9.onreadystatechange = procesarEventos9;
   aleatorio=Math.random();
   var obnn=document.getElementById('numberses').value;
-  conexion9.open('GET','./php/accionesarticulopublico.php?idart='+numeroartic+"&rnadom="+aleatorio+"&estaSesion="+obnn, true);
+  conexion9.open('GET','./php/llenar_acciones_articulo_publico.php?idart='+numeroartic+"&rnadom="+aleatorio+"&estaSesion="+obnn, true);
   conexion9.send();
 }
 

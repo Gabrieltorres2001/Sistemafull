@@ -125,17 +125,22 @@ function imprimir_detalle_empresas($resultc, $conexion_sp, $idEmpresaTemp) {
 	//2: Proveedor. Los descuentos/recargos se aplicarán al artículo
 	//3 y 4: Varios o Cli/prov. NO SE. Por ahora nada.
 
-	if ($reg['IdTipoContacto']=='2'){
 	echo "<label>Cliente:</label> Los descuentos/recargos se aplicarán al comprobante (presupuesto/venta) al momento de generarlo.<br />";
 	echo "<label>Proveedor:</label> Los descuentos/recargos se aplicarán a todos los artículos de este proveedor. También se aplicarán los de tipo Lista a las OC.<br />";
 	echo "<label>Varios o Cli/prov:</label> No se aplicarán descuentos o recargos automáticos.<br />";
 
-	}
-	echo"<label>Descuentos y recargos vigentes:</label><br />";
-	echo"<br />";
+	if (($reg['IdTipoContacto']=='2')||($reg['IdTipoContacto']=='1')){
+		echo"<label>Descuentos y recargos vigentes:</label><br />";
+		if(!$tiposDescuentos = mysqli_query($conexion_sp, "select ID, Descripcion from tipos where Destino = 'Descuentos'")) die("Problemas con la consulta tipos");
+		while ($rowTiposDescuentos = mysqli_fetch_array($tiposDescuentos)){ 
+			if(!$descuentos = mysqli_query($conexion_sp, "select Id, Porcentaje, Fecha, Tipo from descuentos where Empresa = '".$reg['id']."' and Tipo = '".$rowTiposDescuentos['ID']."' order by Id desc limit 1")) die("Problemas con la consulta descuentos");
 
-	echo"<label>Descuentos y recargos anteriores:</label><br />";
-	echo"<br />";
+		}
+		echo"<br />";
+
+		echo"<label>Descuentos y recargos anteriores:</label><br />";
+		echo"<br />";
+	}
 	
 	//Siguen las direcciones. Hacer una tabla.
 	if(!$resultDirec = mysqli_query($conexion_sp, "select id, Direccion, Ciudad, Codigopostal, Provoestado, Pais from direcciones where CUIT = '".$reg['id']."' and Direccion not Like '%@%' and ((Direccion is not null) and (Ciudad is not null) and (Codigopostal is not null) and (Provoestado is not null) and (Pais is not null)) order by id asc")) die("Problemas con la consulta Direcciones");

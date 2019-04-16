@@ -111,7 +111,7 @@ function mostrarDetalles(celda){
   conexion7.onreadystatechange = procesarEventos7;
 	var aleatorio=Math.random();
 	var obnn=document.getElementById('numberses').value;
-  conexion7.open('GET','./php/accionesempresa.php?idsesion='+obnn+"&rnadom="+aleatorio, true);
+  conexion7.open('GET','./php/llenar_acciones_empresa.php?idsesion='+obnn+"&rnadom="+aleatorio, true);
   conexion7.send();
 }
 

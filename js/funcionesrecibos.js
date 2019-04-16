@@ -1099,6 +1099,24 @@ function btnkeydown(event)
 {
 	//Algunos navegadores usan which y otros charCode, asi que tengo que poner este if y usar KeyCode en lugar de event.charCode
 	var KeyCode = event.KeyCode ? event.KeyCode : event.which ? event.which : event.charCode;
+
+	if (KeyCode==13)
+	{
+		if (document.activeElement.name=="xxxxt")
+		{
+			var tags_td = new Array();
+		  var tags_td=document.getElementsByName('xxxxt');
+			var r=0;
+			var ae=document.activeElement.id;
+			for (i=0; i<tags_td.length; i++) {
+				if (ae==tags_td[i].id){
+					r=i;
+					r++;
+					tags_td[r].focus(); }
+		  } 			
+		}
+	}
+
 	if (event.ctrlKey) {	
 	
 		if (KeyCode==65)

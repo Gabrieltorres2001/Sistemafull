@@ -20,6 +20,8 @@
 		if ($puedoModificar==0) {echo"<input type='button' id='botonActualizaEmpresa' value='Actualizar datos' disabled>";} else {echo"<input type='button' id='botonActualizaEmpresa' value='Actualizar datos'/>";}
 		echo " ";
 		if ($puedoModificar==0) {echo"<input type='button' id='botonNuevaEmpresa' value='Nueva empresa' disabled>";} else {echo"<input type='button' id='botonNuevaEmpresa' value='Nueva empresa'/>";}
+		echo " ";
+		if ($puedoModificar==0) {echo"<input type='button' id='botonNuevoDescuento' value='Nuevo descuento / recargo' disabled>";} else {echo"<input type='button' id='botonNuevoDescuento' value='Nuevo descuento / recargo'/>";}
 		echo"</br>";
 		echo"</br>";
 		echo"<input type='checkbox' id='checkMostrarAFIP' value='MostrarAFIP'/>Mostrar datos en AFIP";
