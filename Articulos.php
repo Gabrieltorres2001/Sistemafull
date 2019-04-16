@@ -87,6 +87,9 @@ sec_session_start();
         </div> <!-- /acciones -->
         <div id="accionesDetalle">
         <?php
+
+        include ('php/llenar_acciones_articulos.php');
+
          //llenar_acciones_articulos(htmlentities($_SESSION['user_id']));
 		 ?>
         </div> <!-- /accionesDetalle -->

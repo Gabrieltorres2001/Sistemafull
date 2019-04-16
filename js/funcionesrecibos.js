@@ -123,8 +123,8 @@ function procesarEventos301()
 	  { 
 		  var datosc=document.getElementById('listaComprobantes');
 		  datosc.innerHTML=conexion301.responseText;
-		  var tags_tdm = new Array();
-		  var tags_tdm=document.getElementsByName('xxxxrt');
+		  var tags_tdm = [];
+		  tags_tdm=document.getElementsByName('xxxxrt');
 		  var r=0;
 		  for (ii=0; ii<tags_tdm.length; ii++) {
 				tags_tdm[ii].addEventListener('click',mostrarDetalles,false);
@@ -159,8 +159,8 @@ function procesarEventos1()
 		  document.getElementById('listaComprobantes').innerHTML=conexion1.responseText;
 		  //listar todos los Recibos MIOS
 		  document.getElementById('listarMios').addEventListener('click',listarRecibosMios,false); 
-		  var tags_td = new Array();
-		  var tags_td=document.getElementsByName('xxxxrt');
+		  var tags_td = [];
+		  tags_td=document.getElementsByName('xxxxrt');
 		  var r=0;
 		  for (i=0; i<tags_td.length; i++) {
 				tags_td[i].addEventListener('click',mostrarDetalles,false);
@@ -175,16 +175,17 @@ var conexion4;
 var conexion5;
 var conexion2019_5;
 function mostrarDetalles(celda){
-	document.getElementById('informeRecibo').innerHTML="";
+document.getElementById('informeRecibo').innerHTML="";
+var numeroComprobante="";
 if (isNaN(celda))
   {
-	if(!isNaN(nCom)){if(!(document.getElementById(nCom)==null)){document.getElementById(nCom).style.backgroundColor="transparent";}}
+	if(!isNaN(nCom)){if((document.getElementById(nCom)!=null)){document.getElementById(nCom).style.backgroundColor="transparent";}}
 	document.getElementById(celda.target.id).style.backgroundColor="#809fff";
-    var numeroComprobante=celda.target.id;
+    numeroComprobante=celda.target.id;
   }
   else
   {
-	var numeroComprobante=celda; 
+	 numeroComprobante=celda; 
   }
 	nCom=numeroComprobante;
 	//alert(numeroComprobante);
@@ -236,7 +237,8 @@ function procesarEventos4()
 			document.getElementById('Notas').addEventListener('blur',guardaCambiosEncabezadoRecibo,false); 	
 			  } else {	  
 					document.getElementById('asignarmeRemit').addEventListener('click',asignarmeRemito,false); 	
-		  };}, 100);		  
+			}
+			}, 100);	  
 	  }
   } 
 
@@ -258,36 +260,36 @@ function procesarEventos2019_5()
 		  if (datosce.value == '1') {
 			  //si soy yo, permito editar la tabla (P para Recibos)
 			  //Lo hago solo para los xxxxt, ya que los xxxxtn no son editables.
-			  var tags_td_camb = new Array();
-  			  var tags_td_camb = document.getElementsByName('xxxxtp');
+			  var tags_td_camb = [];
+  			tags_td_camb = document.getElementsByName('xxxxtp');
 			  for (i=0; i<tags_td_camb.length; i++) {
 						tags_td_camb[i].addEventListener('change',cambioUnPagoRecibo,false);
-				};
-			  var tags_td_cambE = new Array();
-  			  var tags_td_cambE = document.getElementsByName('xxxxtp');
+				}
+			  var tags_td_cambE = [];
+  			tags_td_cambE = document.getElementsByName('xxxxtp');
 			  for (i=0; i<tags_td_cambE.length; i++) {
 						tags_td_cambE[i].addEventListener('keypress',teclaEnterTab,false);
-				};
+				}
 			  //un click en el boton de la cruz borra la linea (P para Recibos)
-			  var tags_td_elim = new Array();
-  			  var tags_td_elim = document.getElementsByName('xxxxxp');
+			  var tags_td_elim = [];
+  			tags_td_elim = document.getElementsByName('xxxxxp');
 			  for (i=0; i<tags_td_elim.length; i++) {
 						tags_td_elim[i].addEventListener('click',borrarPagoRecibo,false);
-				};
+				}
 			
 				//un click en el boton del tilde refresca la tabla (P para Recibos)
-			  var tags_td_actua = new Array();
-  			  var tags_td_actua = document.getElementsByName('xxxxyp');
+			  var tags_td_actua = [];
+  			tags_td_actua = document.getElementsByName('xxxxyp');
 			  for (i=0; i<tags_td_actua.length; i++) {
 						tags_td_actua[i].addEventListener('click',actualizArticuloRemit,false);
-				};
+				}
 			  //un click en el boton del tilde EN LA ULTIMA LINEA agrega un item (P para Recibos)
-			  var tags_td_actua = new Array();
-  			  var tags_td_actua = document.getElementsByName('xxxxzp');
+			  tags_td_actua = [];
+  			tags_td_actua = document.getElementsByName('xxxxzp');
 			  for (i=0; i<tags_td_actua.length; i++) {
 						tags_td_actua[i].addEventListener('click',agregoPagoARecibo,false);			
-				};								
-				};}, 100);
+				}
+				}}, 100);
 		}
 	}
 }
@@ -311,7 +313,7 @@ function cambioUnPagoRecibo(celda)
 				campoAEditar="Descripcion";
 				modificarPagoTablaDetalleComprobante(palabras[0],campoAEditar,celda.target.value);
 				break;
-	  };
+	  }
 }
 
 var conexionR20;
@@ -322,7 +324,7 @@ function modificarPagoTablaDetalleComprobante(IdDetalleComprobante,campoAEditar,
 	conexionR20.open('GET','./php/actualizo_detalle_recibo_pago.php?idcomprobante='+IdDetalleComprobante+"&campo="+campoAEditar+"&valor="+newValue+"&rnadom="+aleatorio, true);
 	conexionR20.send();
 	//NOOOO DEBO actualizar automaticamente!! DEBO RECIBIR UN JSON Y GRABARLO EN EL CAMPO. VER FUNCION modificarArticuloDivAgregaArt
-	setTimeout(function(){mostrarDetalles(nCom)}, 100);
+	setTimeout(function(){mostrarDetalles(nCom);}, 100);
 }
 
 function procesarEventosR20()
@@ -344,11 +346,11 @@ function agregoPagoARecibo(){
 	document.getElementById('nuevoItem').style.visibility='visible';
 	transfEnEditableNueva();
 	cargarFaltanteDePago();
-	var tags_td_acept = new Array();
-	  var tags_td_acept = document.getElementsByName('xxxxA');
+	var tags_td_acept = [];
+	tags_td_acept = document.getElementsByName('xxxxA');
 	  for (i=0; i<tags_td_acept.length; i++) {
 				tags_td_acept[i].addEventListener('click',agregaItemNuevo,false);
-	};
+	}
 }
 
 
@@ -364,7 +366,7 @@ function agregaItemNuevo(celda){
 	var cadena="idcomprobante="+nCom;
 	//alert(cadena);
 	if ((isNaN(parseFloat(editableGridTemp.getValueAt(0, 3))))||(editableGridTemp.getValueAt(0, 0) == null)||(editableGridTemp.getValueAt(0, 1) == null)||(editableGridTemp.getValueAt(0, 2) == null)||(parseFloat(editableGridTemp.getValueAt(0, 3))<0.001)||(isNaN(parseFloat(editableGridTemp.getValueAt(0, 1))))){
-			mostrarAvisos("Faltan datos!")
+			mostrarAvisos("Faltan datos!");
 	  } else {
 				//campo 0. Fecha
 			  cadena=cadena+"&Fecha="+editableGridTemp.getValueAt(0,0);	
@@ -379,7 +381,7 @@ function agregaItemNuevo(celda){
 			  cadena=cadena+"&Descripcion="+editableGridTemp.getValueAt(0, 4);
 				//ESTE PHP LO VOY A TENER QUE CAMBIAR
 				//alert(cadena);
-			  cadena='./php/agrego_pago_a_recibo.php?'+cadena+"&rnadom="+aleatorio
+			  cadena='./php/agrego_pago_a_recibo.php?'+cadena+"&rnadom="+aleatorio;
 				//alert(cadena);
 				editableGridTemp.setValueAt(0, 0, '','true');
 				editableGridTemp.setValueAt(0, 1, '','true');
@@ -438,7 +440,7 @@ function transfEnEditableNueva()
 						campoAEditar="Descripcion";
 						//Por ahora nada.									
 						break;
-			  };
+			  }
 			  //alert(oldValue);
 			  }, 			  
 			  //otra funcion a redefir 
@@ -476,36 +478,36 @@ function procesarEventos5()
 		  if (datosce.value == '1') {
 			  //si soy yo, permito editar la tabla
 			  //Lo hago solo para los xxxxt, ya que los xxxxtn no son editables.
-			  var tags_td_camb = new Array();
-  			  var tags_td_camb = document.getElementsByName('xxxxt');
+			  var tags_td_camb = [];
+  			tags_td_camb = document.getElementsByName('xxxxt');
 			  for (i=0; i<tags_td_camb.length; i++) {
 						tags_td_camb[i].addEventListener('change',cambioUnComprobRecibo,false);
-				};
-			  var tags_td_cambE = new Array();
-  			  var tags_td_cambE = document.getElementsByName('xxxxt');
+				}
+			  var tags_td_cambE = [];
+  			tags_td_cambE = document.getElementsByName('xxxxt');
 			  for (i=0; i<tags_td_cambE.length; i++) {
 						tags_td_cambE[i].addEventListener('keypress',teclaEnterTab,false);
-				};
+				}
 			  //un click en el boton de la cruz borra la linea
-			  var tags_td_elim = new Array();
-  			  var tags_td_elim = document.getElementsByName('xxxxx');
+			  var tags_td_elim = [];
+  			tags_td_elim = document.getElementsByName('xxxxx');
 			  for (i=0; i<tags_td_elim.length; i++) {
 						tags_td_elim[i].addEventListener('click',borrarComprobanteRecibo,false);
-				};
+				}
 			
 			  //un click en el boton del tilde refresca la tabla
-			  var tags_td_actua = new Array();
-  			  var tags_td_actua = document.getElementsByName('xxxxy');
+			  var tags_td_actua = [];
+  			tags_td_actua = document.getElementsByName('xxxxy');
 			  for (i=0; i<tags_td_actua.length; i++) {
 						tags_td_actua[i].addEventListener('click',actualizArticuloRemit,false);
-				};
+				}
 			  //un click en el boton del tilde EN LA ULTIMA LINEA agrega un item
-			  var tags_td_actua = new Array();
-  			  var tags_td_actua = document.getElementsByName('xxxxz');
+			  tags_td_actua = [];
+  			tags_td_actua = document.getElementsByName('xxxxz');
 			  for (i=0; i<tags_td_actua.length; i++) {
 						tags_td_actua[i].addEventListener('click',agregoComprobanteARecibo,false);			
-				};								
-				};}, 100);
+				}							
+				}}, 100);
 	  }
   } 
 
@@ -532,7 +534,7 @@ function procesarEventos121()
   { 
 	  if(conexion121.status == 200)
 	  { 
-		setTimeout(function(){mostrarDetalles(nCom)}, 100);
+		setTimeout(function(){mostrarDetalles(nCom);}, 100);
 	  }
   } 
 }
@@ -551,7 +553,7 @@ function borrarComprobanteRecibo(celda){
 		conexion25.open('GET','./php/borro_comprobante_detalle_recibo.php?idcomprobante='+numeroPosic+"&rnadom="+aleatorio, true);
 		conexion25.send();	
 		//DEBO actualizar automaticamente
-		setTimeout(function(){mostrarDetalles(nCom)}, 500);
+		setTimeout(function(){mostrarDetalles(nCom);}, 500);
 	}
 }
 
@@ -580,7 +582,7 @@ function borrarPagoRecibo(celda){
 		conexionR25.open('GET','./php/borro_pago_detalle_recibo.php?idcomprobante='+numeroPosic+"&rnadom="+aleatorio, true);
 		conexionR25.send();	
 		//DEBO actualizar automaticamente
-		setTimeout(function(){mostrarDetalles(nCom)}, 500);
+		setTimeout(function(){mostrarDetalles(nCom);}, 500);
 	}
 }
 
@@ -591,7 +593,7 @@ function procesarEventosR25()
 	  if(conexionR25.status == 200)
 	  { 
 		mostrarAvisos(conexionR25.responseText);
-		setTimeout(function(){mostrarDetalles(nCom)}, 500);
+		setTimeout(function(){mostrarDetalles(nCom);}, 500);
 	  }
   } 
 }
@@ -615,7 +617,7 @@ function agregaItemNuevoV2(celda){
 	var aleatorio=Math.random();
 	//defino los campos a enviar
 	var cadena="idcomprobante="+nCom;
-	  cadena='./php/agrego_detalle_remito_articulo.php?'+cadena+"&rnadom="+aleatorio
+	  cadena='./php/agrego_detalle_remito_articulo.php?'+cadena+"&rnadom="+aleatorio;
 	  //alert(cadena);
 	  //campo 0. Orden
 	  cadena=cadena+"&Orden=999";			  
@@ -669,8 +671,8 @@ function procesarEventos2_2019()
 		  datosc.innerHTML=conexion2_2019.responseText;	
 		  document.getElementById('listaFacturasFRMInf').innerHTML="";
 		  //document.getElementById('xxxxB').addEventListener('click',buscarDatosEmpresa,false);			  
-		  var tags_tdm = new Array();
-		  var tags_tdm=document.getElementsByName('FilaFactura');
+		  var tags_tdm = [];
+		  tags_tdm=document.getElementsByName('FilaFactura');
 		  var r=0;
 		  for (ii=0; ii<tags_tdm.length; ii++) {
 				tags_tdm[ii].addEventListener('click',mostrarDetallesParaRecibo,false);
@@ -685,16 +687,17 @@ var nComNC;
 function mostrarDetallesParaRecibo(celda){
 	//alert(celda);
 	//alert(celda.target.id);
+var numeroComprobante="";
 if (isNaN(celda))
   {
-	if(!isNaN(nComNC)){if(!(document.getElementById(nComNC)==null)){document.getElementById(nComNC).style.backgroundColor="transparent";}}
+	if(!isNaN(nComNC)){if(document.getElementById(nComNC)!=null){document.getElementById(nComNC).style.backgroundColor="transparent";}}
 	document.getElementById(celda.target.id).style.backgroundColor="#809fff";
-		var numeroComprobante=celda.target.id;
+		numeroComprobante=celda.target.id;
 		document.getElementById('botonSeleccionarComprobante').disabled=false;
 		document.getElementById('botonSeleccionarComprobante').addEventListener('click',agregaFacturaaRecibo,false); 
   }  else
   {
-	var numeroComprobante=celda; 
+	 numeroComprobante=celda; 
   }
 	nComNC=numeroComprobante;
 	//alert(nComNC);
@@ -935,6 +938,7 @@ function cambioUnComprobRecibo(celda)
 	var ambosid=celda.target.id;
 	var palabras = ambosid.split("&");
 	var numeroartic = palabras[2];
+	var nuevoSubotal="";
 	  switch(numeroartic){
 			case "pendienteFacturaitem":
 			  //El cliente modificó el importe a cancelar, tengo que guardar ese y ademas el subtotal, el tipo de cambio queda sin tocar
@@ -947,7 +951,7 @@ function cambioUnComprobRecibo(celda)
 				//Ahora grabo el subtotal en pesos
 				campoAEditar="Subtotal";
 				//alert(document.getElementById(palabras[0]+'&'+palabras[1]+'&cambioitem&E').value);
-				var nuevoSubotal=parseFloat(celda.target.value)*parseFloat(document.getElementById(palabras[0]+'&'+palabras[1]+'&cambioitem&E').value);
+				nuevoSubotal=parseFloat(celda.target.value)*parseFloat(document.getElementById(palabras[0]+'&'+palabras[1]+'&cambioitem&E').value);
 				modificarArticuloTablaDetalleComprobante(palabras[0],campoAEditar,nuevoSubotal);
 			break;
 
@@ -962,7 +966,7 @@ function cambioUnComprobRecibo(celda)
 				//Ahora grabo el subtotal en pesos
 				campoAEditar="Subtotal";
 				//alert(document.getElementById(palabras[0]+'&'+palabras[1]+'&cambioitem&E').value);
-				var nuevoSubotal=parseFloat(celda.target.value)*parseFloat(document.getElementById(palabras[0]+'&'+palabras[1]+'&pendienteFacturaitem&E').value);
+				nuevoSubotal=parseFloat(celda.target.value)*parseFloat(document.getElementById(palabras[0]+'&'+palabras[1]+'&pendienteFacturaitem&E').value);
 				modificarArticuloTablaDetalleComprobante(palabras[0],campoAEditar,nuevoSubotal);
 			break;
 
@@ -1007,19 +1011,21 @@ function cambioUnComprobRecibo(celda)
 				break;
 
 
-	  };
+	  }
 }
 
 function cambioSubTotal(){
 				//Ahora si llamo a la funcion que graba en la base de datos. Grabo los 3 y listo.
 				//Pregunto que opción vale
 				//alert(nuevoAdescontarA);
+				nuevoAdescontar="";
+				nuevoTipoCambio="";
 				if ((nuevoTipoCambioA==1)||(document.getElementById('radio11111').checked)) {
-						var nuevoAdescontar=nuevoAdescontarA;
-						var nuevoTipoCambio=nuevoTipoCambioA;
+						nuevoAdescontar=nuevoAdescontarA;
+						nuevoTipoCambio=nuevoTipoCambioA;
 				} else {
-					var nuevoAdescontar=nuevoAdescontarB;
-					var nuevoTipoCambio=nuevoTipoCambioB;			
+					nuevoAdescontar=nuevoAdescontarB;
+					nuevoTipoCambio=nuevoTipoCambioB;			
 				}
 				//Empiezo por el que guardó el usuario
 				campoAEditar="Subtotal";
@@ -1044,7 +1050,7 @@ function modificarArticuloTablaDetalleComprobante(IdDetalleComprobante,campoAEdi
 	conexion20.open('GET','./php/actualizo_detalle_recibo_factura.php?idcomprobante='+IdDetalleComprobante+"&campo="+campoAEditar+"&valor="+newValue+"&rnadom="+aleatorio, true);
 	conexion20.send();
 	//NOOOO DEBO actualizar automaticamente!! DEBO RECIBIR UN JSON Y GRABARLO EN EL CAMPO. VER FUNCION modificarArticuloDivAgregaArt
-	setTimeout(function(){mostrarDetalles(nCom)}, 100);
+	setTimeout(function(){mostrarDetalles(nCom);}, 100);
 }
 
 function procesarEventos20()
@@ -1104,8 +1110,8 @@ function btnkeydown(event)
 	{
 		if (document.activeElement.name=="xxxxt")
 		{
-			var tags_td = new Array();
-		  var tags_td=document.getElementsByName('xxxxt');
+			var tags_td = [];
+		  tags_td=document.getElementsByName('xxxxt');
 			var r=0;
 			var ae=document.activeElement.id;
 			for (i=0; i<tags_td.length; i++) {
@@ -1122,7 +1128,7 @@ function btnkeydown(event)
 		if (KeyCode==65)
 		{
 			event.preventDefault();
-			if (!isNaN(nCom)){agregoComprobanteARecibo()};
+			if (!isNaN(nCom)){agregoComprobanteARecibo();}
 		}
 		}
 }
@@ -1192,28 +1198,28 @@ function procesarEventos31(){
 	  if(conexion31.status == 200)
 	  {
 		  document.getElementById('agregarItemAlComprobanteFRMSup').innerHTML=conexion31.responseText;
-		  var tags_td = new Array();
-		  var tags_td=document.getElementsByName('xxxxb');
+		  var tags_td = [];
+		  tags_td=document.getElementsByName('xxxxb');
 		  var clickCount = 0;
 		  for (i=0; i<tags_td.length; i++) {
-					tags_td[i].addEventListener('click',function(i) {
-					clickCount++;
-					if (clickCount === 1) {
-						singleClickTimer = setTimeout(function() {
+					tags_td[i].addEventListener('click',function(i){
+						clickCount++;
+						if (clickCount === 1) {
+							singleClickTimer = setTimeout(function() {
+								clickCount = 0;
+								mostrarDetallesItemEnRemit(i);
+							}, 300);
+						} else if (clickCount === 2) {
+							clearTimeout(singleClickTimer);
 							clickCount = 0;
-							mostrarDetallesItemEnRemit(i);
-						}, 300);
-					} else if (clickCount === 2) {
-						clearTimeout(singleClickTimer);
-						clickCount = 0;
-						//alert(i.target.id);
-						//aca deberia cargar el articulo en el div de nuevo articulo (nuevoItem)
-						ponerItemEncontradoEnVentanaAgregar(i.target.id);
-						//document.getElementById('nuevoItem').style.visibility='hidden';
-						//document.getElementById('agregarItemAlComprobante').style.visibility='hidden';
-					}
-				},false);
-		  };		  		  
+							//alert(i.target.id);
+							//aca deberia cargar el articulo en el div de nuevo articulo (nuevoItem)
+							ponerItemEncontradoEnVentanaAgregar(i.target.id);
+							//document.getElementById('nuevoItem').style.visibility='hidden';
+							//document.getElementById('agregarItemAlComprobante').style.visibility='hidden';
+						}
+					},false);
+		  }	  		  
 	  }
   } 
 }

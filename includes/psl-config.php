@@ -4,7 +4,7 @@
  */  
 define("HOST", "localhost");     // El alojamiento al que deseas conectarte
 define("USER", "root");    // El nombre de usuario de la base de datos
-define("PASSWORD", "");    // La contrase�a de la base de datos
+define("PASSWORD", "mysql");    // La contrase�a de la base de datos
 define("DATABASE", "secure_login");    // El nombre de la base de datos
  
 define("CAN_REGISTER", "any");
