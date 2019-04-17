@@ -13,11 +13,7 @@ function inicializarEventos()
     tags_td[i].addEventListener('click',mostrarDetalles,false);
   } 
 
-  $('td').each(function(i){
-
-  });
-  
-  $('buscadorArticulo').on('keypress',teclaEnter());
+  document.getElementById('buscadorArticulo').addEventListener('keypress',teclaEnter,false);
   var tags_input = [];
   tags_input = document.getElementsByClassName("input");
   for (i=0; i<tags_input.length; i++) {
@@ -88,8 +84,7 @@ function algoCambio(e)
   //} 
 }
 
-function teclaEnter(e)
-{
+function teclaEnter(e){
   var tecla=e.which;
   if(tecla==13)
   {
@@ -122,7 +117,7 @@ function mostrarDetalles(celda){
 	if(!isNaN(nCom)){if(document.getElementById(nCom)!=null){document.getElementById(nCom).style.backgroundColor="transparent";}}
 	document.getElementById(celda.target.id).style.backgroundColor="#809fff";
   nCom=celda.target.id;
-  llenarAccionesArticulosJS();
+  //llenarAccionesArticulosJS();
 }
 
 function mostrarDetallesArt(celda){

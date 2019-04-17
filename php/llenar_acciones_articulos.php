@@ -1,9 +1,9 @@
 <?php
 	include 'php/globalFunctions.php';
 	
-		$rowPermisoModificar = consultaMembers($_REQUEST['sesses']);
+		$userInfo = consultaMembers($_SESSION["user_id"]);
 		$puedoModificar="";
-		if($rowPermisoModificar['PuedeModificarArticulos']=0){
+		if($userInfo['PuedeModificarArticulos']=0){
 			$puedoModificar=" disabled";
 			};
 		ob_start();
