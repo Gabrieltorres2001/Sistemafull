@@ -66,10 +66,8 @@ include 'header.php';
 </body>
 
 <script>
-	$(document).ready(function () {
-        inicio();
-    	$("input:text:visible:first").focus();
-	});
+	$(document).ready(function () {inicio();
+    	                           $("input:text:visible:first").focus();});
 </script>
 
 </html>

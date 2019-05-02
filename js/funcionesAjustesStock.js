@@ -52,11 +52,7 @@ function procesarEventos1()
 	  { 
 		  document.getElementById('listaComprobantes').innerHTML=conexion1.responseText;
 		  //document.getElementById('articulosAjustados').focus();
-		  	$(document).ready(function() {
-			  //$("#articulosAjustados").select2();
-			  $("#articulosAjustados").select2({ width: '80%' }); 
-			  //$("#articulosAjustados").select2("open");
-			});
+		  	$(document).ready(function() {$("#articulosAjustados").select2({ width: '80%' });});
 		  //listar todos los presupuestos MIOS
 		  //document.getElementById('listarMios').addEventListener('click',listarPresupuestosMios,false); 
 		  var tags_td = new Array();

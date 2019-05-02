@@ -37,7 +37,7 @@ sec_session_start();
 		<!-- [DO NOT DEPLOY] --><script src="./editablegrid/editablegrid_charts.js" ></script> 
 		<link rel="stylesheet" href="./editablegrid/editablegrid.css" type="text/css" media="screen">
     <!-- de EDITABLEGRID-->
-    <style type="text/css">
+
 	<!-- de EDITABLEGRID
 			body { font-family:'lucida grande', tahoma, verdana, arial, sans-serif; font-size:11px; }
 			h1 { font-size: 15px; }
@@ -49,7 +49,7 @@ sec_session_start();
 			input.invalid { background: red; color: #FDFDFD; }
 	de EDITABLEGRID-->
 	<link href="css/select2.min.css" rel="stylesheet">
-    </style>
+  
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -69,9 +69,7 @@ sec_session_start();
   	<!-- DataTables Initialization -->
     <script type="text/javascript" src="js/jquery.dataTables.js"></script>
   	<script type="text/javascript" charset="utf-8">
-			$(document).ready(function() {
-				$('#dt1').dataTable();
-			} );
+			$(document).ready(function() {$('#dt1').dataTable();});
 	</script>
 	<!-- include javascript and css files for jQuery UI, in order to have the datepicker -->
 		<script src="js/jquery-1.6.4.min.js" ></script>
@@ -83,9 +81,7 @@ sec_session_start();
 
 	
 	<script type="text/javascript">
-	$(document).ready(function() {
-	  $("#empresa").select2();
-	});
+	$(document).ready(function() {$("#empresa").select2();});
 	</script>
 	
     

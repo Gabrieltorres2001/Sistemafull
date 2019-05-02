@@ -13,15 +13,15 @@
 		//tengo que tenerpermiso para modificar
 		if(!$permisoModificar = mysqli_query($conexion_db, "select PuedeModificarContactos from members where id='".$_REQUEST['idsesion']."' limit 1")) die("Problemas con la consultamembers");
 		$rowPermisoModificar = mysqli_fetch_array($permisoModificar);
-		$puedoModificar=0;
-		if($rowPermisoModificar['PuedeModificarContactos']!=0)$puedoModificar=1;
+		$puedoModificar=" disabled";
+		if($rowPermisoModificar['PuedeModificarContactos']!=0)$puedoModificar="";
 		
 		echo "<p>";
-		if ($puedoModificar==0) {echo"<input type='button' id='botonActualizaEmpresa' value='Actualizar datos' disabled>";} else {echo"<input type='button' id='botonActualizaEmpresa' value='Actualizar datos'/>";}
+		echo"<input type='button' id='botonActualizaEmpresa' value='Actualizar datos'".$puedoModificar.">";
 		echo " ";
-		if ($puedoModificar==0) {echo"<input type='button' id='botonNuevaEmpresa' value='Nueva empresa' disabled>";} else {echo"<input type='button' id='botonNuevaEmpresa' value='Nueva empresa'/>";}
+		echo"<input type='button' id='botonNuevaEmpresa' value='Nueva empresa'".$puedoModificar.">";
 		echo " ";
-		if ($puedoModificar==0) {echo"<input type='button' id='botonNuevoDescuento' value='Nuevo descuento / recargo' disabled>";} else {echo"<input type='button' id='botonNuevoDescuento' value='Nuevo descuento / recargo'/>";}
+		echo"<input type='button' id='botonNuevoDescuento' value='Nuevo descuento / recargo'".$puedoModificar.">";
 		echo"</br>";
 		echo"</br>";
 		echo"<input type='checkbox' id='checkMostrarAFIP' value='MostrarAFIP'/>Mostrar datos en AFIP";

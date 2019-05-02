@@ -179,9 +179,9 @@ function procesarEventos2()
 					tags_input[i].addEventListener('change',algoCambio,false);
 		  } 
 		  tags_cambios = []; 
-		  $(document).ready(function() {$("#IdProveedor").select2();});	
-		  $(document).ready(function() {$("#IdRubro").select2();});
-		  $(document).ready(function() {$("#IdSubRubro").select2();});
+      $(document).ready(function() {$("#IdProveedor").select2();
+                                    $("#IdRubro").select2();
+                                    $("#IdSubRubro").select2();});
 	  }
   } 
 }
@@ -326,9 +326,9 @@ function procesarEventos3()
 		  var datosc=document.getElementById('detallesdearticulo');
 		  datosc.innerHTML=conexion3.responseText;
 		  tags_cambios = [];
-		  $(document).ready(function() {$("#IdProveedor").select2();});	
-		  $(document).ready(function() {$("#IdRubro").select2();});
-		  $(document).ready(function() {$("#IdSubRubro").select2();});
+      $(document).ready(function() {$("#IdProveedor").select2();
+                                    $("#IdRubro").select2();
+                                    $("#IdSubRubro").select2();});
 	  }
   } 
 
@@ -365,9 +365,9 @@ function procesarEventos4()
 		  var datosc=document.getElementById('detallesdearticulo');
 		  datosc.innerHTML=conexion4.responseText;
 		  tags_cambios = [];
-		  $(document).ready(function() {$("#IdProveedor").select2();});	
-		  $(document).ready(function() {$("#IdRubro").select2();});
-		  $(document).ready(function() {$("#IdSubRubro").select2();});
+      $(document).ready(function() {$("#IdProveedor").select2();
+                                    $("#IdRubro").select2();
+                                    $("#IdSubRubro").select2();});
 	  }
   } 
 
@@ -399,9 +399,9 @@ function procesarEventos5()
 		  document.getElementById('detallesdearticulo').innerHTML=conexion5.responseText;
 		  document.getElementById('botonActualizaArticuloNuevo').addEventListener('click',actualizoArticulo,false);
 		  tags_cambios = [];
-		  $(document).ready(function() {$("#IdProveedor").select2();});	
-		  $(document).ready(function() {$("#IdRubro").select2();});
-		  $(document).ready(function() {$("#IdSubRubro").select2();});
+      $(document).ready(function() {$("#IdProveedor").select2();
+                                    $("#IdRubro").select2();
+                                    $("#IdSubRubro").select2();});
 	  }
   } 
 

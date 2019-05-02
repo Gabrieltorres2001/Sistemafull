@@ -1,1 +1,3 @@
 *.xml
+includes/psl-config-sp.php
+includes/psl-config.php

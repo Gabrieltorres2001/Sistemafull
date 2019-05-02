@@ -93,7 +93,6 @@ function teclaEnter(e)
   }  
 }
 
-var conexion2;
 var conexion6;
 function mostrarDetalles(celda){
   //alert(celda.target.id);
@@ -101,11 +100,27 @@ function mostrarDetalles(celda){
   document.getElementById('accionesDetalle').innerHTML="";
   var numeroartic=celda.target.id;
   id_actual=numeroartic;
-  conexion2=new XMLHttpRequest(); 
-  conexion2.onreadystatechange = procesarEventos2;
   var aleatorio=Math.random();
-  conexion2.open('GET','./php/detallesarticulo.php?idart='+numeroartic+"&rnadom="+aleatorio, true);
-  conexion2.send();
+
+  $.ajax({
+    url:"./php/detallesarticulo.php",
+    type:"GET",
+    dataType:"text",
+    data:{idart:numeroartic,
+          rnadom:aleatorio}
+  })
+  .done(function(msg){
+    document.getElementById('detallesdearticulo').innerHTML=msg;
+		  var tags_input = new Array();
+		  var tags_input=document.getElementsByClassName("input");
+		  for (i=0; i<tags_input.length; i++) {
+					tags_input[i].addEventListener('change',algoCambio,false);
+		  } 
+		  tags_cambios = []; 
+      $(document).ready(function() {$("#IdProveedor").select2();
+                                    $("#IdRubro").select2();
+                                    $("#IdSubRubro").select2();});
+  })
   //AHORA LOS MOVIMIENTOS DEL ARTICULO
   document.getElementById('movimientosdearticulo').innerHTML="";
   conexion6=new XMLHttpRequest(); 
@@ -119,27 +134,6 @@ function mostrarDetalles(celda){
   llenarAccionesArticulosJS();
 }
 
-function procesarEventos2()
-{
-	//alert ("readyState: "+conexion2.readyState+"status: "+conexion2.status);
-    if(conexion2.readyState == 4)
-  { //alert ("readyState: "+conexion2.readyState+"status: "+conexion2.status);
-	  if(conexion2.status == 200)
-	  { //alert ("readyState: "+conexion2.readyState+"status: "+conexion2.status);
-		  document.getElementById('detallesdearticulo').innerHTML=conexion2.responseText;
-		  var tags_input = new Array();
-		  var tags_input=document.getElementsByClassName("input");
-		  for (i=0; i<tags_input.length; i++) {
-					tags_input[i].addEventListener('change',algoCambio,false);
-		  } 
-		  tags_cambios = []; 
-		  $(document).ready(function() {$("#IdProveedor").select2();});	
-		  $(document).ready(function() {$("#IdRubro").select2();});
-		  $(document).ready(function() {$("#IdSubRubro").select2();});
-	  }
-  } 
-
-}
 function procesarEventos6()
 {
     if(conexion6.readyState == 4)
@@ -258,31 +252,27 @@ function actualizoArticulo(){
   //for (i=0; i<tags_cambios.length; i++) {
 	     //      tags_cambios[i]; VOY A TENER QUE ARMAR UN STRING EN FORMATO PARA ENVIAR LUEGO DEL ? DEL PHP
 		 
-  //}   
-  //alert("voy a llamar al php. hasta aca todo bien"+conexion2.status);  
+  //}    
   cadena='./php/actualizo_detallesarticulo.php?'+cadena+"&rnadom="+aleatorio
   //alert(cadena);
   conexion3.open('GET',cadena, true);
-  //alert ("readyState: "+conexion2.readyState+"status: "+conexion2.status);
   conexion3.send();
-  //alert ("readyState: "+conexion2.readyState+"status: "+conexion2.status);
 }
 
 function procesarEventos3()
 {
-	//alert ("readyState: "+conexion2.readyState+"status: "+conexion2.status);
     if(conexion3.readyState == 4)
-  { //alert ("readyState: "+conexion2.readyState+"status: "+conexion2.status);
+  { 
 	  if(conexion3.status == 200)
-	  { //alert ("readyState: "+conexion2.readyState+"status: "+conexion2.status);
+	  { 
 		  //SI BUSCO LA CAGOOOO. TENGO QUE VER COMO HACER PARA ACTUALIZAR EL LISTADO SIN PERDER EL DETALLE
 		  //busco();
 		  var datosc=document.getElementById('detallesdearticulo');
 		  datosc.innerHTML=conexion3.responseText;
 		  tags_cambios = [];
-		  $(document).ready(function() {$("#IdProveedor").select2();});	
-		  $(document).ready(function() {$("#IdRubro").select2();});
-		  $(document).ready(function() {$("#IdSubRubro").select2();});
+      $(document).ready(function() {$("#IdProveedor").select2();
+                                    $("#IdRubro").select2();
+                                    $("#IdSubRubro").select2();});
 	  }
   } 
 
@@ -302,14 +292,14 @@ function copioArticulo(){
   cadena='./php/copio_detallesarticulo.php?'+cadena+"&rnadom="+aleatorio
   //alert(cadena);
   conexion4.open('GET',cadena, true);
-  //alert ("readyState: "+conexion2.readyState+"status: "+conexion2.status);
+  
   conexion4.send();
-  //alert ("readyState: "+conexion2.readyState+"status: "+conexion2.status);
+  
 }
 
 function procesarEventos4()
 {
-	//alert ("readyState: "+conexion2.readyState+"status: "+conexion2.status);
+
     if(conexion4.readyState == 4)
   { //alert ("readyState: "+conexion2.readyState+"status: "+conexion2.status);
 	  if(conexion4.status == 200)
@@ -319,9 +309,9 @@ function procesarEventos4()
 		  var datosc=document.getElementById('detallesdearticulo');
 		  datosc.innerHTML=conexion4.responseText;
 		  tags_cambios = [];
-		  $(document).ready(function() {$("#IdProveedor").select2();});	
-		  $(document).ready(function() {$("#IdRubro").select2();});
-		  $(document).ready(function() {$("#IdSubRubro").select2();});
+		  $(document).ready(function() {$("#IdProveedor").select2();
+		                                $("#IdRubro").select2();
+		                                $("#IdSubRubro").select2();});
 	  }
   } 
 
@@ -353,9 +343,9 @@ function procesarEventos5()
 		  document.getElementById('detallesdearticulo').innerHTML=conexion5.responseText;
 		  document.getElementById('botonActualizaArticuloNuevo').addEventListener('click',actualizoArticulo,false);
 		  tags_cambios = [];
-		  $(document).ready(function() {$("#IdProveedor").select2();});	
-		  $(document).ready(function() {$("#IdRubro").select2();});
-		  $(document).ready(function() {$("#IdSubRubro").select2();});
+		  $("#IdProveedor").select2();	
+		  $("#IdRubro").select2();
+		  $("#IdSubRubro").select2();
 	  }
   } 
 

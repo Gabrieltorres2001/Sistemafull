@@ -13,15 +13,15 @@
 		//tengo que tenerpermiso para modificar
 		if(!$permisoModificar = mysqli_query($conexion_db, "select PuedeModificarArticulos from members where id='".$_REQUEST['sesses']."' limit 1")) die("Problemas con la consultamembers");
 		$rowPermisoModificar = mysqli_fetch_array($permisoModificar);
-		$puedoModificar=0;
-		if($rowPermisoModificar['PuedeModificarArticulos']!=0)$puedoModificar=1;
+		$puedoModificar=" disabled";
+		if($rowPermisoModificar['PuedeModificarArticulos']!=0)$puedoModificar="";
 		
 		echo "<p>";
-		if ($puedoModificar==0) {echo"<input type='button' id='botonActualizaArticulo' value='Actualizar datos' disabled>";} else {echo"<input type='button' id='botonActualizaArticulo' value='Actualizar datos'/>";}
+		echo"<input type='button' id='botonActualizaArticulo' value='Actualizar datos'".$puedoModificar.">";
 		echo " ";
-		if ($puedoModificar==0) {echo"<input type='button' id='botonCopiaArticulo' value='Duplicar artículo' disabled>";} else {echo"<input type='button' id='botonCopiaArticulo' value='Duplicar artículo'/>";}
+		echo"<input type='button' id='botonCopiaArticulo' value='Duplicar artículo'".$puedoModificar.">";
 		echo " ";
-		if ($puedoModificar==0) {echo"<input type='button' id='botonNuevoArticulo' value='Nuevo artículo' disabled>";} else {echo"<input type='button' id='botonNuevoArticulo' value='Nuevo artículo'/>";}
+		echo"<input type='button' id='botonNuevoArticulo' value='Nuevo artículo'".$puedoModificar.">";
 		echo"</br>";
 		echo"</br>";
 		echo"<input type='checkbox' id='checkMostrarMovimientos' value='MostrarMovimientos'/>Mostrar movimientos del producto";
