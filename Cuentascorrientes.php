@@ -98,7 +98,7 @@ sec_session_start();
 <body>  
     <!-- SI ESTOY LOGEADO. BIEN. PUEDO INGRESAR. -->
     <?php if (login_check($mysqli) == true) : ?>   
-	<?php barraSuperior('CuentasCorrientes') ?>
+	<?php upperMenu('CuentasCorrientes') ?>
 
     <div class="container">
       <!-- CONTENT -->

@@ -123,7 +123,7 @@ sec_session_start();
     
     <!-- SI ESTOY LOGEADO. BIEN. PUEDO INGRESAR. -->
     <?php if ((login_check($mysqli) == true) && (formulario_habilitado("Recibo") == true)): ?>   
-	<?php barraSuperior('Recibos') ?>
+	<?php upperMenu('Recibos') ?>
 
     <div class="container">
       <!-- CONTENT -->

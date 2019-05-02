@@ -1,0 +1,157 @@
+<form> 
+  <div class="row">
+    <div class="form-group row">
+      <label for="IdProducto" class="col-4 col-form-label">id</label> 
+      <div class="col-8">
+        <input id="IdProducto" name="IdProducto" aria-describedby="IdProductoHelpBlock" required="required" class="form-control" type="text"> 
+        <span id="IdProductoHelpBlock" class="form-text bg-info text-white">Indetificador unico para los artículos</span>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="actualiz" class="col-4 col-form-label">Fecha de actulización</label> 
+      <div class="col-8">
+        <input id="actualiz" name="actualiz" aria-describedby="actualizHelpBlock" required="required" class="form-control" type="text"> 
+        <span id="actualizHelpBlock" class="form-text bg-info text-white">Indica la fecha de la última actualización del regitro de artículo</span>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="TipoProducto" class="col-4 col-form-label">Tipo</label> 
+      <div class="col-8">
+        <select id="TipoProducto" name="TipoProducto" aria-describedby="TipoProductoHelpBlock" required="required" class="custom-select">
+          <option value="0">Comercial</option>
+          <option value="1">Importado</option>
+        </select> 
+        <span id="TipoProductoHelpBlock" class="form-text bg-info text-white">Seleccionar el tipo de producto según su origen</span>
+      </div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="MonedaOrigen" class="col-4 col-form-label">Moneda</label> 
+    <div class="col-8">
+      <select id="MonedaOrigen" name="MonedaOrigen" aria-describedby="MonedaOrigenHelpBlock" required="required" class="custom-select">
+        <option value="0">ARS</option>
+        <option value="1">USD</option>
+        <option value="2">EUR</option>
+      </select> 
+      <span id="MonedaOrigenHelpBlock" class="form-text bg-info text-white">Indicar la moneda de origen del producto</span>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="ValorVenta" class="col-4 col-form-label">Valor</label> 
+    <div class="col-8">
+      <input id="ValorVenta" name="ValorVenta" placeholder="valor del producto" aria-describedby="ValorVentaHelpBlock" class="form-control" type="text"> 
+      <span id="ValorVentaHelpBlock" class="form-text bg-info text-white">Indicar el valor de venta del artículo según la moneda inidcada</span>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="IVA" class="col-4 col-form-label">IVA</label> 
+    <div class="col-8">
+      <select id="IVA" name="IVA" aria-describedby="IVAHelpBlock" class="custom-select">
+        <option value="0">21%</option>
+        <option value="1">10,5%</option>
+      </select> 
+      <span id="IVAHelpBlock" class="form-text bg-info text-white">Seleccione el iva que corresponde al artículo</span>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="descricpcion" class="col-4 col-form-label">Descripción</label> 
+    <div class="col-8">
+      <textarea id="descricpcion" name="descricpcion" cols="40" rows="3" aria-describedby="descricpcionHelpBlock" required="required" class="form-control"></textarea> 
+      <span id="descricpcionHelpBlock" class="form-text bg-info text-white">Escribir la descripción del artículo</span>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="OfrecerAdemas" class="col-4 col-form-label">Ofrecer además</label> 
+    <div class="col-8">
+      <input id="OfrecerAdemas" name="OfrecerAdemas" aria-describedby="OfrecerAdemasHelpBlock" class="form-control" type="text"> 
+      <span id="OfrecerAdemasHelpBlock" class="form-text bg-info text-white">Indicar que otros artículos o servicios se pueden ofrecer con este Artíuclo</span>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="NotasArt" class="col-4 col-form-label">Notas Internas</label> 
+    <div class="col-8">
+      <textarea id="NotasArt" name="NotasArt" cols="40" rows="5" aria-describedby="NotasArtHelpBlock" class="form-control"></textarea> 
+      <span id="NotasArtHelpBlock" class="form-text bg-info text-white">Escribir indicaciones internas del artículo</span>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="ComposicionyDescirpcion" class="col-4 col-form-label">Composición y Descripción</label> 
+    <div class="col-8">
+      <textarea id="ComposicionyDescirpcion" name="ComposicionyDescirpcion" cols="40" rows="5" aria-describedby="ComposicionyDescirpcionHelpBlock" class="form-control"></textarea> 
+      <span id="ComposicionyDescirpcionHelpBlock" class="form-text bg-info text-white">Escribir el detalle del artíuclo estas notas pueden aparecer en los documentos</span>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="IdProveedor" class="col-4 col-form-label">Proveedor</label> 
+    <div class="col-8">
+      <select id="IdProveedor" name="IdProveedor" aria-describedby="IdProveedorHelpBlock" class="custom-select">
+        <option value="0">Proveedor A</option>
+        <option value="1">Proveedor B</option>
+      </select> 
+      <span id="IdProveedorHelpBlock" class="form-text bg-info text-white">Seleccionar el proveedor del artículo</span>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="CodigoProveedor" class="col-4 col-form-label">Código del proveedor</label> 
+    <div class="col-8">
+      <input id="CodigoProveedor" name="CodigoProveedor" aria-describedby="CodigoProveedorHelpBlock" class="form-control" type="text"> 
+      <span id="CodigoProveedorHelpBlock" class="form-text bg-info text-white">Indicar el código interno del proveedor</span>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="IdRubro" class="col-4 col-form-label">Rubro</label> 
+    <div class="col-8">
+      <select id="IdRubro" name="IdRubro" aria-describedby="IdRubroHelpBlock" class="custom-select">
+        <option value="0">Rubro A</option>
+        <option value="1">Rubro B</option>
+      </select> 
+      <span id="IdRubroHelpBlock" class="form-text bg-info text-white">Seleccionar el rubro del Artículo</span>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="IdSubRubro" class="col-4 col-form-label">SubRubro</label> 
+    <div class="col-8">
+      <select id="IdSubRubro" name="IdSubRubro" aria-describedby="IdSubRubroHelpBlock" class="custom-select">
+        <option value="0">SUB A</option>
+        <option value="1">SUB B</option>
+      </select> 
+      <span id="IdSubRubroHelpBlock" class="form-text bg-info text-white">Seleccionar el sub Rubro del artículo</span>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="StockMinimo" class="col-4 col-form-label">Stock mínimo</label> 
+    <div class="col-8">
+      <input id="StockMinimo" name="StockMinimo" aria-describedby="StockMinimoHelpBlock" class="form-control" type="text"> 
+      <span id="StockMinimoHelpBlock" class="form-text bg-info text-white">Ingrese cual será el stock mínmo del artículo</span>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="EnStock" class="col-4 col-form-label">En Stock</label> 
+    <div class="col-8">
+      <input id="EnStock" name="EnStock" aria-describedby="EnStockHelpBlock" class="form-control" type="text"> 
+      <span id="EnStockHelpBlock" class="form-text bg-info text-white">Indicar cuál es el stock actual para contabilizar</span>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="UnidadMedida" class="col-4 col-form-label">Unidad de medida</label> 
+    <div class="col-8">
+      <input id="UnidadMedida" name="UnidadMedida" aria-describedby="UnidadMedidaHelpBlock" class="form-control" type="text"> 
+      <span id="UnidadMedidaHelpBlock" class="form-text bg-info text-white">Indicar cual es la unidad de medida del artículo</span>
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-4"></div> 
+    <div class="col-8">
+      <div class="custom-control custom-checkbox custom-control-inline">
+        <input name="tangible" id="tangible_0" checked="checked" aria-describedby="tangibleHelpBlock" class="custom-control-input" value="1" type="checkbox"> 
+        <label for="tangible_0" class="custom-control-label">Tangible</label>
+      </div> 
+      <span id="tangibleHelpBlock" class="form-text bg-info text-white">Inidicar si el artículo es o no tangible</span>
+    </div>
+  </div> 
+  <div class="form-group row">
+    <div class="offset-4 col-8">
+      <button name="submit" type="submit" class="btn btn-primary">Submit</button>
+    </div>
+  </div>
+</form>

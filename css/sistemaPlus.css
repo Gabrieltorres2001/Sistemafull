@@ -1,0 +1,52 @@
+body {
+	padding-top: 65px;
+	padding-bottom: 45px;
+	  background: url("../images/photo_bg.jpg") no-repeat center center fixed;
+	  background-size: cover;
+}
+
+div.card {
+	background-color: #CCC;
+	/* border-radius: 0; */
+}
+
+.card-h {
+	-webkit-transform: translate(0, 0);
+	-ms-transform: translate(0, 0);
+	transform: translate(0, 0);
+	height: 500px;
+	}
+.card-h .card-header {
+	height: 75px;
+}
+.card-h .card-body {
+	overflow: auto;
+	height: 425px;
+}
+
+.btn-success{
+    background: #b2c831;
+    border-color: #b2c831;
+}
+
+input[type=button] {
+	font-family: 'Open Sans', sans-serif;
+	font-size: 14px;
+	background: #b2c831;
+	color: #fff;
+	border: none;
+	padding: 2px 8px 2px 10px;
+	-webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+}
+
+input[type=button]:disabled {
+    background: #aaa;
+}
+table{
+	font-size: 70%;
+}
+form{
+	font-size: 80%;
+}

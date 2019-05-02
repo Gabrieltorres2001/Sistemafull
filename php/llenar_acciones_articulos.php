@@ -8,14 +8,9 @@
 			};
 		ob_start();
 		?>
-		<p>
-		<input type='button' id='botonActualizaArticulo' value='Actualizar datos'<?php echo $puedoModificar ?>>
-		<input type='button' id='botonCopiaArticulo' value='Duplicar artículo'<?php echo $puedoModificar ?>>
-		<input type='button' id='botonNuevoArticulo' value='Nuevo artículo'<?php echo $puedoModificar ?>>
-		<br>
-		<br>
-		<input type='checkbox' id='checkMostrarMovimientos' value='MostrarMovimientos'>Mostrar movimientos del producto"
-		</p>
+		<button class="btn btn-success btn-sm" id='botonActualizaArticulo' >Actualizar datos</button>
+		<button class="btn btn-success btn-sm" id='botonCopiaArticulo' >Duplicar artículo</button>
+		<button class="btn btn-success btn-sm" id='botonNuevoArticulo' >Nuevo artículo</button>
 		<?php
 		$ret = ob_get_contents();
 		ob_end_clean();

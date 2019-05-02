@@ -72,7 +72,7 @@ sec_session_start();
     
     <!-- SI ESTOY LOGEADO. BIEN. PUEDO INGRESAR. -->
     <?php if ((login_check($mysqli) == true) && (formulario_habilitado("ComprobantesGenerados") == true)) : ?>  
-	<?php barraSuperior('ComprobantesEmitidos') ?>
+	<?php upperMenu('ComprobantesEmitidos') ?>
 
     <div class="container">
       <!-- CONTENT -->

@@ -51,7 +51,7 @@ sec_session_start();
     
     <!-- SI ESTOY LOGEADO. BIEN. PUEDO INGRESAR. -->
     <?php if (login_check($mysqli) == true) : ?>
-	<?php barraSuperior('pp3') ?>
+	<?php upperMenu('pp3') ?>
 
     <div class="container">
         <div class="row">
