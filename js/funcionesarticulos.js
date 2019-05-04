@@ -114,7 +114,6 @@ function algoCambio(e) {
   tags_cambios.push(e.target.id);
 }
 
-var conexion2;
 var conexion6;
 
 function mostrarDetalles(celda) {
@@ -211,7 +210,6 @@ function actualizoArticulo(event) {
   conexion3.open('GET', cadena, true);
   //alert ("readyState: "+conexion2.readyState+"status: "+conexion2.status);
   conexion3.send();
-  //alert ("readyState: "+conexion2.readyState+"status: "+conexion2.status);
 }
 
 function procesarEventos3() {
@@ -245,7 +243,7 @@ function copioArticulo() {
   conexion4.open('GET', cadena, true);
   //alert ("readyState: "+conexion2.readyState+"status: "+conexion2.status);
   conexion4.send();
-  //alert ("readyState: "+conexion2.readyState+"status: "+conexion2.status);
+  
 }
 
 function procesarEventos4() {

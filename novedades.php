@@ -56,9 +56,7 @@ sec_session_start();
   	<!-- DataTables Initialization -->
     <script type="text/javascript" src="js/jquery.dataTables.js"></script>
   			<script type="text/javascript" charset="utf-8">
-			$(document).ready(function() {
-				$('#dt1').dataTable();
-			} );
+			$(document).ready(function() {$('#dt1').dataTable();});
 	</script>
 
 	<!-- include javascript and css files for jQuery UI, in order to have the datepicker 

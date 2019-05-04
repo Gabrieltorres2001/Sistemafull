@@ -28,9 +28,7 @@ function procesarEventos1()
 	  if(conexion1.status == 200)
 	  { 
 		  document.getElementById('Listas').innerHTML=conexion1.responseText;
-		  	$(document).ready(function() {
-			  $("#listaNombre").select2();
-			});		  
+		  	$(document).ready(function() {$("#listaNombre").select2();});		  
 		  //acciones para el boton buscar
 		  document.getElementById('seleccionaEmpresa').addEventListener('click',mostrarListaSeleccionadaNombre,false); 
 		  document.getElementById('nuevaLista').addEventListener('click',nuevaListaContactos,false);	

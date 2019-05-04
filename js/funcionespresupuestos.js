@@ -851,10 +851,8 @@ function procesarEventos13()
 	  { 
 		  document.getElementById('acciones').innerHTML=conexion13.responseText;
 		  document.getElementById('empresa').focus();
-		  	$(document).ready(function() {
-			  $("#empresa").select2();
-			  $("#empresa").select2("open");
-			});
+		  	$(document).ready(function() {$("#empresa").select2();
+			  															$("#empresa").select2("open");});
 			//document.getElementById('empresa').focus();
 			//document.getElementById('empresa').click();
 		  //habilito la funcion del boton "Listo"

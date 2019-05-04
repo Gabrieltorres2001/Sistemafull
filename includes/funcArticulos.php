@@ -76,7 +76,7 @@ function imprimir_detalle_articulos($resultc, $conexion_sp)
 			if (!$resultTP = mysqli_query($conexion_sp, "select * from z_tipoproducto")) die("Problemas con la consulta z_tipoproducto");
 			?>
 			<div class="form-group col-md-4">
-				<label for='TipoProducto' class="col-12 col-form-label" >Tipo:</label>
+				<label for='TipoProducto' class="col-12 col-form-label">Tipo:</label>
 				<select id='TipoProducto' class='form-control select2' style="width: 100%;" name='TipoProducto'>
 					<?php
 					while ($row = mysqli_fetch_array($resultTP)) {
@@ -102,7 +102,7 @@ function imprimir_detalle_articulos($resultc, $conexion_sp)
 
 		<div class="form-row">
 			<div class="form-group col-4">
-				<label for='MonedaOrigen' class="col-12 col-form-label" >Moneda:</label>
+				<label for='MonedaOrigen' class="col-12 col-form-label">Moneda:</label>
 				<select id='MonedaOrigen' class='select2' style="width: 100%;" name='MonedaOrigen'>
 					<?php
 					if (!$resultTM = mysqli_query($conexion_sp, "select * from monedaorigen")) die("Problemas con la consulta monedaorigen");
@@ -117,15 +117,15 @@ function imprimir_detalle_articulos($resultc, $conexion_sp)
 						?>
 						<option selected value=''></option>
 					<?php
-					}
-					?>
+				}
+				?>
 				</select>
 			</div>
-			<div class="form-group col-4" >	
-				<label for='ValorVenta' class="col-12 col-form-label" >Valor:</label>
+			<div class="form-group col-4">
+				<label for='ValorVenta' class="col-12 col-form-label">Valor:</label>
 				<input id='ValorVenta' class='col-12 form-control' name='ValorVenta' type='text' style='text-align: center;' value='<?php echo $reg['ValorVenta']; ?>'>
 			</div>
-			<div class="form-group col-4" >
+			<div class="form-group col-4">
 				<label for='IVA' class="col-12 col-form-label">IVA:</label>
 				<select id='IVA' class='select2' style="width: 100%;" name='IVA'>
 					<?php
@@ -226,7 +226,7 @@ function imprimir_detalle_articulos($resultc, $conexion_sp)
 				</select>
 			</div>
 			<div class="form-group col-md-6">
-				<label for='IdSubRubro' class="col-12 col-form-label" >SubRubro:</label>
+				<label for='IdSubRubro' class="col-12 col-form-label">SubRubro:</label>
 				<select id='IdSubRubro' class='select2' style="width: 100%;" name='IdSubRubro'>
 					<option selected value=''></option>
 					<?php
@@ -270,14 +270,14 @@ function imprimir_detalle_articulos($resultc, $conexion_sp)
 				<input id='EnStock' class='col-12 form-control' name='EnStock' type='text' size='4' style='text-align:center; background-color:<?php echo $colorFondo; ?>;' value='<?php echo $reg['EnStock']; ?>' readonly>
 			</div>
 			<div class="form-group col-md-4">
-				<label for='UnidadMedida' class="col-12">U	nidad Medida:</label>
+				<label for='UnidadMedida' class="col-12">U nidad Medida:</label>
 				<input id='UnidadMedida' class='col-12 form-control' name='UnidadMedida' type='text' size='6' style='text-align:center;' value='<?php echo $reg['UnidadMedida']; ?>'>
 			</div>
 		</div>
 
 		<div class="form-row">
 
-			<div class=""> 
+			<div class="">
 				<div class="custom-control custom-checkbox custom-control-inline">
 					<?php
 					if ($reg['tangible'] == 0) {
@@ -287,7 +287,7 @@ function imprimir_detalle_articulos($resultc, $conexion_sp)
 					<?php
 				} else {
 					?>
-						<input name="tangible" id="tangible" checked="checked"  class="form-check-input" value="1" type="checkbox">
+						<input name="tangible" id="tangible" checked="checked" class="form-check-input" value="1" type="checkbox">
 						<!-- <input name='tangible' id='tangible' type='checkbox' value="1" checked> -->
 					<?php
 				}
@@ -295,7 +295,7 @@ function imprimir_detalle_articulos($resultc, $conexion_sp)
 
 					<label for="tangible" class="col-form-label">Tangible</label>
 				</div>
-				</div>
+			</div>
 		</div>
 
 
@@ -306,20 +306,20 @@ function imprimir_detalle_articulos($resultc, $conexion_sp)
 		?>
 		<div class="form-row">
 			<div class="form-group col-md-4">
-				<label for='numDeposito' class="cols-12 col-form-label" >Deposito:</label>
+				<label for='numDeposito' class="cols-12 col-form-label">Deposito:</label>
 				<input id='numDeposito' class='form-control' name='numDeposito' type='text' size='17' value='<?php echo $rowUbic['Deposito']; ?>'>
 			</div>
 			<div class="form-group col-md-4">
-					<label for='Estanteria' class="cols-12 col-form-label" >Módulo:</label>
-					<input id='Estanteria' class='form-control' name='Estanteria' type='text' size='17' value='<?php echo $rowUbic['Estanteria']; ?>'>
+				<label for='Estanteria' class="cols-12 col-form-label">Módulo:</label>
+				<input id='Estanteria' class='form-control' name='Estanteria' type='text' size='17' value='<?php echo $rowUbic['Estanteria']; ?>'>
 			</div>
 			<div class="form-group col-md-4">
-				<label for='Estante' class="cols-12 col-form-label" >Estante:</label>
+				<label for='Estante' class="cols-12 col-form-label">Estante:</label>
 				<input id='Estante' class='form-control' name='Estante' type='text' size='17' value='<?php echo $rowUbic['Estante']; ?>'>
 			</div>
 		</div>
-		
-		
+
+
 		<label for='HojaFabricante' class="col-form-label col-12">HojaFabricante:</label>
 		<div class="input-group mb-3">
 			<input id='HojaFabricante' class='form-control' name='HojaFabricante' type='text' value='<?php echo $reg['HojaFabricante'] ?>'>
@@ -327,10 +327,10 @@ function imprimir_detalle_articulos($resultc, $conexion_sp)
 				<?php
 				if (strlen($reg['HojaFabricante']) > 0) {
 					?>
-					<button id='verHT' value='Ver...' class="btn btn-outline-secondary" type="button"><i class="fa fa-eye" ></i>Ver</button>
+					<button id='verHT' value='Ver...' class="btn btn-outline-secondary" type="button"><i class="fa fa-eye"></i>Ver</button>
 				<?php
-				} 
-				?>
+			}
+			?>
 				<button id='buscarHT' value='Buscar...' class="btn btn-outline-primary" type="button"><i class="fa fa-search"></i> Buscar</button>
 			</div>
 		</div>
@@ -340,12 +340,12 @@ function imprimir_detalle_articulos($resultc, $conexion_sp)
 		<div class="input-group">
 			<input id='Imagen' class='form-control' name='Imagen' type='text' value='<?php echo $reg['Imagen']; ?>'>
 			<div class="input-group-append">
-			<?php
+				<?php
 				if (strlen($reg['Imagen']) > 0) {
 					?>
-					<button id='verImagen' value='Ver...' class="btn btn-outline-secondary" type="button"><i class="fa fa-eye" ></i>Ver</button>
+					<button id='verImagen' value='Ver...' class="btn btn-outline-secondary" type="button"><i class="fa fa-eye"></i>Ver</button>
 				<?php
-				}
+			}
 			?>
 				<button id='buscarHT' value='Buscar...' class="btn btn-outline-primary" type="button"><i class="fa fa-search"></i> Buscar</button>
 			</div>
@@ -431,286 +431,275 @@ function imprimir_movimientos_articulos($resultc, $conexion_sp)
 
 function imprimir_detalle_articulos_deshabilitado($resultc, $conexion_sp)
 {
+
+
 	$reg = mysqli_fetch_array($resultc);
-	echo "<label for='IdProducto'>Id del Producto:</label>";
-	echo "<input id='IdProducto' class='input' name='IdProducto' type='text' size='6' value=" . $reg['IdProducto'] . " readonly>";
 
-	echo "<label for='actualiz'>Fecha de actualización:</label>";
-	echo "<input id='actualiz' class='input' name='actualiz' type='text' size='33' value='" . $reg['actualiz'] . "' readonly>";
+	ob_start();
+	?>
+	<label for='IdProducto'>Id del Producto:</label>
+	<input id='IdProducto' class='input' name='IdProducto' type='text' size='6' value="<?php echo $reg['IdProducto']; ?>" readonly>
+	<label for='actualiz'>Fecha de actualización:</label>
+	<input id='actualiz' class='input' name='actualiz' type='text' size='33' value='<?php echo $reg['actualiz']; ?>' readonly>
 
-	if (!$resultTP = mysqli_query($conexion_sp, "select * from z_tipoproducto")) die("Problemas con la consulta z_tipoproducto");
-	echo "<label for='TipoProducto'>Tipo:</label>";
-	echo "<select id='TipoProducto' class='input' name='TipoProducto' readonly>";
-	while ($row = mysqli_fetch_row($resultTP)) {
-		if ($reg['TipoProducto'] == $row[0]) {
-			echo "<option selected value=" . $row[0] . ">" . $row[1] . "</option>";
-		} else {
-			echo "<option value=" . $row[0] . ">" . $row[1] . "</option>";
+	<label for='TipoProducto'>Tipo:</label>
+	<select id='TipoProducto' class='input' name='TipoProducto' readonly>
+
+		<?php
+		if (!$resultTP = mysqli_query($conexion_sp, "select * from z_tipoproducto")) die("Problemas con la consulta z_tipoproducto");
+		while ($row = mysqli_fetch_row($resultTP)) {
+			if ($reg['TipoProducto'] == $row[0]) {
+				echo "<option selected value=" . $row[0] . ">" . $row[1] . "</option>";
+			} else {
+				echo "<option value=" . $row[0] . ">" . $row[1] . "</option>";
+			}
 		}
-	}
-	if ($reg['TipoProducto'] == '' or $reg['TipoProducto'] == '0') {
-		echo "<option selected value=''></option>";
-	}
-	echo "</select><br />";
-
-	if (!$resultTM = mysqli_query($conexion_sp, "select * from monedaorigen")) die("Problemas con la consulta monedaorigen");
-	echo "<label for='MonedaOrigen'>Moneda:</label>";
-	echo "<select id='MonedaOrigen' class='input' name='MonedaOrigen' style='font-size:1.7em' readonly>";
-	while ($row = mysqli_fetch_array($resultTM)) {
-		if ($reg['MonedaOrigen'] == $row['IdRegistroCambio']) {
-			echo "<option selected value=" . $row['IdRegistroCambio'] . ">" . $row['Origen'] . "</option>";
-		} else {
-			echo "<option value=" . $row['IdRegistroCambio'] . ">" . $row['Origen'] . "</option>";
+		if ($reg['TipoProducto'] == '' or $reg['TipoProducto'] == '0') {
+			echo "<option selected value=''></option>";
 		}
-	}
-	if ($reg['MonedaOrigen'] == '' or $reg['MonedaOrigen'] == '0') {
-		echo "<option selected value=''></option>";
-	}
-	echo "</select>";
-
-	echo "<label for='ValorVenta'>Valor:</label>";
-	echo "<input id='ValorVenta' class='input' name='ValorVenta' type='text' size='18' style='text-align: center; font-size:1.7em' value='" . $reg['ValorVenta'] . "' readonly>";
-
-	if (!$resultTI = mysqli_query($conexion_sp, "select * from z_ivas")) die("Problemas con la consulta z_ivas");
-	echo "<label for='IVA'>IVA:</label>";
-	echo "<select id='IVA' class='input' name='IVA' style='font-size:1.7em' readonly>";
-	while ($row = mysqli_fetch_row($resultTI)) {
-		if ($reg['IVA'] == $row[0]) {
-			echo "<option selected value=" . $row[0] . ">" . $row[1] . "</option>";
-		} else {
-			echo "<option value=" . $row[0] . ">" . $row[1] . "</option>";
+		?>
+	</select>
+	<label for='MonedaOrigen'>Moneda:</label>
+	<select id='MonedaOrigen' class='input' name='MonedaOrigen' style='font-size:1.7em' readonly>
+		<?php
+		if (!$resultTM = mysqli_query($conexion_sp, "select * from monedaorigen")) die("Problemas con la consulta monedaorigen");
+		while ($row = mysqli_fetch_array($resultTM)) {
+			if ($reg['MonedaOrigen'] == $row['IdRegistroCambio']) {
+				echo "<option selected value=" . $row['IdRegistroCambio'] . ">" . $row['Origen'] . "</option>";
+			} else {
+				echo "<option value=" . $row['IdRegistroCambio'] . ">" . $row['Origen'] . "</option>";
+			}
 		}
-	}
-	if ($reg['IVA'] == '' or $reg['IVA'] == '0') {
-		echo "<option selected value=''></option>";
-	}
-	echo "</select><br />";
-
-	echo "<label for='descricpcion'>Descripción:</label>";
-	echo "<textarea id='descricpcion' class='input' name='descricpcion' rows='2' cols='94' readonly>" . $reg['descricpcion'] . "</textarea> <br />";
-
-	echo "<label for='OfrecerAdemas'>Ofrecer además:</label>";
-	echo "<input id='OfrecerAdemas' class='input' name='OfrecerAdemas' type='text' size='92' value='" . $reg['OfrecerAdemas'] . "' readonly><br />";
-
-	echo "<label for='NotasArt'>Notas Internas:</label>";
-	echo "<textarea id='NotasArt' class='input' name='NotasArt' rows='6' cols='94' readonly>" . $reg['Notas'] . "</textarea> <br />";
-
-	echo "<label for='ComposicionyDescirpcion'>Composición y Descripción:</label>";
-	echo "<textarea id='ComposicionyDescirpcion' class='input' name='ComposicionyDescirpcion' rows='6' cols='80' readonly>" . $reg['ComposicionyDescirpcion'] . "</textarea> <br />";
-
-	if (!$resultCP = mysqli_query($conexion_sp, "select min(contactos2.idContacto) as mindeidContacto, organizaciones.Organizacion from contactos2 INNER JOIN organizaciones ON contactos2.idOrganizacion = organizaciones.id group by organizaciones.Organizacion")) die("Problemas con la consulta contactos2 Organizacion");
-	echo "<label for='IdProveedor'>Proveedor:</label>";
-	echo "<select id='IdProveedor' class='input' name='IdProveedor' readonly>";
-	while ($row = mysqli_fetch_row($resultCP)) {
-		if ($reg['IdProveedor'] == $row[1]) {
-			echo "<option selected value=" . $row[0] . ">" . substr($row[1], 0, 23) . "</option>";
-		} else {
-			echo "<option value=" . $row[0] . ">" . substr($row[1], 0, 23) . "</option>";
+		if ($reg['MonedaOrigen'] == '' or $reg['MonedaOrigen'] == '0') {
+			echo "<option selected value=''></option>";
 		}
-	}
-	if ($reg['IdProveedor'] == '' or $reg['IdProveedor'] == '0') {
-		echo "<option selected value='0'></option>";
-	}
-	echo "</select>";
-
-	echo "<label for='CodigoProveedor'>Codigo del proveedor:</label>";
-	echo "<input id='CodigoProveedor' class='input' name='CodigoProveedor' type='text' size='34' value='" . $reg['CodigoProveedor'] . "' readonly><br />";
-
-	if (!$resultRub = mysqli_query($conexion_sp, "select IdRubro,Rubro from z_rubros where Nivel=0 order by Rubro")) die("Problemas con la consulta z_rubros");
-	echo "<label for='IdRubro'>Rubro:</label>";
-	echo "<select id='IdRubro' class='input' name='IdRubro' readonly>";
-	echo "<option selected value=''></option>";
-	while ($row = mysqli_fetch_row($resultRub)) {
-		if ($reg['IdRubro'] == $row[0]) {
-			echo "<option selected value=" . $row[0] . ">" . substr($row[1], 0, 36) . "</option>";
-		} else {
-			echo "<option value=" . $row[0] . ">" . substr($row[1], 0, 36) . "</option>";
+		?>
+	</select>
+	<label for='ValorVenta'>Valor:</label>
+	<input id='ValorVenta' class='input' name='ValorVenta' type='text' size='18' style='text-align: center; font-size:1.7em' value='" . $reg[' ValorVenta'] . "' readonly>
+		<label for='IVA'>IVA:</label>
+			<select id='IVA' class='input' name='IVA' style='font-size:1.7em' readonly>
+			<?php
+			if (!$resultTI = mysqli_query($conexion_sp, "select * from z_ivas")) die("Problemas con la consulta z_ivas");
+			while ($row = mysqli_fetch_row($resultTI)) {
+				if ($reg['IVA'] == $row[0]) {
+					echo "<option selected value=" . $row[0] . ">" . $row[1] . "</option>";
+				} else {
+					echo "<option value=" . $row[0] . ">" . $row[1] . "</option>";
+				}
+			}
+			if ($reg['IVA'] == '' or $reg['IVA'] == '0') {
+				echo "<option selected value=''></option>";
+			}
+			?>
+			</select>
+			<label for='descricpcion'>Descripción:</label>
+			<textarea id='descricpcion' class='input' name='descricpcion' rows='2' cols='94' readonly><?php echo $reg['descricpcion']; ?></textarea>
+			<label for='OfrecerAdemas'>Ofrecer además:</label>
+			<input id='OfrecerAdemas' class='input' name='OfrecerAdemas' type='text' size='92' value='<?php echo $reg['OfrecerAdemas']; ?>' readonly>
+			<label for='NotasArt'>Notas Internas:</label>
+			<textarea id='NotasArt' class='input' name='NotasArt' rows='6' cols='94' readonly><?php echo $reg['Notas']; ?></textarea>
+			<label for='ComposicionyDescirpcion'>Composición y Descripción:</label>
+			<textarea id='ComposicionyDescirpcion' class='input' name='ComposicionyDescirpcion' rows='6' cols='80' readonly><?php echo $reg['ComposicionyDescirpcion']; ?></textarea>
+			<label for='IdProveedor'>Proveedor:</label>
+			<select id='IdProveedor' class='input' name='IdProveedor' readonly>
+			<?php
+			if (!$resultCP = mysqli_query($conexion_sp, "select min(contactos2.idContacto) as mindeidContacto, organizaciones.Organizacion from contactos2 INNER JOIN organizaciones ON contactos2.idOrganizacion = organizaciones.id group by organizaciones.Organizacion")) die("Problemas con la consulta contactos2 Organizacion");
+			while ($row = mysqli_fetch_row($resultCP)) {
+				if ($reg['IdProveedor'] == $row[1]) {
+					echo "<option selected value=" . $row[0] . ">" . substr($row[1], 0, 23) . "</option>";
+				} else {
+					echo "<option value=" . $row[0] . ">" . substr($row[1], 0, 23) . "</option>";
+				}
+			}
+			if ($reg['IdProveedor'] == '' or $reg['IdProveedor'] == '0') {
+				echo "<option selected value='0'></option>";
+			}
+			?>
+			</select>
+			<label for='CodigoProveedor'>Codigo del proveedor:</label>
+			<input id='CodigoProveedor' class='input' name='CodigoProveedor' type='text' size='34' value='" . $reg['CodigoProveedor'] . "' readonly><br />
+			<label for='IdRubro'>Rubro:</label>
+			<select id='IdRubro' class='input' name='IdRubro' readonly>
+			<option selected value=''></option>
+			<?php
+				if (!$resultRub = mysqli_query($conexion_sp, "select IdRubro,Rubro from z_rubros where Nivel=0 order by Rubro")) die("Problemas con la consulta z_rubros");
+				while ($row = mysqli_fetch_row($resultRub)) {
+				if ($reg['IdRubro'] == $row[0]) {
+					echo "<option selected value=" . $row[0] . ">" . substr($row[1], 0, 36) . "</option>";
+				} else {
+					echo "<option value=" . $row[0] . ">" . substr($row[1], 0, 36) . "</option>";
+				}
+			}
+			?>
+			</select>
+			<label for='IdSubRubro'>SubRubro:</label>
+			<select id='IdSubRubro' class='input' name='IdSubRubro' readonly>
+			<option selected value=''></option>
+			<?php
+			if (!$resultRub = mysqli_query($conexion_sp, "select IdRubro,Rubro from z_rubros where Nivel=1 order by Rubro")) die("Problemas con la consulta z_rubros sub rubros");
+			while ($row = mysqli_fetch_row($resultRub)) {
+				if ($reg['IdSubRubro'] == $row[0]) {
+					echo "<option selected value=" . $row[0] . ">" . substr($row[1], 0, 36) . "</option>";
+				} else {
+					echo "<option value=" . $row[0] . ">" . substr($row[1], 0, 36) . "</option>";
+				}
+			}
+			?>
+			</select><br />";
+			<label for='StockMinimo'>Stock Minimo:</label>";
+			<input id='StockMinimo' class='input' name='StockMinimo' type='text' size='4' value='" . $reg['StockMinimo'] . "' readonly>";
+			<label for='EnStock'>En Stock:</label>";
+			<input id='EnStock' class='input' name='EnStock' type='text' size='4' value='" . $reg['EnStock'] . "' readonly='readonly'>";
+			<label for='UnidadMedida'>Unidad Medida:</label>";
+			<input id='UnidadMedida' class='input' name='UnidadMedida' type='text' size='6' value='" . $reg['UnidadMedida'] . "' readonly>";
+			<label for='tangible'>Tangible: </label>";
+			<?php
+			if ($reg['tangible'] == 0) {
+				echo "<input name='tangible' id='tangible' type='checkbox'></input>";
+			} else {
+				echo "<input name='tangible' id='tangible' type='checkbox' checked></input>";
+			}
+			?>
+			<br>
+			<label for='CodigoInterno'>CodigoInterno:</label>
+			<input id='CodigoInterno' class='input' name='CodigoInterno' type='text' size='40' value='" . $reg['CodigoInterno'] . "' readonly><br />
+			<label for='Numerodeserie'>Numerodeserie:</label>
+			<input id='Numerodeserie' class='input' name='Numerodeserie' type='text' size='40' value='" . $reg['Numerodeserie'] . "' readonly><br />
+			<label for='IdCostoProveedor'>IdCostoProveedor:</label>
+			<input id='IdCostoProveedor' class='input' name='IdCostoProveedor' type='text' size='26' value='" . $reg['IdCostoProveedor'] . "' readonly><br />
+			<label for='IdImagen'>IdImagen:</label>
+			<input id='IdImagen' class='input' name='IdImagen' type='text' size='40' value='" . $reg['IdImagen'] . "' readonly><br />
+			<label for='HojaFabricante'>HojaFabricante:</label>
+			<input id='HojaFabricante' class='input' name='HojaFabricante' type='text' size='40' value='" . $reg['HojaFabricante'] . "' readonly><br />
+			<label for='HojaOtra'>HojaOtra:</label>
+			<input id='HojaOtra' class='input' name='HojaOtra' type='text' size='40' value='" . $reg['HojaOtra'] . "' readonly><br />
+			<label for='UsuarioCreacion'>UsuarioCreacion:</label>
+			<input id='UsuarioCreacion' class='input' name='UsuarioCreacion' type='text' size='17' value='" . $reg['UsuarioCreacion'] . "' readonly><br />
+			<label for='UsuarioModificacion'>UsuarioModificacion:</label>
+			<input id='UsuarioModificacion' class='input' name='UsuarioModificacion' type='text' size='14' value='" . $reg['UsuarioModificacion'] . "' readonly><br />
+			<label for='UsuarioFC'>UsuarioFC:</label>
+			<input id='UsuarioFC' class='input' name='UsuarioFC' type='text' size='28' value='" . $reg['UsuarioFC'] . "' readonly><br />
+			<label for='UsuarioFM'>UsuarioFM:</label>
+			<input id='UsuarioFM' class='input' name='UsuarioFM' type='text' size='40' value='" . $reg['UsuarioFM'] . "' readonly><br />
+			<label for='Imagen'>Imagen:</label>
+			<input id='Imagen' class='input' name='Imagen' type='text' size='97' value='" . $reg['Imagen'] . "' readonly><br />
+			<label for='FechaActualizacion'>FechaActualizacion:</label>
+			<input id='FechaActualizacion' class='input' name='FechaActualizacion' type='text' size='40' value='" . $reg['FechaActualizacion'] . "' readonly>
+			<br>
+			<?php
 		}
-	}
-	echo "</select>";
 
-	if (!$resultRub = mysqli_query($conexion_sp, "select IdRubro,Rubro from z_rubros where Nivel=1 order by Rubro")) die("Problemas con la consulta z_rubros sub rubros");
-	echo "<label for='IdSubRubro'>SubRubro:</label>";
-	echo "<select id='IdSubRubro' class='input' name='IdSubRubro' readonly>";
-	echo "<option selected value=''></option>";
-	while ($row = mysqli_fetch_row($resultRub)) {
-		if ($reg['IdSubRubro'] == $row[0]) {
-			echo "<option selected value=" . $row[0] . ">" . substr($row[1], 0, 36) . "</option>";
-		} else {
-			echo "<option value=" . $row[0] . ">" . substr($row[1], 0, 36) . "</option>";
+
+		function imprimir_detalle_articulos_ajustado_stock($resultc, $conexion_sp)
+		{
+			$reg = mysqli_fetch_array($resultc);
+			echo "<label for='IdProducto'>Id del Producto:</label>";
+			echo "<input id='IdProducto' class='input' name='IdProducto' type='text' size='6' value=" . $reg['IdProducto'] . " readonly>";
+
+			echo "<label for='actualiz'>Fecha de actualización:</label>";
+			echo "<input id='actualiz' class='input' name='actualiz' type='text' size='33' value='" . $reg['actualiz'] . "' readonly><br />";
+
+			if (!$resultTM = mysqli_query($conexion_sp, "select * from monedaorigen")) die("Problemas con la consulta monedaorigen");
+			echo "<label for='MonedaOrigen'>Moneda:</label>";
+			echo "<select id='MonedaOrigen' class='input' name='MonedaOrigen' style='font-size:1.7em' readonly>";
+			while ($row = mysqli_fetch_array($resultTM)) {
+				if ($reg['MonedaOrigen'] == $row['IdRegistroCambio']) {
+					echo "<option selected value=" . $row['IdRegistroCambio'] . ">" . $row['Origen'] . "</option>";
+				} else {
+					echo "<option value=" . $row['IdRegistroCambio'] . ">" . $row['Origen'] . "</option>";
+				}
+			}
+			if ($reg['MonedaOrigen'] == '' or $reg['MonedaOrigen'] == '0') {
+				echo "<option selected value=''></option>";
+			}
+			echo "</select>";
+
+			echo "<label for='ValorVenta'>Valor:</label>";
+			echo "<input id='ValorVenta' class='input' name='ValorVenta' type='text' size='18' style='text-align: center; font-size:1.7em' value='" . $reg['ValorVenta'] . "' readonly><br />";
+
+			echo "<label for='descricpcion'>Descripción:</label>";
+			echo "<textarea id='descricpcion' class='input' name='descricpcion' rows='2' cols='81' readonly>" . $reg['descricpcion'] . "</textarea> <br />";
+
+			if (!$resultCP = mysqli_query($conexion_sp, "select min(contactos2.idContacto) as mindeidContacto, organizaciones.Organizacion from contactos2 INNER JOIN organizaciones ON contactos2.idOrganizacion = organizaciones.id group by organizaciones.Organizacion")) die("Problemas con la consulta contactos2 Organizacion");
+			echo "<label for='IdProveedor'>Proveedor:</label>";
+			echo "<select id='IdProveedor' class='input' name='IdProveedor' readonly>";
+			while ($row = mysqli_fetch_row($resultCP)) {
+				if ($reg['IdProveedor'] == $row[1]) {
+					echo "<option selected value=" . $row[0] . ">" . substr($row[1], 0, 23) . "</option>";
+				} else {
+					echo "<option value=" . $row[0] . ">" . substr($row[1], 0, 23) . "</option>";
+				}
+			}
+			if ($reg['IdProveedor'] == '' or $reg['IdProveedor'] == '0') {
+				echo "<option selected value='0'></option>";
+			}
+			echo "</select>";
+
+			echo "<label for='CodigoProveedor'>Codigo del proveedor:</label>";
+			echo "<input id='CodigoProveedor' class='input' name='CodigoProveedor' type='text' size='34' value='" . $reg['CodigoProveedor'] . "' readonly><br />";
+
+			if (!$resultRub = mysqli_query($conexion_sp, "select IdRubro,Rubro from z_rubros where Nivel=0 order by Rubro")) die("Problemas con la consulta z_rubros");
+			echo "<label for='IdRubro'>Rubro:</label>";
+			echo "<select id='IdRubro' class='input' name='IdRubro' readonly>";
+			echo "<option selected value=''></option>";
+			while ($row = mysqli_fetch_row($resultRub)) {
+				if ($reg['IdRubro'] == $row[0]) {
+					echo "<option selected value=" . $row[0] . ">" . substr($row[1], 0, 36) . "</option>";
+				} else {
+					echo "<option value=" . $row[0] . ">" . substr($row[1], 0, 36) . "</option>";
+				}
+			}
+			echo "</select>";
+
+			if (!$resultRub = mysqli_query($conexion_sp, "select IdRubro,Rubro from z_rubros where Nivel=1 order by Rubro")) die("Problemas con la consulta z_rubros sub rubros");
+			echo "<label for='IdSubRubro'>SubRubro:</label>";
+			echo "<select id='IdSubRubro' class='input' name='IdSubRubro' readonly>";
+			echo "<option selected value=''></option>";
+			while ($row = mysqli_fetch_row($resultRub)) {
+				if ($reg['IdSubRubro'] == $row[0]) {
+					echo "<option selected value=" . $row[0] . ">" . substr($row[1], 0, 36) . "</option>";
+				} else {
+					echo "<option value=" . $row[0] . ">" . substr($row[1], 0, 36) . "</option>";
+				}
+			}
+			echo "</select><br />";
+
+			echo "<label for='StockMinimo'>Stock Minimo:</label>";
+			echo "<input id='StockMinimo' class='input' name='StockMinimo' type='text' size='4' style='text-align:center;' value='" . $reg['StockMinimo'] . "' readonly>";
+
+			//Una nueva. Colores por stock. PERO SOLO SI SON TANGIBLES!
+			$colorFondo = '#abf1ab';
+			if ($reg['EnStock'] <= $reg['StockMinimo']) {
+				$colorFondo = 'yellow';
+			}
+			if ($reg['EnStock'] < 1) {
+				$colorFondo = '#FA5858';
+			}
+			if ($reg['tangible'] < 1) {
+				$colorFondo = 'white';
+			}
+
+			echo "<label for='EnStock'>En Stock:</label>";
+			echo "<input id='EnStock' class='input' name='EnStock' type='text' size='4' style='text-align:center; background-color:" . $colorFondo . ";' value='" . $reg['EnStock'] . "' readonly>";
+
+			echo "<label for='UnidadMedida'>Unidad Medida:</label>";
+			echo "<input id='UnidadMedida' class='input' name='UnidadMedida' type='text' size='6' style='text-align:center;' value='" . $reg['UnidadMedida'] . "' readonly>";
+
+			echo "<label for='tangible'>Tangible: </label>";
+			if ($reg['tangible'] == 0) {
+				echo "<input name='tangible' id='tangible' type='checkbox' readonly></input>";
+			} else {
+				echo "<input name='tangible' id='tangible' type='checkbox' checked readonly></input>";
+			}
+			//Nueva Junio 2018. Ubicacion
+			echo "<br />";
+			if (!$resultUbicacion = mysqli_query($conexion_sp, "select Deposito,Estanteria,Estante from Stock where Producto='" . $reg['IdProducto'] . "' limit 1")) die("Problemas con la consulta Stock Ubicacion 571");
+			$rowUbic = mysqli_fetch_array($resultUbicacion);
+			echo "<label for='numDeposito'>Deposito:</label>";
+			echo "<input id='numDeposito' class='input' name='numDeposito' type='text' size='17' value='" . $rowUbic['Deposito'] . "' readonly>";
+			echo "<label for='Estanteria'>Módulo:</label>";
+			echo "<input id='Estanteria' class='input' name='Estanteria' type='text' size='17' value='" . $rowUbic['Estanteria'] . "' readonly>";
+			echo "<label for='Estante'>Estante:</label>";
+			echo "<input id='Estante' class='input' name='Estante' type='text' size='17' value='" . $rowUbic['Estante'] . "' readonly>";
 		}
-	}
-	echo "</select><br />";
-
-	echo "<label for='StockMinimo'>Stock Minimo:</label>";
-	echo "<input id='StockMinimo' class='input' name='StockMinimo' type='text' size='4' value='" . $reg['StockMinimo'] . "' readonly>";
-
-	echo "<label for='EnStock'>En Stock:</label>";
-	echo "<input id='EnStock' class='input' name='EnStock' type='text' size='4' value='" . $reg['EnStock'] . "' readonly='readonly'>";
-
-	echo "<label for='UnidadMedida'>Unidad Medida:</label>";
-	echo "<input id='UnidadMedida' class='input' name='UnidadMedida' type='text' size='6' value='" . $reg['UnidadMedida'] . "' readonly>";
-
-	echo "<label for='tangible'>Tangible: </label>";
-	if ($reg['tangible'] == 0) {
-		echo "<input name='tangible' id='tangible' type='checkbox'></input>";
-	} else {
-		echo "<input name='tangible' id='tangible' type='checkbox' checked></input>";
-	}
-
-	echo "<br />";
-	echo "<br />";
-	echo "<br />";
-	echo "<br />";
-
-	echo "<label for='CodigoInterno'>CodigoInterno:</label>";
-	echo "<input id='CodigoInterno' class='input' name='CodigoInterno' type='text' size='40' value='" . $reg['CodigoInterno'] . "' readonly><br />";
-
-	echo "<label for='Numerodeserie'>Numerodeserie:</label>";
-	echo "<input id='Numerodeserie' class='input' name='Numerodeserie' type='text' size='40' value='" . $reg['Numerodeserie'] . "' readonly><br />";
-
-	echo "<label for='IdCostoProveedor'>IdCostoProveedor:</label>";
-	echo "<input id='IdCostoProveedor' class='input' name='IdCostoProveedor' type='text' size='26' value='" . $reg['IdCostoProveedor'] . "' readonly><br />";
-
-	echo "<label for='IdImagen'>IdImagen:</label>";
-	echo "<input id='IdImagen' class='input' name='IdImagen' type='text' size='40' value='" . $reg['IdImagen'] . "' readonly><br />";
-
-	echo "<label for='HojaFabricante'>HojaFabricante:</label>";
-	echo "<input id='HojaFabricante' class='input' name='HojaFabricante' type='text' size='40' value='" . $reg['HojaFabricante'] . "' readonly><br />";
-
-	echo "<label for='HojaOtra'>HojaOtra:</label>";
-	echo "<input id='HojaOtra' class='input' name='HojaOtra' type='text' size='40' value='" . $reg['HojaOtra'] . "' readonly><br />";
-
-	echo "<label for='UsuarioCreacion'>UsuarioCreacion:</label>";
-	echo "<input id='UsuarioCreacion' class='input' name='UsuarioCreacion' type='text' size='17' value='" . $reg['UsuarioCreacion'] . "' readonly><br />";
-
-	echo "<label for='UsuarioModificacion'>UsuarioModificacion:</label>";
-	echo "<input id='UsuarioModificacion' class='input' name='UsuarioModificacion' type='text' size='14' value='" . $reg['UsuarioModificacion'] . "' readonly><br />";
-
-	echo "<label for='UsuarioFC'>UsuarioFC:</label>";
-	echo "<input id='UsuarioFC' class='input' name='UsuarioFC' type='text' size='28' value='" . $reg['UsuarioFC'] . "' readonly><br />";
-
-	echo "<label for='UsuarioFM'>UsuarioFM:</label>";
-	echo "<input id='UsuarioFM' class='input' name='UsuarioFM' type='text' size='40' value='" . $reg['UsuarioFM'] . "' readonly><br />";
-
-	echo "<label for='Imagen'>Imagen:</label>";
-	echo "<input id='Imagen' class='input' name='Imagen' type='text' size='97' value='" . $reg['Imagen'] . "' readonly><br />";
-
-	echo "<label for='FechaActualizacion'>FechaActualizacion:</label>";
-	echo "<input id='FechaActualizacion' class='input' name='FechaActualizacion' type='text' size='40' value='" . $reg['FechaActualizacion'] . "' readonly>";
-	echo "<br />";
-}
-
-
-function imprimir_detalle_articulos_ajustado_stock($resultc, $conexion_sp)
-{
-	$reg = mysqli_fetch_array($resultc);
-	echo "<label for='IdProducto'>Id del Producto:</label>";
-	echo "<input id='IdProducto' class='input' name='IdProducto' type='text' size='6' value=" . $reg['IdProducto'] . " readonly>";
-
-	echo "<label for='actualiz'>Fecha de actualización:</label>";
-	echo "<input id='actualiz' class='input' name='actualiz' type='text' size='33' value='" . $reg['actualiz'] . "' readonly><br />";
-
-	if (!$resultTM = mysqli_query($conexion_sp, "select * from monedaorigen")) die("Problemas con la consulta monedaorigen");
-	echo "<label for='MonedaOrigen'>Moneda:</label>";
-	echo "<select id='MonedaOrigen' class='input' name='MonedaOrigen' style='font-size:1.7em' readonly>";
-	while ($row = mysqli_fetch_array($resultTM)) {
-		if ($reg['MonedaOrigen'] == $row['IdRegistroCambio']) {
-			echo "<option selected value=" . $row['IdRegistroCambio'] . ">" . $row['Origen'] . "</option>";
-		} else {
-			echo "<option value=" . $row['IdRegistroCambio'] . ">" . $row['Origen'] . "</option>";
-		}
-	}
-	if ($reg['MonedaOrigen'] == '' or $reg['MonedaOrigen'] == '0') {
-		echo "<option selected value=''></option>";
-	}
-	echo "</select>";
-
-	echo "<label for='ValorVenta'>Valor:</label>";
-	echo "<input id='ValorVenta' class='input' name='ValorVenta' type='text' size='18' style='text-align: center; font-size:1.7em' value='" . $reg['ValorVenta'] . "' readonly><br />";
-
-	echo "<label for='descricpcion'>Descripción:</label>";
-	echo "<textarea id='descricpcion' class='input' name='descricpcion' rows='2' cols='81' readonly>" . $reg['descricpcion'] . "</textarea> <br />";
-
-	if (!$resultCP = mysqli_query($conexion_sp, "select min(contactos2.idContacto) as mindeidContacto, organizaciones.Organizacion from contactos2 INNER JOIN organizaciones ON contactos2.idOrganizacion = organizaciones.id group by organizaciones.Organizacion")) die("Problemas con la consulta contactos2 Organizacion");
-	echo "<label for='IdProveedor'>Proveedor:</label>";
-	echo "<select id='IdProveedor' class='input' name='IdProveedor' readonly>";
-	while ($row = mysqli_fetch_row($resultCP)) {
-		if ($reg['IdProveedor'] == $row[1]) {
-			echo "<option selected value=" . $row[0] . ">" . substr($row[1], 0, 23) . "</option>";
-		} else {
-			echo "<option value=" . $row[0] . ">" . substr($row[1], 0, 23) . "</option>";
-		}
-	}
-	if ($reg['IdProveedor'] == '' or $reg['IdProveedor'] == '0') {
-		echo "<option selected value='0'></option>";
-	}
-	echo "</select>";
-
-	echo "<label for='CodigoProveedor'>Codigo del proveedor:</label>";
-	echo "<input id='CodigoProveedor' class='input' name='CodigoProveedor' type='text' size='34' value='" . $reg['CodigoProveedor'] . "' readonly><br />";
-
-	if (!$resultRub = mysqli_query($conexion_sp, "select IdRubro,Rubro from z_rubros where Nivel=0 order by Rubro")) die("Problemas con la consulta z_rubros");
-	echo "<label for='IdRubro'>Rubro:</label>";
-	echo "<select id='IdRubro' class='input' name='IdRubro' readonly>";
-	echo "<option selected value=''></option>";
-	while ($row = mysqli_fetch_row($resultRub)) {
-		if ($reg['IdRubro'] == $row[0]) {
-			echo "<option selected value=" . $row[0] . ">" . substr($row[1], 0, 36) . "</option>";
-		} else {
-			echo "<option value=" . $row[0] . ">" . substr($row[1], 0, 36) . "</option>";
-		}
-	}
-	echo "</select>";
-
-	if (!$resultRub = mysqli_query($conexion_sp, "select IdRubro,Rubro from z_rubros where Nivel=1 order by Rubro")) die("Problemas con la consulta z_rubros sub rubros");
-	echo "<label for='IdSubRubro'>SubRubro:</label>";
-	echo "<select id='IdSubRubro' class='input' name='IdSubRubro' readonly>";
-	echo "<option selected value=''></option>";
-	while ($row = mysqli_fetch_row($resultRub)) {
-		if ($reg['IdSubRubro'] == $row[0]) {
-			echo "<option selected value=" . $row[0] . ">" . substr($row[1], 0, 36) . "</option>";
-		} else {
-			echo "<option value=" . $row[0] . ">" . substr($row[1], 0, 36) . "</option>";
-		}
-	}
-	echo "</select><br />";
-
-	echo "<label for='StockMinimo'>Stock Minimo:</label>";
-	echo "<input id='StockMinimo' class='input' name='StockMinimo' type='text' size='4' style='text-align:center;' value='" . $reg['StockMinimo'] . "' readonly>";
-
-	//Una nueva. Colores por stock. PERO SOLO SI SON TANGIBLES!
-	$colorFondo = '#abf1ab';
-	if ($reg['EnStock'] <= $reg['StockMinimo']) {
-		$colorFondo = 'yellow';
-	}
-	if ($reg['EnStock'] < 1) {
-		$colorFondo = '#FA5858';
-	}
-	if ($reg['tangible'] < 1) {
-		$colorFondo = 'white';
-	}
-
-	echo "<label for='EnStock'>En Stock:</label>";
-	echo "<input id='EnStock' class='input' name='EnStock' type='text' size='4' style='text-align:center; background-color:" . $colorFondo . ";' value='" . $reg['EnStock'] . "' readonly>";
-
-	echo "<label for='UnidadMedida'>Unidad Medida:</label>";
-	echo "<input id='UnidadMedida' class='input' name='UnidadMedida' type='text' size='6' style='text-align:center;' value='" . $reg['UnidadMedida'] . "' readonly>";
-
-	echo "<label for='tangible'>Tangible: </label>";
-	if ($reg['tangible'] == 0) {
-		echo "<input name='tangible' id='tangible' type='checkbox' readonly></input>";
-	} else {
-		echo "<input name='tangible' id='tangible' type='checkbox' checked readonly></input>";
-	}
-	//Nueva Junio 2018. Ubicacion
-	echo "<br />";
-	if (!$resultUbicacion = mysqli_query($conexion_sp, "select Deposito,Estanteria,Estante from Stock where Producto='" . $reg['IdProducto'] . "' limit 1")) die("Problemas con la consulta Stock Ubicacion 571");
-	$rowUbic = mysqli_fetch_array($resultUbicacion);
-	echo "<label for='numDeposito'>Deposito:</label>";
-	echo "<input id='numDeposito' class='input' name='numDeposito' type='text' size='17' value='" . $rowUbic['Deposito'] . "' readonly>";
-	echo "<label for='Estanteria'>Módulo:</label>";
-	echo "<input id='Estanteria' class='input' name='Estanteria' type='text' size='17' value='" . $rowUbic['Estanteria'] . "' readonly>";
-	echo "<label for='Estante'>Estante:</label>";
-	echo "<input id='Estante' class='input' name='Estante' type='text' size='17' value='" . $rowUbic['Estante'] . "' readonly>";
-}

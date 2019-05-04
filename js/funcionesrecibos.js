@@ -861,10 +861,8 @@ function procesarEventos13()
 	  if(conexion13.status == 200)
 	  { 
 		  document.getElementById('acciones').innerHTML=conexion13.responseText;
-		  	$(document).ready(function() {
-			  $("#empresaNombre").select2();
-			  $("#empresaNombre").select2("open");
-			});
+		  	$(document).ready(function() {$("#empresaNombre").select2();
+			  															$("#empresaNombre").select2("open");});
 		  //habilito la funcion del boton "Listo"
 		  //agregarUnNuevoComprobanteRecibo ahora esta en funcionescomunes.js
 			document.getElementById('listoNuevoRe').addEventListener('click',agregarUnNuevoComprobanteRecibo,false); 

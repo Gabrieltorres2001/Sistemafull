@@ -28,9 +28,7 @@ function procesarEventos1()
 	  if(conexion1.status == 200)
 	  { 
 		  document.getElementById('acciones').innerHTML=conexion1.responseText;
-		  	$(document).ready(function() {
-			  $("#empresaNombre").select2();
-			});		  
+		  	$(document).ready(function() {$("#empresaNombre").select2();});		  
 		  //acciones para el boton buscar
 		  document.getElementById('seleccionaEmpresa').addEventListener('click',mostrarEmpresaSeleccionadaNombre,false); 
 		  document.getElementById('imprimirCuenta').addEventListener('click',informeCuentaCorriente,false);	

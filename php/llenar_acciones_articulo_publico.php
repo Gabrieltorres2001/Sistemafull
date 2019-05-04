@@ -14,8 +14,8 @@ $conexion_db=mysqli_connect(HOST,USER,PASSWORD,DATABASE) or
 	//tengo que tenerpermiso para modificar
 	if(!$permisoModificar = mysqli_query($conexion_db, "select PuedeModificarArticulos from members where id='".$_REQUEST['estaSesion']."' limit 1")) die("Problemas con la consultamembers");
 	$rowPermisoModificar = mysqli_fetch_array($permisoModificar);
-	$puedoModificar=0;
-	if($rowPermisoModificar['PuedeModificarArticulos']!=0)$puedoModificar=1;
+	$puedoModificar=" disabled";
+	if($rowPermisoModificar['PuedeModificarArticulos']!=0)$puedoModificar="";
 
 	//Hago 3 div
 	//Para ver cual DIV va, tengo que saber si el articulo es publico o privado
@@ -58,7 +58,7 @@ $conexion_db=mysqli_connect(HOST,USER,PASSWORD,DATABASE) or
 	echo "<p>";
 	echo"</br>";
 
-	if ($puedoModificar==0) {echo"<input type='button' id='botonHacerPublico' value='Hacer público' disabled>";} else {echo"<input type='button' id='botonHacerPublico' value='Hacer público'/>";}
+	echo"<input type='button' id='botonHacerPublico' value='Hacer público'".$puedoModificar.">";
 	
 	echo"</br>";
 	echo"</p>";
@@ -78,7 +78,7 @@ $conexion_db=mysqli_connect(HOST,USER,PASSWORD,DATABASE) or
 	overflow: auto;
 	text-align:center; '>";
 	echo "<p>";
-	if ($puedoModificar==0) {echo"<input type='button' id='botonActualizaArticulo' value='Actualizar datos' disabled>";} else {echo"<input type='button' id='botonActualizaArticulo' value='Actualizar datos'/>";}
+	echo"<input type='button' id='botonActualizaArticulo' value='Actualizar datos'".$puedoModificar.">";
 	
 	echo"</br>";
 	echo"</br>";
@@ -120,9 +120,7 @@ $conexion_db=mysqli_connect(HOST,USER,PASSWORD,DATABASE) or
 
 	echo "<p>";
 	echo"</br>";
-
-	if ($puedoModificar==0) {echo"<input type='button' id='botonHacerPrivado' value='Hacer privado' disabled>";} else {echo"<input type='button' id='botonHacerPrivado' value='Hacer privado'/>";}
-	
+	echo"<input type='button' id='botonHacerPrivado' value='Hacer privado'".$puedoModificar.">";
 	echo"</br>";
 	echo"</p>";
 

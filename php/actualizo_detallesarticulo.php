@@ -19,10 +19,13 @@ $conexion_sp=mysqli_connect(HOSTSP,USERSP,PASSWORDSP,DATABASESP) or
 	$regCP = mysqli_fetch_array($resultCP);
 	//echo $regCP['Organizacion'];	
 	//echo $_REQUEST['Notas'];
+
 	$tangible = 0 ;
 	if (isset($_REQUEST[''])) {
 		$tangible = $_REQUEST['tangible'];
 	}
+
+	
 
 	$sql = "UPDATE productos set 
 			TipoProducto = '".$_REQUEST['TipoProducto']."',  

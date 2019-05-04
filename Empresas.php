@@ -20,9 +20,7 @@ sec_session_start();
 
 	
 	<script type="text/javascript">
-	$(document).ready(function() {
-	  $("#empresa").select2();
-	});
+	$(document).ready(function() {$("#empresa").select2();});
 	</script>
     
   </head>

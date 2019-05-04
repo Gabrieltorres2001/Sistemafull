@@ -141,9 +141,8 @@ function llenarAccionesLegajo(){
   var obnn=document.getElementById('numberses').value;
   conexion2.open('GET','./php/llenar_acciones_legajos.php?rnadom='+aleatorio+"&sesses="+obnn, true);
   conexion2.send();
-
-
 }
+
 function procesarEventos2()
 {
     if(conexion2.readyState == 4)
@@ -176,10 +175,8 @@ function procesarEventos3()
 	  { 
 		  document.getElementById('acciones').innerHTML=conexion3.responseText;
 		  document.getElementById('Presupuestos').focus();
-		  	$(document).ready(function() {
-			  $("#Presupuestos").select2();
-			  $("#Presupuestos").select2("open");
-			});
+		  	$(document).ready(function() {$("#Presupuestos").select2();
+			  															$("#Presupuestos").select2("open");});
 		  //habilito la funcion del boton "Listo"
 			document.getElementById('listoNuevoLeg').addEventListener('click',agregarUnNuevoLegajo,false); 
 
@@ -399,10 +396,7 @@ function procesarEventos8()
 	  { 
 		document.getElementById('agregarItemAlComprobanteFRMSup').innerHTML=conexion8.responseText;
 		document.getElementById('listoNuevoLegVent').addEventListener('click',agregarAdjunto,false);
-		$(document).ready(function() {
-		  $("#itemsAAgregarALegajo").select2();
-		  //$("#itemsAAgregarALegajo").select2("open");
-		});
+		$(document).ready(function() {$("#itemsAAgregarALegajo").select2();});
 	  }
   }
 }

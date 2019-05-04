@@ -34,15 +34,11 @@ sec_session_start();
   	<!-- DataTables Initialization -->
     <script type="text/javascript" src="js/jquery.dataTables.js"></script>
   	<script type="text/javascript" charset="utf-8">
-			$(document).ready(function() {
-				$('#dt1').dataTable();
-			} );
+			$(document).ready(function() {$('#dt1').dataTable();});
 	</script>
 	
 	<script type="text/javascript">
-	$(document).ready(function() {
-	  $("#empresa").select2();
-	});
+	$(document).ready(function() {$("#empresa").select2();});
 	</script>
 	
   </head>
