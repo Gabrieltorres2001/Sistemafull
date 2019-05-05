@@ -1,15 +1,19 @@
 <?php
 include 'appConfig.php';
-$titulo = "Ingreso diario: Error";
+
+$app = $homeLinks['ERROR'];
+
 include 'header.php';
 $error = filter_input(INPUT_GET, 'err', $filter = FILTER_SANITIZE_STRING);
  
 if (! $error) {
   $error = 'Ocurrió un error desconocido';
 }
-?>
 
-	<!-- page Stylesheet -->
+sec_session_start();
+
+?>
+<!-- app js -->
 	<link rel="stylesheet" href="css/style.css">
 	<!-- page js libs -->
 

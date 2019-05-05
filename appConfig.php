@@ -79,3 +79,11 @@ $homeLinks['perfil'] = array(
     'icon' => '', // optional icon to use with the link
     'default' => false
 );
+$homeLinks['ERROR'] = array(
+    'url' => 'error.php', 
+    'navBar' => false,
+    'title' => 'ERROR', 
+    'description' => 'Error general del sistema',
+    'icon' => '', // optional icon to use with the link
+    'default' => false
+);
