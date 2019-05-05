@@ -35,6 +35,7 @@ function upperMenu($current){
 
   $html = "";
   foreach($homeLinks as $link){
+    $active="";
     if (!$link['navBar']) continue;
     if(!isset($link['url']) || !isset($link['title'])) continue;
     $active = $link['title'] == $current ? "active" : "";

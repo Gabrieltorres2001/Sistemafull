@@ -61,3 +61,12 @@ $homeLinks['ArticulosPublicos'] = array(
     'icon' => '', // optional icon to use with the link
     'default' => false
 );
+
+$homeLinks['login'] = array(
+    'url' => 'index.php', 
+    'navBar' => false,
+    'title' => 'LogIn', 
+    'description' => 'Ingreso diario',
+    'icon' => '', // optional icon to use with the link
+    'default' => false
+);

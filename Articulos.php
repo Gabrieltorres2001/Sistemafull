@@ -9,15 +9,9 @@ include 'header.php';
 sec_session_start();
 
 ?>
+<!-- app js -->
 <script src="js/funcionesarticulos.js"></script>
 
-<!-- DataTables Initialization -->
-<script type="text/javascript" src="js/jquery.dataTables.js"></script>
-<script type="text/javascript" charset="utf-8">
-  $(document).ready(function() {
-    $('#dt1').dataTable();
-  });
-</script>
 </head>
 
 <body>
@@ -45,7 +39,7 @@ sec_session_start();
             <!-- listado -->
             <div class="card-body">
               <?php
-                llenar_listado_articulos();
+                echo llenar_listado_articulos();
               ?>
             </div>
           </div>
