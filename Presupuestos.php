@@ -54,7 +54,7 @@ sec_session_start();
 
     <!-- SI ESTOY LOGEADO. BIEN. PUEDO INGRESAR. -->
     <?php if ((login_check($mysqli) == true) && (formulario_habilitado("Presupuesto") == true)){ ?>   
-	<?php upperMenu('Presupuestos') ?>
+	<?php echo upperMenu('Presupuestos') ?>
 	
     <div class="container">
       <!-- CONTENT -->

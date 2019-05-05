@@ -47,8 +47,7 @@ sec_session_start();
     <!-- SI ESTOY LOGEADO. BIEN. PUEDO INGRESAR. -->
     <?php if ((login_check($mysqli) == true) && (formulario_habilitado("AjustesStock") == true)) { ?>   
 	<?php 
-	//upperMenu('ajustesStock');
-	upperMenu($titulo);
+	echo upperMenu($titulo);
 	 ?>
 
     <div class="container">

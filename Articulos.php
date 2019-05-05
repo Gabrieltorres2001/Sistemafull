@@ -19,7 +19,7 @@ sec_session_start();
   <?php
   if (login_check($mysqli) == true) {
     // SI ESTOY LOGEADO. BIEN. PUEDO INGRESAR
-    upperMenu($app['title']);
+    echo upperMenu($app['title']);
     ?>
 
     <div class="container">

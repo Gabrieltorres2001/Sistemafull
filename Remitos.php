@@ -50,7 +50,7 @@ sec_session_start();
     
     <!-- SI ESTOY LOGEADO. BIEN. PUEDO INGRESAR. -->
     <?php if (login_check($mysqli) == true) {?>   
-	<?php upperMenu('Remitos') ?>
+	<?php echo upperMenu('Remitos') ?>
 
     <div class="container">
       <!-- CONTENT -->

@@ -91,7 +91,7 @@ sec_session_start();
     
     <!-- SI ESTOY LOGEADO. BIEN. PUEDO INGRESAR. -->
     <?php if ((login_check($mysqli) == true) && (formulario_habilitado("RemitosSinFactura") == true)) : ?>   
-	<?php upperMenu('Remitos sin facturar') ?>
+	<?php echo upperMenu('Remitos sin facturar') ?>
 
     <div class="container">
       <!-- CONTENT -->

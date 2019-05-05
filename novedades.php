@@ -96,7 +96,7 @@ sec_session_start();
 <body>  
     <!-- SI ESTOY LOGEADO. BIEN. PUEDO INGRESAR. -->
     <?php if (login_check($mysqli) == true) : ?>   
-	<?php upperMenu('Novedades') ?>
+	<?php echo upperMenu('Novedades') ?>
 
     <div class="container">
       <!-- CONTENT -->

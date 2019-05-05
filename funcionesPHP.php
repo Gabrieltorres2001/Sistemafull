@@ -88,6 +88,6 @@ function upperMenu($current){
   <?php
   $nav = ob_get_contents();
   ob_clean();
-  echo $nav;
+  return $nav;
 
 }

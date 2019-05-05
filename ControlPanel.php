@@ -26,7 +26,7 @@ sec_session_start();
     
     <!-- SI ESTOY LOGEADO. BIEN. PUEDO INGRESAR. -->
     <?php if (login_check($mysqli) == true) { ?>  
-	<?php upperMenu('ControlPanel') ?>
+	<?php echo upperMenu('ControlPanel') ?>
 
     <div class="container">
       <!-- CONTENT -->

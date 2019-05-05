@@ -34,7 +34,7 @@ sec_session_start();
 
     	<!-- SI ESTOY LOGEADO. BIEN. PUEDO INGRESAR. -->
         <?php if (login_check($mysqli) == true) { ?>
-		<?php upperMenu('pp2') ?>
+		<?php echo upperMenu('pp2') ?>
 
 	<div class="dash-unit" style="height:25px; width:98%; text-align:center; color:white;">
 		<a href="novedades.php">

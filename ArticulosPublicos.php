@@ -27,8 +27,7 @@ sec_session_start();
     <!-- SI ESTOY LOGEADO. BIEN. PUEDO INGRESAR. -->
     <?php if (login_check($mysqli) == true) { ?>
   <?php 
-  // upperMenu('Articulos Públicos');
-  upperMenu('Articulos') ?>
+  echo upperMenu('Articulos') ?>
 
     <div class="container">
       <!-- CONTENT -->
