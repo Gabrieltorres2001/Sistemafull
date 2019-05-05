@@ -1,4 +1,5 @@
 <?php
+include 'appConfig.php';
 $titulo = "Ingreso diario: Error";
 include 'header.php';
 $error = filter_input(INPUT_GET, 'err', $filter = FILTER_SANITIZE_STRING);
@@ -9,7 +10,7 @@ if (! $error) {
 ?>
 
 	<!-- page Stylesheet -->
-	
+	<link rel="stylesheet" href="css/style.css">
 	<!-- page js libs -->
 
 </head>
@@ -25,7 +26,7 @@ if (! $error) {
 				<h2>Hubo un problema</h2>
 			</div>
         <p class="error"><?php echo $error; ?></p>  
-        <p>Regresar a la página de <a class = "btn btn-light" href="index.html">login</a></p>
+        <p>Regresar a la página de <a class = "btn btn-light" href="index.php">login</a></p>
 		</div>
 	</div>
 </body>
