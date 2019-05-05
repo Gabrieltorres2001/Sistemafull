@@ -22,6 +22,7 @@ include 'funcionesPHP.php';
 	<link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css">
 	<link rel="stylesheet" href="assets/select2/select2.min.css">
 	<link rel="stylesheet" href="assets/lte/css/adminlte.css">
+	<link rel="stylesheet" href="css/animate.css">
 	<link rel="stylesheet" href="css/sistemaPlus.css">
 	
 	<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->

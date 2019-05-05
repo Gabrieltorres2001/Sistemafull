@@ -70,3 +70,12 @@ $homeLinks['login'] = array(
     'icon' => '', // optional icon to use with the link
     'default' => false
 );
+
+$homeLinks['perfil'] = array(
+    'url' => 'perfil.php', 
+    'navBar' => false,
+    'title' => 'Perfil', 
+    'description' => 'Actulizar el perfil',
+    'icon' => '', // optional icon to use with the link
+    'default' => false
+);

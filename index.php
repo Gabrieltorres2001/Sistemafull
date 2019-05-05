@@ -13,7 +13,6 @@ if (login_check($mysqli) == true) {
 ?>
 	<!-- page Stylesheet -->
 	<link rel="stylesheet" href="css/style.css">
-	<link rel="stylesheet" href="css/animate.css">
 	<!-- page js libs -->
 	<script src="js/funcionesindex.js"></script>
 

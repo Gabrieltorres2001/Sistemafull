@@ -53,7 +53,7 @@ sec_session_start();
 
       <!-- USER PROFILE BLOCK -->
 			<div class="col-sm-3 col-lg-3">
-					<a href="protected_page3.php">
+					<a href="perfil.php">
 						<div class="dash-unit">
 									<dtitle>Perfil del usuario</dtitle>
 									<hr>
