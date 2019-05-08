@@ -42,7 +42,7 @@ function Actualizar_Usuario($user_id) {
 /*mysqli_query($conexion, "update members
                           set Nombre='protected_page3'") or
   die("Problemas en el select:".mysqli_error($conexion));*/
-  header('Location: /protected_page3.php');
+  header('Location: /perfil.php');
 	//primero tengo que ver cuales campos voy a actualizar
 	//si la longitud es cero, lo dejo con el que esta
 	//no olvidar de actualizar tambien el campo $FechaActualizacion

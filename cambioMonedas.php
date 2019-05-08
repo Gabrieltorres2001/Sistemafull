@@ -73,7 +73,9 @@ sec_session_start();
 <body>  
     <!-- SI ESTOY LOGEADO. BIEN. PUEDO INGRESAR. -->
     <?php if (login_check($mysqli) == true) : ?>   
-	<?php barraSuperior('CambioMonedas') ?>
+	<?php 
+	echo upperMenu($tiutlo);
+	 ?>
 
     <div class="container">
       <!-- CONTENT -->

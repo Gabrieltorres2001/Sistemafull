@@ -7,7 +7,7 @@ $conexion_sp=mysqli_connect(HOSTSP,USERSP,PASSWORDSP,DATABASESP) or
 	mysqli_query($conexion_sp,"set names 'utf8'");
 //generamos la consulta de actualizacion
 	
-	if(!$resultcopia = mysqli_query($conexion_sp, "insert into productos (TipoProducto, MonedaOrigen, ValorVenta, IVA, descricpcion, OfrecerAdemas, Notas, ComposicionyDescirpcion, IdProveedor, CodigoProveedor, IdRubro, IdSubRubro, StockMinimo, UnidadMedida, CodigoInterno, Numerodeserie, IdCostoProveedor, IdImagen, tangible, HojaFabricante, HojaOtra, UsuarioCreacion, UsuarioModificacion, UsuarioFC, UsuarioFM, Imagen, FechaActualizacion, EnStock, actualiz) values ('', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', now())")){
+	if(!$resultcopia = mysqli_query($conexion_sp, "INSERT INTO productos( TipoProducto, MonedaOrigen, ValorVenta, IVA, descricpcion, OfrecerAdemas, Notas, ComposicionyDescirpcion, IdProveedor, CodigoProveedor, IdRubro, IdSubRubro, StockMinimo, UnidadMedida, CodigoInterno, Numerodeserie, IdCostoProveedor, IdImagen, tangible, HojaFabricante, HojaOtra, UsuarioCreacion, UsuarioModificacion, UsuarioFC, UsuarioFM, Imagen, FechaActualizacion, EnStock, actualiz ) VALUES( '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NOW())")){
 		echo"Articulo NO creado";
 		 die("Problemas con la consulta de nuevo");
 	}

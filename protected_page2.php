@@ -1,49 +1,20 @@
 <?php
-include_once 'includes/db_connect.php';
-include_once 'includes/functions.php';
+$titulo = "SISTEMAPLUS - Ventana principal";
+
 include 'includes/funciones_pp2.php';
-include 'includes/funcionesg.php';
-include 'includes/funciones_Cambio_Moneda.php';
-include 'funcionesPHP.php';
+
+include 'header.php';
  
 sec_session_start();
 ?>
-<!doctype html>
-<html><head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <title>SISTEMAPLUS - Ventana principal</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="Yo">
-
-    <!-- Le styles -->
-    <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/main.css" rel="stylesheet">
     <link href="css/font-style.css" rel="stylesheet">
     <link href="css/flexslider.css" rel="stylesheet">
     <link href="css/pp2.css" rel="stylesheet">
     
 	<script type="text/javascript" src="js/jqyer.js"></script>
-<script src=" js/jquery-1.11.0.min.js"></script>
 <script src="js/jquery.cycle.all.js"></script>
-<script type="text/JavaScript" src="js/sha512.js"></script> 
 <script src="js/funcionespp2.js"></script>
-<script type="text/JavaScript" src="js/forms.js"></script>
-    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-
-    <!-- Le fav and touch icons -->
-    <link rel="shortcut icon" href="assets/ico/favicon.ico">
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
-
-  	<!-- Google Fonts call. Font Used Open Sans & Raleway -->
-	<link href="http://fonts.googleapis.com/css?family=Raleway:400,300" rel="stylesheet" type="text/css">
-  	<link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
 
 	<script type="text/javascript">
 	$(document).ready(function(){
@@ -62,8 +33,8 @@ sec_session_start();
   <body>
 
     	<!-- SI ESTOY LOGEADO. BIEN. PUEDO INGRESAR. -->
-        <?php if (login_check($mysqli) == true) : ?>
-		<?php barraSuperior('pp2') ?>
+        <?php if (login_check($mysqli) == true) { ?>
+		<?php echo upperMenu('pp2') ?>
 
 	<div class="dash-unit" style="height:25px; width:98%; text-align:center; color:white;">
 		<a href="novedades.php">
@@ -81,40 +52,40 @@ sec_session_start();
       <div class="row">
 
       <!-- USER PROFILE BLOCK -->
-        <a href="protected_page3.php">
-        <div class="col-sm-3 col-lg-3">
-      		<div class="dash-unit">
-	      		<dtitle>Perfil del usuario</dtitle>
-	      		<hr>
-				<div class="thumbnail">
-                <?php Buscar_Usuario($_SESSION['user_id']); ?>
-					<img style=" max-height: 80px;  max-width: 80px;"src="<?php echo htmlentities($_SESSION['Foto']); ?>" alt="Marcel Newman" class="img-circle">
-				</div><!-- /thumbnail -->
-				<h1><?php echo htmlentities($_SESSION['Nombre']); ?> <?php echo htmlentities($_SESSION['Apellido']); ?></h1>
-				<h3><?php echo htmlentities($_SESSION['username']); ?></h3>
-				<br>
-					<div class="info-user">
-						<span aria-hidden="true" class="li_user fs1"></span>
-						<span aria-hidden="true" class="li_settings fs1"></span>
-						<span aria-hidden="true" class="li_mail fs1"></span>
-						<span aria-hidden="true" class="li_key fs1"></span>
+			<div class="col-sm-3 col-lg-3">
+					<a href="perfil.php">
+						<div class="dash-unit">
+									<dtitle>Perfil del usuario</dtitle>
+									<hr>
+							<div class="thumbnail">
+											<?php Buscar_Usuario($_SESSION['user_id']); ?>
+								<img style=" max-height: 80px;  max-width: 80px;"src="<?php echo htmlentities($_SESSION['Foto']); ?>" alt="Marcel Newman" class="img-circle">
+							</div><!-- /thumbnail -->
+							<h1><?php echo htmlentities($_SESSION['Nombre']); ?> <?php echo htmlentities($_SESSION['Apellido']); ?></h1>
+							<h3><?php echo htmlentities($_SESSION['username']); ?></h3>
+							<br>
+								<div class="info-user">
+									<span aria-hidden="true" class="li_user fs1"></span>
+									<span aria-hidden="true" class="li_settings fs1"></span>
+									<span aria-hidden="true" class="li_mail fs1"></span>
+									<span aria-hidden="true" class="li_key fs1"></span>
+								</div>
+						</div>
+					</a>
 					</div>
-				</div>
-        </div>
-</a>
       <!-- DONUT CHART BLOCK -->
         <div class="col-sm-3 col-lg-3">
-			<a href="Presupuestos.php">
-			<div class="dash-unit">
-	      		<dtitle>Presupuestos</dtitle>
-	      		<hr>
-	      		<div class="cont">
-					<p><bold>
-					Presupuestos
-					</bold></p>
-				</div>
-			</div>
-			</a>
+						<a href="Presupuestos.php">
+							<div class="dash-unit">
+								<dtitle>Presupuestos</dtitle>
+								<hr>
+								<div class="cont">
+									<p><bold>
+									Presupuestos
+									</bold></p>
+								</div>
+							</div>
+						</a>
         </div>
       <!-- DONUT CHART BLOCK -->
         <div class="col-sm-3 col-lg-3">
@@ -433,8 +404,8 @@ sec_session_start();
 		 		<div id="jstwitter" class="clearfix">
 					<ul id="twitter_update_list"></ul>
 				</div>
-				<script src="http://twitter.com/javascripts/blogger.js"></script><!-- Script Needed to load the Tweets -->
-				<script src="http://api.twitter.com/1/statuses/user_timeline/wrapbootstrap.json?callback=twitterCallback2&amp;count=1"></script>
+				<!-- <script src="http://twitter.com/javascripts/blogger.js"></script><!-- Script Needed to load the Tweets -->
+				<!-- <script src="http://api.twitter.com/1/statuses/user_timeline/wrapbootstrap.json?callback=twitterCallback2&amp;count=1"></script> --> -->
 				<!-- To show your tweets replace "wrapbootstrap", in the line above, with your user. -->
 				<div class="text">
 				<p><grey>Show your tweets here!</grey></p>
@@ -634,19 +605,6 @@ sec_session_start();
 
 		</div><!--/row -->
      
-	<!-- FOOTER -->	
-	<div id="footerwrap">
-      	<footer class="clearfix"></footer>
-      	<div class="container">
-      		<div class="row">
-      			<div class="col-sm-12 col-lg-12">
-      			<p><img src="assets/img/logo.png" alt=""></p>
-      			<p>SistemaPlus - Copyright 2016-2018</p>
-      			</div>
-
-      		</div><!-- /row -->
-      	</div><!-- /container -->		
-</div><!-- /footerwrap -->
 
 <div id="estapsesion" style="visibility:hidden;">
 <input type="text" id="numberses" name="number" value="<?php echo htmlentities($_SESSION['user_id']);?>"/>
@@ -658,7 +616,6 @@ sec_session_start();
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script type="text/javascript" src="assets/js/bootstrap.js"></script>
 	<script type="text/javascript" src="assets/js/lineandbars.js"></script>
     
 	<script type="text/javascript" src="assets/js/dash-charts.js"></script>
@@ -674,26 +631,10 @@ sec_session_start();
 	<!-- You can add more layouts if you want -->
 	<script type="text/javascript" src="assets/js/noty/themes/default.js"></script>
     <!-- <script type="text/javascript" src="assets/js/dash-noty.js"></script> This is a Noty bubble when you init the theme-->
-	<script type="text/javascript" src="http://code.highcharts.com/highcharts.js"></script>
+	<!-- <script type="text/javascript" src="http://code.highcharts.com/highcharts.js"></script> -->
 	<script src="assets/js/jquery.flexslider.js" type="text/javascript"></script>
 
-    <script type="text/javascript" src="assets/js/admin.js"></script>
              
-                    <?php else : ?>
-                    	<link rel="stylesheet" href="css/animate.css">
-	<!-- Custom Stylesheet -->
-	<link rel="stylesheet" href="css/styleAncho.css">
-    
-            	<div class="container">
-				<div class="top">
-					<h1 id="title" class="hidden"><span id="logo">log<span>in</span></span></h1>
-				</div>
-				<div class="login-box animated fadeInUp">
-				<div class="box-header">
-					<h2>Ingreso</h2>
-				</div>
-					<span class="error">No está autorizado para acceder a esta página.</span> Por favor vaya al <a href="index.html">login</a>.
-            		</p>
-				</div>
-        <?php endif; ?>
-</body></html>
+<?php }
+
+	include 'footer.php';			
