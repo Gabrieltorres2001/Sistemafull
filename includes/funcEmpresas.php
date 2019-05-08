@@ -118,8 +118,54 @@ function imprimir_detalle_empresas($resultc, $conexion_sp, $idEmpresaTemp) {
 	echo"</select><br />";
 	//Abril 2019. Precios y descuentos
 	//Hago una tabla para separar visualmente
-	echo"<label><u>Descuentos y recargos:</u></label>";
-	echo"<br />";
+	echo"<label><u>Descuentos y recargos:</u></label><br />";
+	if ($reg['IdTipoContacto']=='2'){$tipoContacto="red";} else {$tipoContacto="black";}
+	//Grafico explicativo (costo del producto)
+	echo "<table style='padding: 1px; border-collapse: separate;' >
+		<tr>
+			<td style='border: 1px solid black;' rowspan='2' align='center'>Precio artículo<br>(lista o neto)</td>
+			<td style='border-bottom: 1px solid black;'></td>
+			<td style='border: 1px solid ".$tipoContacto.";' rowspan='2' align='center'>Descuento<br>proveedor</td>
+			<td style='border-bottom: 1px solid black;' align='center'>Nuestro costo</td>
+			<td style='border: 1px solid black;' rowspan='2' align='center'>Margen de<br>ganancia</td>
+			<td style='border-bottom: 1px solid black;'></td>
+			<td style='border: 1px solid black;' rowspan='2' align='center'>Otros gastos<br>(flete, IIBB, etc)</td>
+			<td style='border-bottom: 1px solid black;'></td>
+			<td style='border: 1px solid black;' rowspan='2' align='center'>PVP artículo<br>(precio de venta)</td>
+		</tr>
+		<tr>
+			
+			<td></td>
+
+			<td align='center'>del producto</td>
+			
+			<td></td>
+
+			<td></td>
+		</tr>
+	 </table>
+	 </br>";
+	//Grafico explicativo (precio final del producto)
+	if ($reg['IdTipoContacto']=='1'){$tipoContacto="red";} else {$tipoContacto="black";}
+	echo "<table style='padding: 1px; border-collapse: separate;' >
+	<tr>
+		<td style='border: 1px solid black;' rowspan='2' align='center'>PVP<br>(precio de venta)</td>
+		<td style='border-bottom: 1px solid black;'></td>
+		<td style='border: 1px solid ".$tipoContacto.";' rowspan='2' align='center'>Descuento habitual<br>cliente</td>
+		<td style='border-bottom: 1px solid black;'></td>
+		<td style='border: 1px solid black;' rowspan='2' align='center'>Descuento especial<br>por única vez</td>
+		<td style='border-bottom: 1px solid black;'></td>
+		<td style='border: 1px solid black;' rowspan='2' align='center'>Precio final<br>de venta</td>
+	</tr>
+	<tr>
+		
+		<td></td>
+
+		<td></td>
+
+		<td></td>
+	</tr>
+ </table>";
 	//ver si es cliente o proveedor
 	//1: Cliente. Los descuentos/recargos se aplicarán al comprobante
 	//2: Proveedor. Los descuentos/recargos se aplicarán al artículo
