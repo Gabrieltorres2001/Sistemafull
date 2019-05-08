@@ -38,5 +38,6 @@ include 'funcionesPHP.php';
 	<script src="js/sha512.js"></script> 
 	<script src="js/forms.js"></script>
 	<script src="js/Untitled.js"></script>
-	<script type="text/javascript" src="js/jquery.dataTables.js"></script>
+	<script src="js/jquery.dataTables.js"></script>
+	<script src="js/funcionescomunes.js"></script>
 	

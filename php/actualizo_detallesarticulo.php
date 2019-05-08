@@ -56,7 +56,7 @@ $conexion_sp=mysqli_connect(HOSTSP,USERSP,PASSWORDSP,DATABASESP) or
 			Imagen = '".$_REQUEST['Imagen']."', 
 			FechaActualizacion = '".$_REQUEST['FechaActualizacion']."', 
 			actualiz = now() 
-			where IdProducto = '".$_REQUEST['IdProducto']."'";
+			WHERE IdProducto = '".$_REQUEST['IdProducto']."'";
 
 	if(!$resultact = mysqli_query($conexion_sp, $sql)){
 		echo"Articulo NO actualizado";
@@ -68,11 +68,11 @@ $conexion_sp=mysqli_connect(HOSTSP,USERSP,PASSWORDSP,DATABASESP) or
 	};
 
 	//Actualizar (o cargar por primera vez, si no existen) los datos de ubicacion de Deposito
-	if(!$resultUbicacion = mysqli_query($conexion_sp, "select id from stock where Producto='".$_REQUEST['IdProducto']."' limit 1")) die("Problemas con la consulta Stock 28");
+	if(!$resultUbicacion = mysqli_query($conexion_sp, "SELECT id from stock where Producto='".$_REQUEST['IdProducto']."' limit 1")) die("Problemas con la consulta Stock 28");
 	if ($rowUbic = mysqli_fetch_array($resultUbicacion)) {
-		if(!$resultactDeposito = mysqli_query($conexion_sp, "update stock set Deposito = '".$_REQUEST['numDeposito']."', Estanteria = '".$_REQUEST['Estanteria']."', Estante = '".$_REQUEST['Estante']."'where Producto = '".$_REQUEST['IdProducto']."'")){ echo"Articulo NO actualizado"; die("Problemas con la consulta de actualizacion");}
+		if(!$resultactDeposito = mysqli_query($conexion_sp, "UPDATE stock set Deposito = '".$_REQUEST['numDeposito']."', Estanteria = '".$_REQUEST['Estanteria']."', Estante = '".$_REQUEST['Estante']."'where Producto = '".$_REQUEST['IdProducto']."'")){ echo"Articulo NO actualizado"; die("Problemas con la consulta de actualizacion");}
 	} else {
-		if(!$resultactDeposito = mysqli_query($conexion_sp, "insert into stock (id, Producto, Deposito, Estanteria, Estante) values (NULL, '".$_REQUEST['IdProducto']."', '".$_REQUEST['numDeposito']."', '".$_REQUEST['Estanteria']."', '".$_REQUEST['Estante']."')")){ echo"Articulo NO agregado"; die("Problemas con la consulta de agregar");}		
+		if(!$resultactDeposito = mysqli_query($conexion_sp, "INSERT into stock (id, Producto, Deposito, Estanteria, Estante) values (NULL, '".$_REQUEST['IdProducto']."', '".$_REQUEST['numDeposito']."', '".$_REQUEST['Estanteria']."', '".$_REQUEST['Estante']."')")){ echo"Articulo NO agregado"; die("Problemas con la consulta de agregar");}		
 	}
 	
 //ACAAAA ---- PRIMERO ACTUALIZAR DATOS. LUEGO SIGUE LO DE ABAJO COMO ESTA (MOSTRAR TODOS LOS DATOS

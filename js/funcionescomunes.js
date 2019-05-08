@@ -136,3 +136,43 @@ function cargarCompobante() {
 		conexion14.open('GET','./php/nuevo_recibo.php?&rnadom='+aleatorio+"&numempresa="+cliente+"&sesses="+obnn, true);}
 	conexion14.send();
 }//El cliente tiene todo
+
+function sortNfilter(url, busqueda = "") {
+  if (!url) return;
+  $sortdir = $(".sortdir");
+  $sortcol = $sortdir
+    .parent()
+    .parent()
+    .attr("class");
+  $sortdir = $sortdir.hasClass("fa-sort-amount-asc") ? "asc" : "desc";
+  orden = $sortcol ? $sortcol + " " + $sortdir : "";
+
+  $.ajax({
+    type: "GET",
+    url: "./php/" + url + ".php",
+    data: {
+      orden: orden,
+      busqueda: busqueda
+    },
+    dataType: "html",
+    success: function(response) {
+      $("#tablaArticulos").html(response);
+      $("." + $sortcol)
+        .children()
+        .append(' <i class="sortdir fa fa-sort-amount-' + $sortdir + '"></i>');
+    }
+  }).fail(function(err) {
+    console.log("error en procesar busqueda y orden", err);
+  });
+}
+
+function sortChange(obj){
+	$this = $(obj);
+	if (!$this.children().hasClass("fa-sort-amount-desc")) {
+		$(".sortdir").remove();
+		$(obj).append(' <i class="sortdir fa fa-sort-amount-desc"></i>');
+	} else {
+		$(".sortdir").remove();
+		$(obj).append(' <i class="sortdir fa fa-sort-amount-asc"></i>');
+	}
+}
