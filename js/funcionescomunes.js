@@ -57,7 +57,7 @@ function noTengoFormaPago(){
 var conexion302;
 function actualizarCPContacto(){
 	var datosc=document.getElementById('CondPago');	
-	if (datosc.value<1){mostrarAvisos("elegi uno!")
+	if (datosc.value<1){mostrarAvisos("elegi uno!");
 	} else {
 		  var cliente=document.getElementById('empresa').value;
 		  conexion302=new XMLHttpRequest(); 
@@ -91,7 +91,7 @@ function noTengoTipoFactura(){
 var conexion302a;
 function actualizarTFContacto(){
 	var datosc=document.getElementById('tipocomprobantesafip');	
-	if (datosc.value<1){mostrarAvisos("elegi uno!")
+	if (datosc.value<1){mostrarAvisos("elegi uno!");
 	} else {
 		  var cliente=document.getElementById('empresa').value;
 		  conexion302a=new XMLHttpRequest(); 
@@ -117,17 +117,18 @@ function procesarEventos302a(){
 //El cliente tiene todo
 var conexion14;
 function cargarCompobante() {
+	var cliente = "";
 	conexion14=new XMLHttpRequest(); 
 	conexion14.onreadystatechange = procesarEventos14;
 	var aleatorio=Math.random();
 	var obnn=document.getElementById('numberses').value;
 	if(tipoComprobante=="Presupuesto") {
 		//Para recibos el descolgable se llama diferente que para remitos y presupuestos.
-		var cliente=document.getElementById('empresa').value;
+		cliente=document.getElementById('empresa').value;
 		conexion14.open('GET','./php/nuevo_presupuesto.php?&rnadom='+aleatorio+"&numempresa="+cliente+"&sesses="+obnn, true);}
 	if(tipoComprobante=="Remito") {
 		//Para recibos el descolgable se llama diferente que para remitos y presupuestos.
-		var cliente=document.getElementById('empresa').value;
+		cliente=document.getElementById('empresa').value;
 		conexion14.open('GET','./php/nuevo_remito.php?&rnadom='+aleatorio+"&numempresa="+cliente+"&sesses="+obnn, true);}
 	//Febrero 2019. Recibos.
 	if(tipoComprobante=="Recibo") {

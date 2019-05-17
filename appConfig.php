@@ -35,7 +35,6 @@ $homeLinks['Contactos'] = array(
     'default' => false
 );
 
-
 $homeLinks['Articulos'] = array(
     'url' => 'Articulos.php', 
     'navBar' => true,

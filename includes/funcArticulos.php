@@ -37,10 +37,10 @@ function tablaArticulos($result)
 		while ($row = mysqli_fetch_array($result)) {
 			?>
 			<tr>
-				<td id="<?php echo $row['IdProducto']; ?>"> <?php echo $row['IdProducto']; ?></td>
-				<td id="<?php echo $row['IdProducto']; ?>"> <?php echo $row['descricpcion']; ?></td>
-				<td id="<?php echo $row['IdProducto']; ?>"> <?php echo $row['idProveedor']; ?></td>
-				<td id="<?php echo $row['IdProducto']; ?>"><?php echo $row['Simbolo']; ?> <?php echo $row['ValorVenta']; ?></td>
+				<td id="<?php echo $row['IdProducto']; ?>"><?php echo $row['IdProducto']; ?></td>
+				<td id="<?php echo $row['IdProducto']; ?>"><?php echo $row['descricpcion']; ?></td>
+				<td id="<?php echo $row['IdProducto']; ?>"><?php echo $row['idProveedor']; ?></td>
+				<td id="<?php echo $row['IdProducto']; ?>"><?php echo $row['Simbolo']; ?><?php echo $row['ValorVenta']; ?></td>
 				<td id="<?php echo $row['IdProducto']; ?>"><?php echo $row['EnStock']; ?></td>
 			</tr>
 		<?php
@@ -385,70 +385,69 @@ function imprimir_detalle_articulos($resultc, $conexion_sp, $readonly = false)
 }
 $html = ob_get_contents();
 ob_clean();
-echo $html;
+return $html;
 }
 
 
 function imprimir_movimientos_articulos($resultc, $conexion_sp)
 {
-	//$reg = mysqli_fetch_array($resultc); 
-	echo "<table class='display' width='650' style='table-layout:fixed'>";
-	echo "<caption>Resultados encontrados: " . mysqli_num_rows($resultc) . "</caption>";
+	ob_start();
+	?>
+	<table class='table table-hover table-sm' id='movimientos'>
+	<caption>Resultados encontrados: <?php echo mysqli_num_rows($resultc); ?></caption>
 
-	echo "<tr>";
-	echo "<th width='80'>Comprobante</th>";
-	echo "<th width='50'>Número</th>";
-	echo "<th  width='60'>Fecha</th>";
-	echo "<th  width='180'>Empresa</th>";
-	echo "<th  width='50'>Cant</th>";
-	echo "<th  width='50'>Moneda</th>";
-	echo "<th  width='50'>Precio</th>";
-	echo "<th  width='50'>SubTotal</th>";
-	echo "<th  width='50'>Cumpl.</th>";
-	echo "</tr>";
+	<tr>
+		<th width='80'>Comprobante</th>
+		<th width='50'>Número</th>
+		<th width='60'>Fecha</th>
+		<th width='180'>Empresa</th>
+		<th width='50'>Cant</th>
+		<th width='50'>Moneda</th>
+		<th width='50'>Precio</th>
+		<th width='50'>SubTotal</th>
+		<th width='50'>Cumpl.</th>
+	</tr>
+	
+	<?php
 	while ($row = mysqli_fetch_array($resultc)) {
-		echo "<tr>";
-		if (!$resultCompro = mysqli_query($conexion_sp, "select TipoComprobante,FechaComprobante,NonmbreEmpresa,NumeroComprobante from comprobantes where IdComprobante='" . $row['IdComprobante'] . "'")) die("Problemas con la consulta comprobantes");
-		$regCompro = mysqli_fetch_array($resultCompro);
-		if (!$resultTP = mysqli_query($conexion_sp, "select TipoComprobante from z_tipocomprobante where IdTipoComprobante='" . $regCompro['TipoComprobante'] . "'")) die("Problemas con la consulta z_tipocomprobante");
-		$regTP = mysqli_fetch_array($resultTP);
-		if (!$resultEmp = mysqli_query($conexion_sp, "select organizaciones.Organizacion from contactos2 INNER JOIN organizaciones ON contactos2.idOrganizacion = organizaciones.id where contactos2.IdContacto='" . $regCompro['NonmbreEmpresa'] . "'")) die("Problemas con la consulta contactos2");
-		$regEmp = mysqli_fetch_array($resultEmp);
-		if (!$resultMon = mysqli_query($conexion_sp, "select Simbolo from monedaorigen where IdRegistroCambio='" . $row['Moneda'] . "'")) die("Problemas con la consulta monedaorigen");
-		$regMon = mysqli_fetch_array($resultMon);
 		//el id de los td tiene que ser el id de comprobante asi busco por ese numero en ambas tablas (comprobantes y detalle)
-		echo "<td name='xxxx' id=" . $row['IdComprobante'] . ">" . $regTP['TipoComprobante'] . "</td>";
-		echo "<td name='xxxx' id=" . $row['IdComprobante'] . ">" . $regCompro['NumeroComprobante'] . "</td>";
-		echo "<td name='xxxx' id=" . $row['IdComprobante'] . ">" . $regCompro['FechaComprobante'] . "</td>";
-		echo "<td name='xxxx' id=" . $row['IdComprobante'] . ">" . $regEmp['Organizacion'] . "</td>";
-		echo "<td name='xxxx' id=" . $row['IdComprobante'] . ">" . $row['Cantidad'] . "</td>";
-		echo "<td name='xxxx' id=" . $row['IdComprobante'] . ">" . $regMon['Simbolo'] . "</td>";
-		echo "<td name='xxxx' id=" . $row['IdComprobante'] . ">" . $row['CostoUnitario'] . "</td>";
-		echo "<td name='xxxx' id=" . $row['IdComprobante'] . ">" . $row['SubTotal'] . "</td>";
-		if ($row['Cumplido'] == '0') {
-			echo "<td name='xxxx' id=" . $row['IdComprobante'] . "><input type='checkbox' / readonly></td>";
-		} else {
-			echo "<td name='xxxx' id=" . $row['IdComprobante'] . "><input type='checkbox' checked readonly></td>";
-		}
-		echo "</tr>";
+		$checked = $row['Cumplido'] == '0' ? "" : " checked";
+		?>
+		<tr id="<?php echo $row['IdComprobante']; ?>" >
+			<td><?php echo $row['TipoComprobante']; ?></td>
+			<td><?php echo $row['NumeroComprobante']; ?></td>
+			<td><?php echo $row['FechaComprobante']; ?></td>
+			<td><?php echo $row['Organizacion']; ?></td>
+			<td><?php echo $row['Cantidad']; ?></td>
+			<td><?php echo $row['Simbolo']; ?></td>
+			<td><?php echo $row['CostoUnitario']; ?></td>
+			<td><?php echo $row['SubTotal']; ?></td>
+			<td><input type='checkbox'<?php echo $checked; ?> readonly></td>
+		</tr>
+		<?php
 	};
-
-	echo "</table>";
+	?>
+	</table>
+	<?php
+	$html = ob_get_contents();
+	ob_clean();
+	echo $html;
 }
 
 
 function imprimir_detalle_articulos_ajustado_stock($resultc, $conexion_sp)
 {
 	$reg = mysqli_fetch_array($resultc);
-	echo "<label for='IdProducto'>Id del Producto:</label>";
-	echo "<input id='IdProducto' class='input' name='IdProducto' type='text' size='6' value=" . $reg['IdProducto'] . " readonly>";
-
-	echo "<label for='actualiz'>Fecha de actualización:</label>";
-	echo "<input id='actualiz' class='input' name='actualiz' type='text' size='33' value='" . $reg['actualiz'] . "' readonly><br />";
-
+	ob_start();
+	?>
+	<label for='IdProducto'>Id del Producto:</label>
+	<input id='IdProducto' class='input' name='IdProducto' type='text' size='6' value="<?php echo $reg['IdProducto']; ?>" readonly>
+	<label for='actualiz'>Fecha de actualización:</label>
+	<input id='actualiz' class='input' name='actualiz' type='text' size='33' value='<?php echo  $reg['actualiz']; ?>' readonly><br>
+	<label for='MonedaOrigen'>Moneda:</label>
+	<select id='MonedaOrigen' class='input' name='MonedaOrigen' style='font-size:1.7em' readonly>
+	<?php
 	if (!$resultTM = mysqli_query($conexion_sp, "select * from monedaorigen")) die("Problemas con la consulta monedaorigen");
-	echo "<label for='MonedaOrigen'>Moneda:</label>";
-	echo "<select id='MonedaOrigen' class='input' name='MonedaOrigen' style='font-size:1.7em' readonly>";
 	while ($row = mysqli_fetch_array($resultTM)) {
 		if ($reg['MonedaOrigen'] == $row['IdRegistroCambio']) {
 			echo "<option selected value=" . $row['IdRegistroCambio'] . ">" . $row['Origen'] . "</option>";

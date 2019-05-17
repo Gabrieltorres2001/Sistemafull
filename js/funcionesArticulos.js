@@ -23,15 +23,7 @@ $(document).ready(function () {
   });
 
   $(".container").on("change", "input, textarea, .select2", function (e) {
-    // algoCambio(e);
     $(this).parent().addClass('bg-warning');
-    // console.lo).css('bag(this);
-    // var color = $('option:selected',this).css('background-color');
-    //     $(thisckground-color','red');
-  });
-
-  $("#cierraMovs").on("click", function () {
-    cerrarVentanaMovs();
   });
 
   $(".card-right .card-header").on("click", "button", function (event) {
@@ -50,29 +42,41 @@ $(document).ready(function () {
     }
   });
 
-  $("#checkMostrarMovimientos").on("change", function () {
-    mostrarMovimientos();
-  });
-
   $(".card-left .card-body").on("click", ".TableHeader", function () {
     sortChange(this);
     buscar();
   });
 
   $(".card [data-widget='collapse']").click(function () {
-    console.log("entrando");
-    var card = $(this).parents(".card");
-    if (!card.hasClass("collapsed-card")) {
-      console.log("collapsing ");
-    } else {
-      console.log("expanding");
-      var id = $('#IdProducto').val();
-      if (id){
-        movimientoArticulo(id);
+      if (!isExpanded(this)){
+        refresh();
       }
+  });
+
+  $('#refresh').on('click',function(){
+    if (isExpanded($(".card [data-widget='collapse']"))){
+      refresh();
     }
   });
+
+  $('#movimientosdearticulo').on('click','tr',function(){
+    mostrarDetallesMovimientos(this.id);
+  });
+
 });
+
+function refresh(){
+  var id = $('#IdProducto').val();
+  if (id){
+    console.log('refreshing');
+    movimientoArticulo(id);
+  }
+}
+
+function isExpanded(obj){
+  var card = !$(obj).parents(".card").hasClass("collapsed-card");
+  return card;
+}
 
 function buscar(clear = false) {
   var busqueda = "";
@@ -84,12 +88,6 @@ function buscar(clear = false) {
 
 }
 
-function algoCambio(e) {
-  tags_cambios.push(e.target.id);
-}
-
-var conexion6;
-
 function mostrarDetalles(celda) { 
   var aleatorio = Math.random();
   $.ajax({
@@ -99,85 +97,30 @@ function mostrarDetalles(celda) {
     dataType: "html",
     success: function (response) {
       $("#detallesdearticulo").html(response);
-        $(".select2").select2();
+      $(".select2").select2();
+      if (!$('#detallesdemovimientos').hasClass('collapsed-card')){
+        $('#refresh').trigger('click');
+      }
     }
-  }).fail();
+  }).fail(function(){
+    console.log("error");
+  });
 
-  $(".card-left .card-body tr")
-  .removeClass('bg-primary');
-  $("#" + celda.id)
-  .parent().addClass('bg-primary');
+  $(".card-left .card-body tr").removeClass('bg-primary');
+  $("#" + celda.id).parent().addClass('bg-primary');
 }
 
 function movimientoArticulo(id){
-
-  //AHORA LOS MOVIMIENTOS DEL ARTICULO
-  conexion6 = new XMLHttpRequest();
-  conexion6.onreadystatechange = procesarEventos6;
   aleatorio = Math.random();
-  conexion6.open(
-    "GET",
-    "./php/movimientosarticulo.php?idart=" +
-    id +
-    "&rnadom=" +
-    aleatorio,
-    true
-  );
-  conexion6.send();
-
-}
-
-function procesarEventos6() {
-  if (conexion6.readyState == 4) {
-    if (conexion6.status == 200) {
-      $("#movimientosdearticulo").html(conexion6.responseText);
-      tags_cambios = [];
-      id_actual = "";
-      //AL HACER CLICK
-      //TE LLEVA AL FORMULARIO DEL MOVIMIENTO
-      var tags_td_mov = [];
-      tags_td_mov = document.getElementsByName("xxxx");
-      for (i = 0; i < tags_td_mov.length; i++) {
-        tags_td_mov[i].addEventListener(
-          "click",
-          mostrarDetallesMovimientos,
-          false
-        );
-      }
+  $.ajax({
+    type: "GET",
+    url: "./php/movimientosarticulo.php",
+    data: {idart:id, rnadom:aleatorio},
+    dataType: "html",
+    success: function (response) {
+      $("#movimientosdearticulo").html(response);
     }
-  }
-}
-
-var conexion1;
-
-function cambiarDatos(orden, datoABuscar) {
-  conexion1 = new XMLHttpRequest();
-  conexion1.onreadystatechange = procesarEventos;
-  var aleatorio = Math.random();
-  conexion1.open(
-    "GET",
-    "./php/buscoarticulo.php?orden=" +
-    orden +
-    "&busqueda=" +
-    datoABuscar +
-    "&rnadom=" +
-    aleatorio,
-    true
-  );
-  conexion1.send();
-}
-
-function procesarEventos() {
-  if (conexion1.readyState == 4) {
-    if (conexion1.status == 200) {
-      $("#tablaArticulos").html(conexion1.responseText);
-      $("#detallesdearticulo").html("");
-      $("#movimientosdearticulo").html("");
-      //document.getElementById('accionesDetalle').innerHTML="";
-      tags_cambios = [];
-      id_actual = "";
-    }
-  }
+  });
 }
 
 var conexion3;
@@ -239,100 +182,51 @@ function procesarEventos4() {
   }
 }
 
-var conexion5;
-
 function nuevoArticulo() {
-  conexion5 = new XMLHttpRequest();
-  conexion5.onreadystatechange = procesarEventos5;
   var aleatorio = Math.random();
-  cadena = "./php/nuevo_detallesarticulo.php?rnadom=" + aleatorio;
-  conexion5.open("GET", cadena, true);
-  conexion5.send();
-}
-
-function procesarEventos5() {
-  if (conexion5.readyState == 4) {
-    //alert ("readyState: "+conexion2.readyState+"status: "+conexion2.status);
-    if (conexion5.status == 200) {
-      //alert ("readyState: "+conexion2.readyState+"status: "+conexion2.status);
-      //SI BUSCO LA CAGOOOO. TENGO QUE VER COMO HACER PARA ACTUALIZAR EL LISTADO SIN PERDER EL DETALLE
-      $("#detallesdearticulo").html(conexion5.responseText);
+  $.ajax({
+    type: "GET",
+    url: "./php/nuevo_detallesarticulo.php",
+    data: {rnadom:aleatorio},
+    dataType: "html",
+    success: function (response) {
+      $("#detallesdearticulo").html(response);
       $("#botonActualizaArticuloNuevo").on("click", function () {
         actualizoArticulo();
         $(".select2").select2();
       });
-      // tags_cambios = [];
     }
-  }
+  });
 }
 
-var conexion7;
-var conexion8;
-
-function mostrarDetallesMovimientos(celda) {
-  //alert(celda.target.id);
-  document.getElementById("detallesdemovimientos").style.visibility = "visible";
-  var numeroComprobante = celda.target.id;
+function mostrarDetallesMovimientos(id) {
   //el encabezado del presupuesto
-  conexion7 = new XMLHttpRequest();
-  conexion7.onreadystatechange = procesarEventos7;
-  var aleatorio = Math.random();
-  //alert("voy a llamar al php. hasta aca todo bien. con4"+conexion4.status);
-  conexion7.open(
-    "GET",
-    "./php/llenar_encabezado_un_comprobante_enArticulo_contacto.php?idcomprobante=" +
-    numeroComprobante +
-    "&rnadom=" +
-    aleatorio,
-    true
-  );
-  //alert ("readyState: "+conexion4.readyState+"status: "+conexion4.status);
-  conexion7.send();
-  //alert ("readyState: "+conexion4.readyState+"status: "+conexion4.status);
-  // el detalle del presupuesto
-  conexion8 = new XMLHttpRequest();
-  conexion8.onreadystatechange = procesarEventos8;
-  aleatorio = Math.random();
-  //alert("voy a llamar al php. hasta aca todo bien. con5"+conexion5.status);
-  conexion8.open(
-    "GET",
-    "./php/llenar_detalle_presupuesto.php?idcomprobante=" +
-    numeroComprobante +
-    "&rnadom=" +
-    aleatorio,
-    true
-  );
-  //alert ("readyState: "+conexion5.readyState+"status: "+conexion5.status);
-  conexion8.send();
-  //alert ("readyState: "+conexion5.readyState+"status: "+conexion5.status);
-}
-
-function procesarEventos7() {
-  if (conexion7.readyState == 4) {
-    if (conexion7.status == 200) {
-      document.getElementById("detallesdemovimientosFRMSup").innerHTML =
-        conexion7.responseText;
+  $.ajax({
+    type: "GET",
+    url: "./php/llenar_encabezado_un_comprobante_enArticulo_contacto.php",
+    data: {idcomprobante:id,rnadom:aleatorio},
+    dataType: "html",
+    success: function (response) {
+      $('#detallesdemovimientosFRMSup').html(response);
     }
-  }
-}
+  });
 
-function procesarEventos8() {
-  if (conexion8.readyState == 4) {
-    if (conexion8.status == 200) {
-      document.getElementById("detallesdemovimientosFRMInf").innerHTML =
-        conexion8.responseText;
+  $.ajax({
+    type: "GET",
+    url: "./php/llenar_detalle_presupuesto.php",
+    data: {idcomprobante:id,rnadom:aleatorio},
+    dataType: "html",
+    success: function (response) {
+      $('#detallesdemovimientosFRMInf').html(response);
     }
-  }
-}
-
-function cerrarVentanaMovs() {
-  document.getElementById("detallesdemovimientos").style.visibility = "hidden";
+  });
+  $('#movimientos-modal').modal('show');
 }
 
 function mostrarAvisos(aviso) {
-  document.getElementById("mensajeAlertaAviso").innerHTML = aviso;
-  document.getElementById("mensajeAlertaAviso").style.visibility = "visible";
+  $("#mensajeAlertaAviso").html(aviso);
+  $("#mensajeAlertaAviso").show();
   setTimeout(function () {
-    document.getElementById("mensajeAlertaAviso").style.visibility = "hidden";
+    $("#mensajeAlertaAviso").hide();
   }, 4000);
 }

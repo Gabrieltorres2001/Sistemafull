@@ -10,4 +10,4 @@ $conexion_sp=mysqli_connect(HOSTSP,USERSP,PASSWORDSP,DATABASESP) or
 
 	if(!$resultc = mysqli_query($conexion_sp, "select * from productos where IdProducto = '".$_REQUEST['idart']."' limit 1")) die("Problemas con la consulta productos");  
 
-imprimir_detalle_articulos($resultc, $conexion_sp);
+echo imprimir_detalle_articulos($resultc, $conexion_sp);

@@ -51,8 +51,9 @@ sec_session_start();
         <div class="col-md-12">
           <div id="detallesdemovimientos" class="card collapsed-card card-button">
             <div class="card-header">
-              <label>Detalle de movimientos</label>
+              <label>Movimientos</label>
               <div class="card-tools">
+                <button id = "refresh" type="button" class="btn btn-tool" ><i class="fa fa-refresh"></i></button>
                 <button type="button" class="btn btn-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
               </div>
             </div>
@@ -63,10 +64,27 @@ sec_session_start();
         </div>
       </div>
 
-      <div id="detallesdemovimientosFRMSup">
+      <div id="movimientos-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="movimientos-modal" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
+          <div class="modal-content bg-gray-light">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalScrollableTitle">Detalle del documento</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div id="detallesdemovimientosFRMSup">
+              </div>
+              <div id="detallesdemovimientosFRMInf">
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div id="detallesdemovimientosFRMInf">
-      </div>
+
+
+      
 
 
       <div id="estapsesion" style="visibility:hidden;">
