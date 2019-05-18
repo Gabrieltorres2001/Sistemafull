@@ -2,24 +2,34 @@
 
 function llenar_listado_empresas() {
    //Creamos la conexión
-include_once 'includes/sp_connect.php';
-$conexion_sp=mysqli_connect(HOSTSP,USERSP,PASSWORDSP,DATABASESP) or
+	include_once 'includes/sp_connect.php';
+	$conexion_sp=mysqli_connect(HOSTSP,USERSP,PASSWORDSP,DATABASESP) or
     die("Problemas con la conexión");
 	mysqli_query($conexion_sp,"set names 'utf8'");
-//generamos la consulta contactos2
-   if(!$result = mysqli_query($conexion_sp, "select id, Organizacion from organizaciones ORDER BY Organizacion asc limit 100")) die("Problemas con la consulta organizaciones");
-echo "<table class='display' id='tablaOrganizaciones'>";  
-echo "<tr>";  
-//echo "<th width='65'>IdContacto</th>";   
-echo "<th  width='170'>Organización</th>";  
-echo "</tr>";  
-while ($row = mysqli_fetch_row($result)){   
-    echo "<tr id=$row[0]>";  
-//    echo "<td id=$row[0]>$row[0]</td>";   
-    echo "<td id=$row[0]>$row[1]</td>";  
-    echo "</tr>";  
-};  
-echo "</table>";
+	//generamos la consulta contactos2
+	$sql ="SELECT id, Organizacion from organizaciones ORDER BY Organizacion asc limit 100";
+   	if(!$result = mysqli_query($conexion_sp, $sql)) die("Problemas con la consulta organizaciones");
+   	ob_start();
+	?>
+		<table class='table table-hover table-sm' id='tablaOrganizaciones'>
+			<tr>
+				<th class="Oragnizacion">Organización</th>
+			</tr>
+			<?php
+			while ($row = mysqli_fetch_row($result)){   
+				?>
+				<tr id=<?php echo $row[0]; ?>>
+					<td><?php echo $row[1]; ?></td>
+				</tr>
+			<?php
+			};  
+			?>
+		</table>
+	<?php
+	$html = ob_get_contents();
+	ob_clean();
+	return $html;
+
 }
 
 function imprimir_detalle_empresas($resultc, $conexion_sp, $idEmpresaTemp) {

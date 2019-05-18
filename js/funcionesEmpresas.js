@@ -1,6 +1,6 @@
 addEventListener('load',inicializarEventos,false);
 
-var tags_cambios = new Array();
+var tags_cambios = [];
 var id_actual="";
 var nCom;
 function inicializarEventos()
@@ -9,8 +9,8 @@ function inicializarEventos()
   document.getElementById('buscadorEmpresa').addEventListener('keypress',teclaEnter,false);
   document.getElementById('botonBuscarPor').addEventListener('click',parametrosDeBusqueda,false);
   document.getElementById('botonAceptarBuscarPor').addEventListener('click',aceptarParametrosDeBusqueda,false); 
-  var tags_td = new Array();
-  var tags_td=document.getElementsByTagName('td');
+  var tags_td = [];
+  tags_td=document.getElementsByTagName('td');
   for (i=0; i<tags_td.length; i++) {
             tags_td[i].addEventListener('click',mostrarDetalles,false);
   } 
@@ -102,14 +102,14 @@ function mostrarDetalles(celda){
   var aleatorio=Math.random();
   conexion2.open('GET','./php/detallesempresa.php?idemp='+numeroEmp+"&rnadom="+aleatorio, true);
   conexion2.send();
-	if(!isNaN(nCom)){if(!(document.getElementById(nCom)==null)){document.getElementById(nCom).style.backgroundColor="transparent";}}
+	if(!isNaN(nCom)){if((document.getElementById(nCom)!=null)){document.getElementById(nCom).style.backgroundColor="transparent";}}
 	document.getElementById(celda.target.id).style.backgroundColor="#809fff";
 	nCom=celda.target.id;
 	//Abril 2019. Las acciones también se borran
 	document.getElementById('accionesDetalle').innerHTML="";
 	conexion7=new XMLHttpRequest(); 
   conexion7.onreadystatechange = procesarEventos7;
-	var aleatorio=Math.random();
+	aleatorio=Math.random();
 	var obnn=document.getElementById('numberses').value;
   conexion7.open('GET','./php/llenar_acciones_empresa.php?idsesion='+obnn+"&rnadom="+aleatorio, true);
   conexion7.send();
@@ -256,8 +256,8 @@ function procesarEventos3()
 			  var cadena="idemp="+document.getElementById('idEmpresa').value;
 			  cadena=cadena+"&cuitemp="+document.getElementById('CUIT').value;
 			  //Primero tengo que ver cuantas direcciones hay en la pantalla
-			  var tags_inputm = new Array();
-			  var tags_inputm=document.getElementsByName("DireccionEmpresa");
+			  var tags_inputm = [];
+			  tags_inputm=document.getElementsByName("DireccionEmpresa");
 			  //alert ("hay "+ tags_inputm.length +" direcciones");
 			  //return false;
 			  var contador=0;
@@ -325,7 +325,7 @@ function nuevaEmpresa(){
   conexion101=new XMLHttpRequest(); 
   conexion101.onreadystatechange = procesarEventos101;
   var aleatorio=Math.random();
-  cadena='./php/nuevo_detallesempresa.php?rnadom='+aleatorio
+  cadena='./php/nuevo_detallesempresa.php?rnadom='+aleatorio;
   conexion101.open('GET',cadena, true);
   conexion101.send();
 }
