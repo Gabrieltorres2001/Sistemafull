@@ -10,7 +10,7 @@
 
 $homeLinks['test'] = array(
     'url' => 'newTemplate.php', 
-    'navBar' => true,
+    'navBar' => false,
     'title' => 'Blank Page', 
     'description' => 'Blank Page',
     'icon' => '', // optional icon to use with the link

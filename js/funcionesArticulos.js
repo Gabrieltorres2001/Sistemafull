@@ -1,31 +1,6 @@
 
 $(document).ready(function () {
-  $("#detallesdearticulo").on("change", "form", function () {
-    $(".select2").select2();
-  });
-
-  $(".card-left").on("click", "#botonBuscador", function () {
-    buscar();
-  });
-
-  $("table").on("click", "td", function () {
-    mostrarDetalles(this);
-  });
-
-  $("#botonBorrar").on("click", function () {
-    buscar(true);
-  });
-
-  $("#buscadorArticulos").on("keypress", function (e) {
-    if (e.which == 13) {
-      buscar();
-    }
-  });
-
-  $(".container").on("change", "input, textarea, .select2", function (e) {
-    $(this).parent().addClass('bg-warning');
-  });
-
+  initApp();
   $(".card-right .card-header").on("click", "button", function (event) {
     switch (this.id) {
       case "botonActualiza-Articulos":
@@ -42,28 +17,12 @@ $(document).ready(function () {
     }
   });
 
-  $(".card-left .card-body").on("click", ".TableHeader", function () {
-    sortChange(this);
-    buscar();
-  });
-
-  $(".card [data-widget='collapse']").click(function () {
-      if (!isExpanded(this)){
-        refresh();
-      }
-  });
-
-  $('#refresh').on('click',function(){
-    if (isExpanded($(".card [data-widget='collapse']"))){
-      refresh();
-    }
-  });
-
-  $('#movimientosdearticulo').on('click','tr',function(){
+  $('.card-button').on('click','tbody tr',function(){
     mostrarDetallesMovimientos(this.id);
   });
 
 });
+
 
 function refresh(){
   var id = $('#IdProducto').val();
@@ -73,41 +32,13 @@ function refresh(){
   }
 }
 
-function isExpanded(obj){
-  var card = !$(obj).parents(".card").hasClass("collapsed-card");
-  return card;
-}
-
 function buscar(clear = false) {
-  var busqueda = "";
-  if (!clear) {
-    busqueda = $("#buscadorArticulos").val();
-  }
-  sortNfilter("buscoarticulo", busqueda);
-  $("#detallesdearticulo").html("");
+  sortNfilter("buscoarticulo", clear);
 
 }
 
-function mostrarDetalles(celda) { 
-  var aleatorio = Math.random();
-  $.ajax({
-    type: "GET",
-    url: "./php/detallesarticulo.php",
-    data: {idart:celda.id, rnadom:aleatorio},
-    dataType: "html",
-    success: function (response) {
-      $("#detallesdearticulo").html(response);
-      $(".select2").select2();
-      if (!$('#detallesdemovimientos').hasClass('collapsed-card')){
-        $('#refresh').trigger('click');
-      }
-    }
-  }).fail(function(){
-    console.log("error");
-  });
-
-  $(".card-left .card-body tr").removeClass('bg-primary');
-  $("#" + celda.id).parent().addClass('bg-primary');
+function mostrarDetalles($row) { 
+  getDetail($row,'detallesarticulo');
 }
 
 function movimientoArticulo(id){
@@ -140,15 +71,9 @@ function actualizoArticulo(event) {
 }
 
 function procesarEventos3() {
-  //alert ("readyState: "+conexion2.readyState+"status: "+conexion2.status);
   if (conexion3.readyState == 4) {
-    //alert ("readyState: "+conexion2.readyState+"status: "+conexion2.status);
     if (conexion3.status == 200) {
-      //alert ("readyState: "+conexion2.readyState+"status: "+conexion2.status);
-      //SI BUSCO LA CAGOOOO. TENGO QUE VER COMO HACER PARA ACTUALIZAR EL LISTADO SIN PERDER EL DETALLE
-      var datosc = document.getElementById("detallesdearticulo");
-      datosc.innerHTML = conexion3.responseText;
-      tags_cambios = [];
+      $("#detallesdearticulo").html(conexion3.responseText);
       $(".select2").select2();
     }
   }

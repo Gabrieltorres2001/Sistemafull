@@ -8,13 +8,20 @@ function llenar_listado_empresas() {
 	mysqli_query($conexion_sp,"set names 'utf8'");
 	//generamos la consulta contactos2
 	$sql ="SELECT id, Organizacion from organizaciones ORDER BY Organizacion asc limit 100";
-   	if(!$result = mysqli_query($conexion_sp, $sql)) die("Problemas con la consulta organizaciones");
-   	ob_start();
+	   if(!$result = mysqli_query($conexion_sp, $sql)) die("Problemas con la consulta organizaciones");
+	
+	return tablaEmpresas($result);
+}
+
+function tablaEmpresas($result){
+	ob_start();
 	?>
 		<table class='table table-hover table-sm' id='tablaOrganizaciones'>
-			<tr>
-				<th class="Oragnizacion">Organización</th>
-			</tr>
+			<thead class=''>
+				<tr>
+					<th class="Organizacion"><a class="TableHeader" href="#">Organización</th>
+				</tr>
+			</thead>
 			<?php
 			while ($row = mysqli_fetch_row($result)){   
 				?>
@@ -29,7 +36,6 @@ function llenar_listado_empresas() {
 	$html = ob_get_contents();
 	ob_clean();
 	return $html;
-
 }
 
 function imprimir_detalle_empresas($resultc, $conexion_sp, $idEmpresaTemp) {

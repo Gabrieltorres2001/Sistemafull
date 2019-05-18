@@ -46,6 +46,7 @@ ob_start();
 									?>
 		</tr>
 	</thead>
+	<tbody>
 	<?php
 	while ($row = mysqli_fetch_row($resultDetalle)) {
 		if (!$resultArticulo = mysqli_query($conexion_sp, "select descricpcion, MonedaOrigen, ValorVenta, IVA from productos where IdProducto='" . $row[2] . "' limit 1")) die("Problemas con la consulta2");
@@ -152,6 +153,7 @@ ob_start();
 	<?php
 }
 ?>
+	</tbody>
 </table>
 <?php
 //ahora la ultima fila en blanco para agregar item

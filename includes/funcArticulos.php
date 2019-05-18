@@ -33,19 +33,21 @@ function tablaArticulos($result)
 				<th width='60' class="EnStock"><a class="TableHeader" href="#">EnStock</a></th>
 			</tr>
 		</thead>
+		<tbody>
 		<?php
 		while ($row = mysqli_fetch_array($result)) {
 			?>
-			<tr>
-				<td id="<?php echo $row['IdProducto']; ?>"><?php echo $row['IdProducto']; ?></td>
-				<td id="<?php echo $row['IdProducto']; ?>"><?php echo $row['descricpcion']; ?></td>
-				<td id="<?php echo $row['IdProducto']; ?>"><?php echo $row['idProveedor']; ?></td>
-				<td id="<?php echo $row['IdProducto']; ?>"><?php echo $row['Simbolo']; ?><?php echo $row['ValorVenta']; ?></td>
-				<td id="<?php echo $row['IdProducto']; ?>"><?php echo $row['EnStock']; ?></td>
+			<tr id="<?php echo $row['IdProducto']; ?>">
+				<td><?php echo $row['IdProducto']; ?></td>
+				<td><?php echo $row['descricpcion']; ?></td>
+				<td><?php echo $row['idProveedor']; ?></td>
+				<td><?php echo $row['Simbolo']; ?><?php echo $row['ValorVenta']; ?></td>
+				<td><?php echo $row['EnStock']; ?></td>
 			</tr>
 		<?php
 	};
 	?>
+		</tbody>
 	</table>
 
 	<?php
@@ -395,38 +397,40 @@ function imprimir_movimientos_articulos($resultc, $conexion_sp)
 	?>
 	<table class='table table-hover table-sm' id='movimientos'>
 	<caption>Resultados encontrados: <?php echo mysqli_num_rows($resultc); ?></caption>
-
-	<tr>
-		<th width='80'>Comprobante</th>
-		<th width='50'>Número</th>
-		<th width='60'>Fecha</th>
-		<th width='180'>Empresa</th>
-		<th width='50'>Cant</th>
-		<th width='50'>Moneda</th>
-		<th width='50'>Precio</th>
-		<th width='50'>SubTotal</th>
-		<th width='50'>Cumpl.</th>
-	</tr>
-	
-	<?php
-	while ($row = mysqli_fetch_array($resultc)) {
-		//el id de los td tiene que ser el id de comprobante asi busco por ese numero en ambas tablas (comprobantes y detalle)
-		$checked = $row['Cumplido'] == '0' ? "" : " checked";
-		?>
-		<tr id="<?php echo $row['IdComprobante']; ?>" >
-			<td><?php echo $row['TipoComprobante']; ?></td>
-			<td><?php echo $row['NumeroComprobante']; ?></td>
-			<td><?php echo $row['FechaComprobante']; ?></td>
-			<td><?php echo $row['Organizacion']; ?></td>
-			<td><?php echo $row['Cantidad']; ?></td>
-			<td><?php echo $row['Simbolo']; ?></td>
-			<td><?php echo $row['CostoUnitario']; ?></td>
-			<td><?php echo $row['SubTotal']; ?></td>
-			<td><input type='checkbox'<?php echo $checked; ?> readonly></td>
-		</tr>
+		<thead>
+			<tr>
+				<th width='80'>Comprobante</th>
+				<th width='50'>Número</th>
+				<th width='60'>Fecha</th>
+				<th width='180'>Empresa</th>
+				<th width='50'>Cant</th>
+				<th width='50'>Moneda</th>
+				<th width='50'>Precio</th>
+				<th width='50'>SubTotal</th>
+				<th width='50'>Cumpl.</th>
+			</tr>
+		</thead>
+		<tbody>
 		<?php
-	};
-	?>
+		while ($row = mysqli_fetch_array($resultc)) {
+			//el id de los td tiene que ser el id de comprobante asi busco por ese numero en ambas tablas (comprobantes y detalle)
+			$checked = $row['Cumplido'] == '0' ? "" : " checked";
+			?>
+			<tr id="<?php echo $row['IdComprobante']; ?>" >
+				<td><?php echo $row['TipoComprobante']; ?></td>
+				<td><?php echo $row['NumeroComprobante']; ?></td>
+				<td><?php echo $row['FechaComprobante']; ?></td>
+				<td><?php echo $row['Organizacion']; ?></td>
+				<td><?php echo $row['Cantidad']; ?></td>
+				<td><?php echo $row['Simbolo']; ?></td>
+				<td><?php echo $row['CostoUnitario']; ?></td>
+				<td><?php echo $row['SubTotal']; ?></td>
+				<td><input type='checkbox'<?php echo $checked; ?> readonly></td>
+			</tr>
+			<?php
+		};
+		?>
+		</tbody>
 	</table>
 	<?php
 	$html = ob_get_contents();
