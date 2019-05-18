@@ -8,6 +8,14 @@
 //     'default' => false // optional name of the table group you wish to add the link to. If the table group name contains non-Latin characters, you should convert them to html entities.
 // );
 
+$homeLinks['test'] = array(
+    'url' => 'newTemplate.php', 
+    'navBar' => true,
+    'title' => 'Blank Page', 
+    'description' => 'Blank Page',
+    'icon' => '', // optional icon to use with the link
+    'default' => false
+);
 $homeLinks['Presupuesto'] = array(
     'url' => 'Presupuestos.php', 
     'navBar' => true,
