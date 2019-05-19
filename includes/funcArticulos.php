@@ -66,7 +66,7 @@ function imprimir_detalle_articulos($resultc, $conexion_sp, $readonly = false)
 	<form>
 		<div class="form-row">
 			<div class="form-group col-md-4">
-				<label for='IdProducto' class="col-12 col-form-label">Id del Producto:</label>
+				<label for='IdProducto' class="col-12 col-form-label">Id Artículo:</label>
 				<input id='IdProducto' class='col-12 form-control-plaintext' name='IdProducto' type='text' value="<?php echo $reg['IdProducto']; ?>" readonly>
 			</div>
 			<div class="form-group col-md-4">

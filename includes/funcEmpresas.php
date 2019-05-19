@@ -41,20 +41,19 @@ function tablaEmpresas($result){
 function imprimir_detalle_empresas($resultc, $conexion_sp, $idEmpresaTemp) {
 	$reg = mysqli_fetch_array($resultc);  
 	//Primero datos del contacto
-	echo"<label><u>Datos de la Empresa:</u></label>";
-	echo"<br />";
-	//echo"<label for='idEmpresa'>Id del contacto:</label>";
-	echo"<input id='idEmpresa' class='hidden' name='idEmpresa' type='text' size='5' value=".$reg['id']." >";
-	
-	echo"<label for='CUIT'>CUIT:</label>";
-	echo"<input id='CUIT' class='input' name='CUIT' type='text' size='12' value='".$reg['CUIT']."'>";	
-	
-	echo"<label for='Organizacion'>Razón social:</label>";
-	echo"<input id='Organizacion' class='input' name='Organizacion' type='text' size='72' value='".$reg['Organizacion']."'> <br />";	
-	
+	ob_start();
+	?>
+	<label for='idEmpresa'>Id Empresa:</label>
+	<input id='idEmpresa' class='hidden' name='idEmpresa' type='text' size='5' value='<?php echo $reg['id']; ?>'>
+	<label for='CUIT'>CUIT:</label>
+	<input id='CUIT' class='input' name='CUIT' type='text' size='12' value='<?php echo $reg['CUIT']; ?>'>
+	<label for='Organizacion'>Razón social:</label>
+	<input id='Organizacion' class='input' name='Organizacion' type='text' size='72' value='<?php echo $reg['Organizacion']; ?>'>
+
+	<label for='IdTipoContacto'>Tipo:</label>
+	<select id='IdTipoContacto' class='input' name='IdTipoContacto'>
+	<?php
 	if(!$resultTC = mysqli_query($conexion_sp, "select * from z_tipocontacto")) die("Problemas con la consulta z_tipocontacto");
-	echo"<label for='IdTipoContacto'>Tipo:</label>";
-	echo"<select id='IdTipoContacto' class='input' name='IdTipoContacto'>";
 	while ($row = mysqli_fetch_row($resultTC)){ 
 		if ($reg['IdTipoContacto']==$row[0]){
 			echo"<option selected value=".$row[0].">".$row[1]."</option>";
@@ -65,33 +64,29 @@ function imprimir_detalle_empresas($resultc, $conexion_sp, $idEmpresaTemp) {
 	if ($reg['IdTipoContacto']=='' or $reg['IdTipoContacto']=='0'){
 	echo"<option selected value=''></option>";
 	}
-    echo"</select>";
+	?>
+    </select>
+	<label for='ActividEmpresa'>Actividad de la empresa:</label>
+	<input id='ActividEmpresa' class='input' name='ActividEmpresa' type='text' size='55' value='<?php echo $reg['ActividEmpresa']; ?>'><br />
+	<label for='Observaciones'>Observaciones:</label>
+	<textarea id='Observaciones' class='input' name='Observaciones' rows='6' cols='90'><?php echo $reg['Observaciones']; ?></textarea> <br />
+	<label for='Informacion'>Rubro:</label>
+	<input id='Informacion' class='input' name='Informacion' type='text' size='34' value='<?php echo $reg['Informacion']; ?>'><br />
+	<label for='Horarios'>Horarios de trabajo:</label>
+	<input id='Horarios' class='input' name='Horarios' type='text' size='89' value='<?php echo $reg['Horarios']; ?>'><br />
+	<label for='DiasDePago'>Dias y horarios de pago:</label>
+	<input id='DiasDePago' class='input' name='DiasDePago' type='text' size='85' value='<?php echo $reg['DiasDePago']; ?>'><br />
+	<label for='EntregaFactura'>Entrega de facturas:</label>
+	<input id='EntregaFactura' class='input' name='EntregaFactura' type='text' size='88' value='<?php echo $reg['EntregaFactura']; ?>'><br />
 	
-	echo"<label for='ActividEmpresa'>Actividad de la empresa:</label>";
-	echo"<input id='ActividEmpresa' class='input' name='ActividEmpresa' type='text' size='55' value='".$reg['ActividEmpresa']."'><br />";
-		
-	echo"<label for='Observaciones'>Observaciones:</label>";
-	echo"<textarea id='Observaciones' class='input' name='Observaciones' rows='6' cols='90'>".$reg['Observaciones']."</textarea> <br />";
-		
-	echo"<label for='Informacion'>Rubro:</label>";
-	echo"<input id='Informacion' class='input' name='Informacion' type='text' size='34' value='".$reg['Informacion']."'><br />";
-	
-	echo"<label for='Horarios'>Horarios de trabajo:</label>";
-	echo"<input id='Horarios' class='input' name='Horarios' type='text' size='89' value='".$reg['Horarios']."'><br />";	
-	
-	echo"<label for='DiasDePago'>Dias y horarios de pago:</label>";
-	echo"<input id='DiasDePago' class='input' name='DiasDePago' type='text' size='85' value='".$reg['DiasDePago']."'><br />";	
-	
-	echo"<label for='EntregaFactura'>Entrega de facturas:</label>";
-	echo"<input id='EntregaFactura' class='input' name='EntregaFactura' type='text' size='88' value='".$reg['EntregaFactura']."'><br />";
-	
+	<label for='CondDePago'>Condición de pago:</label>
+	<select id='CondDePago' class='input' name='CondDePago'>
+	<option selected value=''></option>
+	<?php
 	//cambio la condicion de pago. ahora voy a guardar el id, ya no guardo el texto
 	//Vuelvo a cambiar, ahora la voy a leer del panel de control (y la tengo que separar de la coma).
 	//Padre 17 es la forma de pago. No lo puedo cambiar
 	if(!$resultCpago = mysqli_query($conexion_sp, "select Descripcion, ContenidoValor from controlpanel where padre='17' order by ContenidoValor")) die("Problemas con la consulta forma de pago en controlpanel");
-	echo"<label for='CondDePago'>Condición de pago:</label>";
-	echo"<select id='CondDePago' class='input' name='CondDePago'>";
-	echo"<option selected value=''></option>";
 	while ($rowresultCpago = mysqli_fetch_array($resultCpago)){ 
 		$tmpCpago = explode(',', $rowresultCpago['ContenidoValor']);
 		if ($reg['CondDePago']==$rowresultCpago['Descripcion']){
@@ -100,11 +95,12 @@ function imprimir_detalle_empresas($resultc, $conexion_sp, $idEmpresaTemp) {
 				echo"<option value='".$rowresultCpago['Descripcion']."'>".$tmpCpago[0]."</option>";
 			}	
 	}
-    echo"</select><br />";
-	
+	?>
+    </select><br />
+	<label for='CondicionIVA'>Condicion de IVA:</label>
+	<select id='CondicionIVA' class='input' name='CondicionIVA'>
+	<?php
 	if(!$resultCIVA = mysqli_query($conexion_sp, "select ConddeIva from z_conddeiva")) die("Problemas con la consulta z_conddeiva");
-	echo"<label for='CondicionIVA'>Condicion de IVA:</label>";
-	echo"<select id='CondicionIVA' class='input' name='CondicionIVA'>";
 	while ($row = mysqli_fetch_array($resultCIVA)){ 
 		if ($reg['CondicionIVA']==$row['ConddeIva']){
 			echo"<option selected value='".$row['ConddeIva']."'>".$row['ConddeIva']."</option>";
@@ -137,6 +133,7 @@ function imprimir_detalle_empresas($resultc, $conexion_sp, $idEmpresaTemp) {
 	echo"<label><u>Descuentos y recargos:</u></label><br />";
 	if ($reg['IdTipoContacto']=='2'){$tipoContacto="red";} else {$tipoContacto="black";}
 	//Grafico explicativo (costo del producto)
+
 	echo "<table style='padding: 1px; border-collapse: separate;' >
 		<tr>
 			<td style='border: 1px solid black;' rowspan='2' align='center'>Precio artículo<br>(lista o neto)</td>

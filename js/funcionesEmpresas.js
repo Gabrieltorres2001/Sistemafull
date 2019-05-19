@@ -1,24 +1,7 @@
 $(document).ready(function () {
-	$(".card-left").on("click", "#botonBuscador", function () {
-		buscar();
-	});
-	$("#buscador").on("keypress", function (e) {
-		if (e.which == 13) {
-			buscar();
-		}
-	});
-	$('.card-left .card-body').on('click', 'table tr', function () {
-		mostrarDetalles(this);
-	});
-
-	$(".card-left .card-header").on("click","#botonBorrar", function () {
-    buscar(true);
-  });
 	
-	$(".card-left .card-body").on("click", ".TableHeader", function () {
-		sortChange(this);
-		buscar();
-	});
+	initApp();
+
 });
 
 function buscar(clear = false) {
