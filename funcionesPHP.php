@@ -58,7 +58,7 @@ function upperMenu($current)
     $active = "";
     if (!$link['navBar']) continue;
     if (!isset($link['url']) || !isset($link['title'])) continue;
-    $active = $link['title'] == $current ? "active border border-warning" : "";
+    $active = $link['title'] == $current['title'] ? "active border border-warning" : "";
     $title =  ucwords(strtolower($link['title']));
     $html .= '<li class="nav-item ' . $active . '">';
     $html .= '    <a class="nav-link" href="' . $link['url'] . '" title="' . $link['description'] . '">';

@@ -89,7 +89,7 @@ sec_session_start();
 
     <!-- SI ESTOY LOGEADO. BIEN. PUEDO INGRESAR. -->
     <?php if ((login_check($mysqli) == true) && (formulario_habilitado("Legajos") == true)) : ?>   
-	<?php echo upperMenu('Legajos') ?>
+	<?php echo upperMenu($app) ?>
 
     <div class="container">
       <!-- CONTENT -->

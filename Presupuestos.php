@@ -1,13 +1,17 @@
 <?php
-$titulo = "SISTEMAPLUS - Presupuestos";
+include 'appConfig.php';
 
-include 'includes/funciones_pp2.php';
-include 'includes/funcPresupuestos.php';
+//changue app config.
+$app = $homeLinks['Presupuesto'];
+
+//inlcude own app function
+include 'includes/funcEmpresas.php';
+
 include 'header.php';
+
 sec_session_start();
 ?>
 		<!-- scripts 	-->
-		<script src="js/funcionescomunes.js"></script>
 		
 		<script src="js/funcionespresupuestos.js"></script>
 
@@ -15,46 +19,13 @@ sec_session_start();
     <link href="css/table.css" rel="stylesheet"> 
     <link href="css/formulario1.css" rel="stylesheet"> 	
 		
-		<!-- de EDITABLEGRID-->
-		<script src="./editablegrid/editablegrid.js"></script>
-		<!-- [DO NOT DEPLOY] --> <script src="./editablegrid/editablegrid_renderers.js" ></script>
-		<!-- [DO NOT DEPLOY] --> <script src="./editablegrid/editablegrid_editors.js" ></script>
-		<!-- [DO NOT DEPLOY] --> <script src="./editablegrid/editablegrid_validators.js" ></script>
-		<!-- [DO NOT DEPLOY] --> <script src="./editablegrid/editablegrid_utils.js" ></script>
-		<!-- [DO NOT DEPLOY] --><script src="./editablegrid/editablegrid_charts.js" ></script> 
-		<link rel="stylesheet" href="./editablegrid/editablegrid.css" type="text/css" media="screen">
-    <!-- de EDITABLEGRID-->
- 
-		<!-- de EDITABLEGRID
-			<style>
-				body { font-family:'lucida grande', tahoma, verdana, arial, sans-serif; font-size:11px; }
-				h1 { font-size: 15px; }
-				a { color: #548dc4; text-decoration: none; }
-				a:hover { text-decoration: underline; }
-				table.testgrid { border-collapse: collapse; border: 1px solid #CCB; width: 800px; }
-				table.testgrid td, table.testgrid th { padding: 5px; border: 1px solid #E0E0E0; }
-				table.testgrid th { background: #E5E5E5; text-align: left; }
-				input.invalid { background: red; color: #FDFDFD; }
-			</style>
-		de EDITABLEGRID-->
-
-  	<!-- DataTables Initialization -->
-    <script type="text/javascript" src="js/jquery.dataTables.js"></script>
-  	<script type="text/javascript" charset="utf-8">
-			$(document).ready(function() {$('#dt1').dataTable();});
-	</script>
-	<!-- include javascript and css files for jQuery UI, in order to have the datepicker -->
-	
-	<script type="text/javascript">
-	$(document).ready(function() {$("#empresa").select2();});
-	</script>
     
   </head>
   <body>
 
     <!-- SI ESTOY LOGEADO. BIEN. PUEDO INGRESAR. -->
     <?php if ((login_check($mysqli) == true) && (formulario_habilitado("Presupuesto") == true)){ ?>   
-	<?php echo upperMenu('Presupuestos') ?>
+	<?php echo upperMenu($app) ?>
 	
     <div class="container">
       <!-- CONTENT -->

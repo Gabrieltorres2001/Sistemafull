@@ -39,7 +39,7 @@ sec_session_start();
 <body>  
     <!-- SI ESTOY LOGEADO. BIEN. PUEDO INGRESAR. -->
     <?php if ((login_check($mysqli) == true) && (formulario_habilitado("listadoClientes") == true)) { ?>   
-	<?php echo upperMenu('ListasClientes') ?>
+	<?php echo upperMenu($app) ?>
 
     <div class="container">
       <!-- CONTENT -->
