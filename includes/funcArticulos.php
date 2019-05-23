@@ -23,14 +23,14 @@ function tablaArticulos($result)
 
 	ob_start();
 	?>
-	<table class='table table-hover table-sm' id='tablaArticulos'>
+	<table class='table table-hover table-sm col-lg-12' id='tablaArticulos1'>
 		<thead class=''>
 			<tr>
-				<th width='30' class="IdProducto"><a class="TableHeader" href="#">Cod</a></th>
-				<th width='100' class="descricpcion"><a class="TableHeader" href="#">Descripción</a></th>
-				<th width='140' class="idProveedor"><a class="TableHeader" href="#">Proveedor</a></th>
-				<th width='80' class="Simbolo"><a class="TableHeader" href="#">ValorVenta</a></th>
-				<th width='60' class="EnStock"><a class="TableHeader" href="#">EnStock</a></th>
+				<th class="IdProducto"><a class="TableHeader" href="#">Cod</a></th>
+				<th class="descricpcion"><a class="TableHeader" href="#">Descripción</a></th>
+				<th class="idProveedor"><a class="TableHeader" href="#">Proveedor</a></th>
+				<th class="Simbolo"><a class="TableHeader" href="#">ValorVenta</a></th>
+				<th class="EnStock"><a class="TableHeader" href="#">EnStock</a></th>
 			</tr>
 		</thead>
 		<tbody>

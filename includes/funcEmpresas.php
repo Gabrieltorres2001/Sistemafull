@@ -141,11 +141,8 @@ function imprimir_detalle_empresas($resultc, $conexion_sp, $idEmpresaTemp) {
 
 	if(!$resultCIVA = mysqli_query($conexion_sp, "select ConddeIva from z_conddeiva")) die("Problemas con la consulta z_conddeiva");
 	while ($row = mysqli_fetch_array($resultCIVA)){ 
-		if ($reg['CondicionIVA']==$row['ConddeIva']){
-			echo"<option selected value='".$row['ConddeIva']."'>".$row['ConddeIva']."</option>";
-			}else{
-				echo"<option value='".$row['ConddeIva']."'>".$row['ConddeIva']."</option>";
-			}	
+		$selected = $reg['CondicionIVA']==$row['ConddeIva'] ? "selected" : "" ;
+		echo"<option ". $selected." value='".$row['ConddeIva']."'>".$row['ConddeIva']."</option>";
 	}
 	if ($reg['CondicionIVA']=='' or $reg['CondicionIVA']=='0'){
 	echo"<option selected value=''></option>";
@@ -220,15 +217,14 @@ function imprimir_detalle_empresas($resultc, $conexion_sp, $idEmpresaTemp) {
 		<td></td>
 	</tr>
  </table>
+ <label>Cliente:</label> Los descuentos/recargos se aplicarán al comprobante (presupuesto/venta) al momento de generarlo.
+ <label>Proveedor:</label> Los descuentos/recargos se aplicarán a todos los artículos de este proveedor. También se aplicarán los de tipo Lista a las OC.
+ <label>Varios o Cli/prov:</label> No se aplicarán descuentos o recargos automáticos.
  <?php
 	//ver si es cliente o proveedor
 	//1: Cliente. Los descuentos/recargos se aplicarán al comprobante
 	//2: Proveedor. Los descuentos/recargos se aplicarán al artículo
 	//3 y 4: Varios o Cli/prov. NO SE. Por ahora nada.
-
-	echo "<label>Cliente:</label> Los descuentos/recargos se aplicarán al comprobante (presupuesto/venta) al momento de generarlo.";
-	echo "<label>Proveedor:</label> Los descuentos/recargos se aplicarán a todos los artículos de este proveedor. También se aplicarán los de tipo Lista a las OC.";
-	echo "<label>Varios o Cli/prov:</label> No se aplicarán descuentos o recargos automáticos.";
 
 	if (($reg['IdTipoContacto']=='2')||($reg['IdTipoContacto']=='1')){
 		echo"<label>Descuentos y recargos vigentes:</label>";
@@ -245,57 +241,76 @@ function imprimir_detalle_empresas($resultc, $conexion_sp, $idEmpresaTemp) {
 	
 	//Siguen las direcciones. Hacer una tabla.
 	if(!$resultDirec = mysqli_query($conexion_sp, "select id, Direccion, Ciudad, Codigopostal, Provoestado, Pais from direcciones where CUIT = '".$reg['id']."' and Direccion not Like '%@%' and ((Direccion is not null) and (Ciudad is not null) and (Codigopostal is not null) and (Provoestado is not null) and (Pais is not null)) order by id asc")) die("Problemas con la consulta Direcciones");
-	echo"<label><u>Direccion(es) de la empresa:</u></label>";
-	echo"";
-	echo"<table>";
-	echo"<tr>";
-	echo"<th>Direccion</th>";
-	echo"<th>Ciudad</th>";
-	echo"<th>CP</th>";
-	echo"<th>Provincia</th>";
-	echo"<th>pais</th>";	
-	echo"</tr>";
-	$contadortd=0;
-	while ($rowDir = mysqli_fetch_row($resultDirec)){ 
-		echo"<tr name='DireccionEmpresa' id='".$rowDir[0]."'>";
-		echo"<td><input id='Direccion".$contadortd."' class='input' type='text' value='".$rowDir[1]."'></td>";
-		echo"<td><input id='Ciudad".$contadortd."' class='input' type='text' value='".$rowDir[2]."'></td>";
-		echo"<td><input id='CP".$contadortd."' class='input' type='text' alue='".$rowDir[3]."'></td>";
-		echo"<td><input id='Provincia".$contadortd."' class='input' type='text' value='".$rowDir[4]."'></td>";
-		echo"<td><input id='pais".$contadortd."' class='input' type='text' value='".$rowDir[5]."'></td>";		
-		if ($contadortd==0) {echo"<td><input id='id".$contadortd."' class='input' type='hidden' value='".$rowDir[0]."'>Facturación</td>";} else {echo"<td><input id='id".$contadortd."' class='input' type='hidden' value='".$rowDir[0]."'></td>";}
-		echo"</tr>";
-		$contadortd++;
-	}
-		echo"<tr name='DireccionEmpresa' id='0'>";
-		echo"<td><input id='Direccion".$contadortd."' class='input' type='text' value=''></td>";
-		echo"<td><input id='Ciudad".$contadortd."' class='input' type='text' value=''></td>";
-		echo"<td><input id='CP".$contadortd."' class='input' type='text' alue=''></td>";
-		echo"<td><input id='Provincia".$contadortd."' class='input' type='text' value=''></td>";
-		echo"<td><input id='pais".$contadortd."' class='input' type='text' value=''></td>";
-		echo"<td><input id='id".$contadortd."' class='input' type='hidden' value='0'></td>";		
-		echo"</tr>";
-	echo"</table>";			
+	?>
+	<label><u>Direccion(es) de la empresa:</u></label>
+	<table>
+		<tr>
+		<th>Direccion</th>
+		<th>Ciudad</th>
+		<th>CP</th>
+		<th>Provincia</th>
+		<th>pais</th>
+		</tr>
+		<?php
+		$contadortd=0;
+		while ($rowDir = mysqli_fetch_row($resultDirec)){ 
+			?>
+			<tr name='DireccionEmpresa' id='".$rowDir[0]."'>
+			<td><input id='Direccion".$contadortd."' class='input' type='text' value='".$rowDir[1]."'></td>
+			<td><input id='Ciudad".$contadortd."' class='input' type='text' value='".$rowDir[2]."'></td>
+			<td><input id='CP".$contadortd."' class='input' type='text' alue='".$rowDir[3]."'></td>
+			<td><input id='Provincia".$contadortd."' class='input' type='text' value='".$rowDir[4]."'></td>
+			<td><input id='pais".$contadortd."' class='input' type='text' value='".$rowDir[5]."'></td>
+			<?php
+			if ($contadortd==0) {
+				echo"<td><input id='id".$contadortd."' class='input' type='hidden' value='".$rowDir[0]."'>Facturación</td>";
+			} else {
+				echo"<td><input id='id".$contadortd."' class='input' type='hidden' value='".$rowDir[0]."'></td>";
+			}
+			$contadortd++;
+			?>
+				</tr>
+			<?php
+			}
+			?>
+		<tr name='DireccionEmpresa' id='0'>
+		<td><input id='Direccion".$contadortd."' class='input' type='text' value=''></td>
+		<td><input id='Ciudad".$contadortd."' class='input' type='text' value=''></td>
+		<td><input id='CP".$contadortd."' class='input' type='text' alue=''></td>
+		<td><input id='Provincia".$contadortd."' class='input' type='text' value=''></td>
+		<td><input id='pais".$contadortd."' class='input' type='text' value=''></td>
+		<td><input id='id".$contadortd."' class='input' type='hidden' value='0'></td>
+		</tr>
+	</table>			
+	<?php
 	//Por ultimo los empleados de la empresa
 	if(!$resultEmpleados = mysqli_query($conexion_sp, "select NombreCompleto, FuncionEnLaEmpresa, PalabrasClave, PoderDecision from contactos2 where idOrganizacion = '".$reg['id']."' order by NombreCompleto")) die("Problemas con la consulta contactos2");
-	echo"<label><u>Empleados de la Empresa:</u></label>";
-	echo"";
-	echo"<table>";
-	echo"<tr>";
-	echo"<th>Nombre</th>";
-	echo"<th>Funcion</th>";
-	echo"<th>Palabras clave</th>";
-	echo"<th>Decide</th>";	
-	echo"</tr>";
+	?>
+	<label><u>Empleados de la Empresa:</u></label>
+	<table>
+	<tr>
+	<th>Nombre</th>
+	<th>Funcion</th>
+	<th>Palabras clave</th>
+	<th>Decide</th>
+	</tr>
+	<?php
 	while ($rowDir = mysqli_fetch_row($resultEmpleados)){ 
-		echo"<tr>";
-		echo"<td><input class='input' type='text' value='".$rowDir[0]."' disabled></td>";
-		echo"<td><input class='input' type='text' value='".$rowDir[1]."' disabled></td>";
-		echo"<td><input class='input' type='text' value='".$rowDir[2]."' disabled></td>";
-		if ($rowDir[3]=='1') {echo"<td><input class='input' type='text' alue='Si' disabled></td>";} else {echo"<td><input class='input' type='text' alue='No' disabled></td>";}
-		echo"</tr>";
+		?>
+		<tr>
+		<td><input class='input' type='text' value='<?php echo $rowDir[0]; ?>' disabled></td>
+		<td><input class='input' type='text' value='<?php echo $rowDir[1]; ?>' disabled></td>
+		<td><input class='input' type='text' value='<?php echo $rowDir[2]; ?>' disabled></td>
+		<?php
+		$value = $rowDir[3]=='1' ? "Si" : "No";
+		?>
+		<td><input class='input' type='text' value='<?php echo $value; ?>' disabled></td>
+		</tr>
+		<?php
 	}
-	echo"</table></form>";	
+	?>
+	</table></form>
+	<?php
 }
 
 	

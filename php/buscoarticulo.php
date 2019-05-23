@@ -10,7 +10,8 @@ $textoBusqueda = $_REQUEST['busqueda'];
 $ordenBusqueda = trim($_REQUEST['orden']) ? "ORDER BY ".$_REQUEST['orden'] : '';
 $where = "";
 if ($textoBusqueda != ""){
-    if (substr_count($textoBusqueda, '*') > 0) $textoBusqueda=str_replace("*", "%", $textoBusqueda);
+    if (substr_count($textoBusqueda, '*') > 0) 
+    {$textoBusqueda=str_replace("*", "%", $textoBusqueda);}
     $where = "AND ((IdProducto like '%".$textoBusqueda."%') or (descricpcion like '%".$textoBusqueda."%') or (idProveedor like '%".$textoBusqueda."%') or (CodigoProveedor like '%".$textoBusqueda."%'))";
 }
 

@@ -2,7 +2,7 @@
 include 'appConfig.php';
 
 //changue app config.
-$app = $homeLinks['test'];
+$app = $homeLinks['Empresas'];
 
 //inlcude own app function
 include 'includes/funcEmpresas.php';
@@ -94,7 +94,7 @@ sec_session_start();
 		 </div> <!-- /container -->
 		 
 	<!-- /mensaje auto ocultable -->
-	<div class="alert alert-success" style="position:fixed;left:25%;top:100px;width:50%;float=center;text-align:center;visibility:hidden;" id="mensajeAlertaAviso">Mensaje de información.</div>
+	<div class="alert alert-success" style="position:fixed;left:25%;top:100px;width:50%;float:center;text-align:center;visibility:hidden;" id="mensajeAlertaAviso">Mensaje de información.</div>
 	<?php 
 		}
 		include 'footer.php';
