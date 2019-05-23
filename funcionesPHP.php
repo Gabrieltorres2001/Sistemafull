@@ -111,3 +111,27 @@ function upperMenu($current)
   ob_clean();
   return $nav;
 }
+
+function selectCombo($conexion_sp,$selected,$text,$id){
+  ob_start();
+  ?>
+  <select id='IdTipoContacto' class='input' name='IdTipoContacto'>
+	<?php
+	if(!$resultTC = mysqli_query($conexion_sp, "SELECT * from z_tipocontacto")) die("Problemas con la consulta z_tipocontacto");
+	while ($row = mysqli_fetch_row($resultTC)){ 
+		if ($selected==$row[0]){
+			echo"<option selected value=".$row[0].">".$row[1]."</option>";
+			}else{
+				echo"<option value=".$row[0].">".$row[1]."</option>";
+			}	
+	}
+	if ($selected=='' or $selected=='0'){
+	echo"<option selected value=''></option>";
+	}
+	?>
+    </select>
+    <?php
+  $html = ob_get_contents();
+  ob_clean();
+  return $html;
+}

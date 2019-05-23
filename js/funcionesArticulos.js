@@ -104,6 +104,7 @@ function nuevoArticulo() {
 
 function mostrarDetallesMovimientos(id) {
   //el encabezado del presupuesto
+  var aleatorio = Math.random();
   $.ajax({
     type: "GET",
     url: "./php/llenar_encabezado_un_comprobante_enArticulo_contacto.php",
