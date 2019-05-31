@@ -51,52 +51,10 @@ function movimientoArticulo(id){
     data: {idart:id, rnadom:aleatorio},
     dataType: "html",
     success: function (response) {
-      $("#detallesdearticulo").html(response);
-      $(".select2").select2();
-      //Nueva forma de cambiar los precios
-      $("#ValorVenta").on("dblclick", function () {
-        //Primero ver si el artículo tiene proveedor
-        aleatorio = Math.random();
-        $.ajax({
-          type: "GET",
-          url: "./php/buscarProveedorArticulo.php",
-          data: {idart:id, rnadom:aleatorio},
-          dataType: "html",
-          success: function (responseEmp) {
-           if(responseEmp=='0'){
-             mostrarAvisos('El artículo no tiene un provedor definido. Primero debe solucionar este problema.');
-           } else {
-              //Segundo ver si el proveedor tiene descuentos
-              aleatorio = Math.random();
-              $.ajax({
-                type: "GET",
-                url: "./php/buscarDescuentosProveedorArticulo.php",
-                data: {idemp:responseEmp, rnadom:aleatorio},
-                dataType: "html",
-                success: function (responseDescEmp) {
-
-                }
-
-                }).fail();
-
-              //Tercero mostrar la ventana de carga de precios
-              document.getElementById("fondoClaro").style.visibility = "visible";
-              document.getElementById("nuevoPrecio").style.visibility = "visible";
-              $("#nuevoPrecio").html("3242343243");
-           }
-          }
-        }).fail();
-
-        });
+      $("#movimientosdearticulo").html(response);
     }
-  }).fail();
-
-  $(".card-left .card-body tr")
-  .removeClass('bg-primary');
-  $("#" + id)
-  .addClass('bg-primary');
+  });
 }
-
 
 
 function actualizoArticulo(event) {
