@@ -289,25 +289,22 @@ function imprimir_detalle_empresas($resultc, $conexion_sp, $idEmpresaTemp) {
 		while ($rowDir = mysqli_fetch_row($resultDirec)){ 
 			?>
 			<tr name='DireccionEmpresa' id='<?php echo $rowDir[0]; ?>'>
-			<td><input id='Direccion<?php echo $contadortd; ?>' class='input' type='text' value='<?php echo $rowDir[1]; ?>'></td>
-			<td><input id='Ciudad<?php echo $contadortd; ?>' class='input' type='text' value='<?php echo $rowDir[2]; ?>'></td>
-			<td><input id='CP<?php echo $contadortd; ?>' class='input' type='text' alue='<?php echo $rowDir[3]; ?>'></td>
-			<td><input id='Provincia<?php echo $contadortd; ?>' class='input' type='text' value='<?php echo $rowDir[4]; ?>'></td>
-			<td><input id='pais<?php echo $contadortd; ?>' class='input' type='text' value='<?php echo $rowDir[5]; ?>'></td>
-			<?php
-
-			?>
-				</tr>
+				<td><input id='Direccion<?php echo $contadortd; ?>' class='input' type='text' value='<?php echo $rowDir[1]; ?>'></td>
+				<td><input id='Ciudad<?php echo $contadortd; ?>' class='input' type='text' value='<?php echo $rowDir[2]; ?>'></td>
+				<td><input id='CP<?php echo $contadortd; ?>' class='input' type='text' alue='<?php echo $rowDir[3]; ?>'></td>
+				<td><input id='Provincia<?php echo $contadortd; ?>' class='input' type='text' value='<?php echo $rowDir[4]; ?>'></td>
+				<td><input id='pais<?php echo $contadortd; ?>' class='input' type='text' value='<?php echo $rowDir[5]; ?>'></td>
+			</tr>
 			<?php
 			}
 			?>
 		<tr name='DireccionEmpresa' id='0'>
-		<td><input id='Direccion<?php echo $contadortd; ?>' class='input' type='text' value=''></td>
-		<td><input id='Ciudad<?php echo $contadortd; ?>' class='input' type='text' value=''></td>
-		<td><input id='CP<?php echo $contadortd; ?>' class='input' type='text' alue=''></td>
-		<td><input id='Provincia<?php echo $contadortd; ?>' class='input' type='text' value=''></td>
-		<td><input id='pais<?php echo $contadortd; ?>' class='input' type='text' value=''></td>
-		<td><input id='id<?php echo $contadortd; ?>' class='input' type='hidden' value='0'></td>
+			<td><input id='Direccion<?php echo $contadortd; ?>' class='input' type='text' value=''></td>
+			<td><input id='Ciudad<?php echo $contadortd; ?>' class='input' type='text' value=''></td>
+			<td><input id='CP<?php echo $contadortd; ?>' class='input' type='text' alue=''></td>
+			<td><input id='Provincia<?php echo $contadortd; ?>' class='input' type='text' value=''></td>
+			<td><input id='pais<?php echo $contadortd; ?>' class='input' type='text' value=''></td>
+			<td><input id='id<?php echo $contadortd; ?>' class='input' type='hidden' value='0'></td>
 		</tr>
 	</table>			
 	<?php
