@@ -256,7 +256,7 @@ function imprimir_detalle_empresas($resultc, $conexion_sp, $idEmpresaTemp) {
 		}
 		echo"</table>";	
 		echo"<br />";
-		echo"<input type='button' id='nuevoDescuento' value='Agregar nuevo descuento'/>";	
+		echo"<input data-toggle='modal' data-target='#detallesdemovimientos' type='button' id='nuevoDescuento' value='Agregar nuevo descuento'/>";	
 		echo"<br />";
 
 		echo"<label>Descuentos y recargos anteriores:</label>";
