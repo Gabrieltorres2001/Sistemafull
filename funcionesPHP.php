@@ -96,7 +96,7 @@ function upperMenu($current)
         <li class="nav-item">
           <a class="nav-link" href="cambioMonedas.php">
             <i class="fa fa-euro"></i>
-            <?php Llenar_Dolar(); ?>
+            <?php Llenar_Euro(); ?>
           </a>
         </li>
         <li class="nav-item">
