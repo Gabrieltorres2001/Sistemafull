@@ -144,11 +144,25 @@
 		  font-size: 0.75em;
 		  background-color:#fff;
 		  position:fixed;
-		  left:14%;
+		  left:34%;
 		  top:109px;
-		  height:480px;
-		  width:71%;
+		  height:132px;
+		  width:500px;
 		  visibility:hidden;
 		  border-radius: 9px;
+		}
+
+		#fondoClaro {
+		  border:1px solid #555;
+		  font-size: 0.75em;
+		  background-color:#fff;
+		  position:fixed;
+		  left:0px;
+		  top:0px;
+		  height:100%;
+		  width:100%;
+		  visibility:hidden;
+		  border-radius: 9px;
+		  opacity:0.5;
 		}
 

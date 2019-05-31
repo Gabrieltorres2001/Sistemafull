@@ -82,6 +82,11 @@ sec_session_start();
           </div>
         </div>
       </div>
+      <div id="fondoClaro">
+      </div> <!-- /fondoClaro -->
+      
+      <div id="nuevoPrecio">
+      </div>
 
 
       

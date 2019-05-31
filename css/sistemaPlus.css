@@ -50,3 +50,30 @@ table{
 form{
 	font-size: 80%;
 }
+
+#fondoClaro {
+	border:1px solid #555;
+	font-size: 0.75em;
+	background-color:#fff;
+	position:fixed;
+	left:0px;
+	top:0px;
+	height:100%;
+	width:100%;
+	visibility:hidden;
+	border-radius: 9px;
+	opacity:0.5;
+}
+
+#nuevoPrecio {
+	border:1px solid #555;
+	font-size: 0.75em;
+	background-color:#fff;
+	position:fixed;
+	left:3%;
+	top:200px;
+	height:125px;
+	width:94%;
+	visibility:hidden;
+	border-radius: 9px;
+}

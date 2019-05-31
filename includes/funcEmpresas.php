@@ -174,11 +174,11 @@ function imprimir_detalle_empresas($resultc, $conexion_sp, $idEmpresaTemp) {
 		<tr>
 			<td style='border: 1px solid black;' rowspan='2' align='center'>Precio artículo<br>(lista o neto)</td>
 			<td style='border-bottom: 1px solid black;'></td>
-			<td style='border: 1px solid <?php echo $tipoContacto; ?>;' rowspan='2' align='center'>Descuento<br>proveedor</td>
-			<td style='border-bottom: 1px solid black;' align='center'>Nuestro costo</td>
-			<td style='border: 1px solid black;' rowspan='2' align='center'>Margen de<br>ganancia</td>
+			<td style='border: 1px solid ".$tipoContacto.";' rowspan='2' align='center'>Descuento(s)<br>proveedor</td>
 			<td style='border-bottom: 1px solid black;'></td>
-			<td style='border: 1px solid black;' rowspan='2' align='center'>Otros gastos<br>(flete, IIBB, etc)</td>
+			<td style='border: 1px solid ".$tipoContacto.";' rowspan='2' align='center'>Otros gastos<br>(flete, IIBB, etc)</td>
+			<td style='border-bottom: 1px solid black;'></td>
+			<td style='border: 1px solid black;' rowspan='2' align='center'>Margen de<br>ganancia</td>
 			<td style='border-bottom: 1px solid black;'></td>
 			<td style='border: 1px solid black;' rowspan='2' align='center'>PVP artículo<br>(precio de venta)</td>
 		</tr>
@@ -186,7 +186,7 @@ function imprimir_detalle_empresas($resultc, $conexion_sp, $idEmpresaTemp) {
 			
 			<td></td>
 
-			<td align='center'>del producto</td>
+			<td></td>
 			
 			<td></td>
 
@@ -227,13 +227,37 @@ function imprimir_detalle_empresas($resultc, $conexion_sp, $idEmpresaTemp) {
 	//3 y 4: Varios o Cli/prov. NO SE. Por ahora nada.
 
 	if (($reg['IdTipoContacto']=='2')||($reg['IdTipoContacto']=='1')){
-		echo"<label>Descuentos y recargos vigentes:</label>";
-		if(!$tiposDescuentos = mysqli_query($conexion_sp, "select ID, Descripcion from tipos where Destino = 'Descuentos'")) die("Problemas con la consulta tipos");
-		while ($rowTiposDescuentos = mysqli_fetch_array($tiposDescuentos)){ 
-			if(!$descuentos = mysqli_query($conexion_sp, "select Id, Porcentaje, Fecha, Tipo from descuentos where Empresa = '".$reg['id']."' and Tipo = '".$rowTiposDescuentos['ID']."' order by Id desc limit 1")) die("Problemas con la consulta descuentos");
-
+		echo"<label>Descuentos y recargos vigentes:</label><br />";
+		if(!$tiposDescuentos = mysqli_query($conexion_sp, "select ID, Descripcion from tipos where ID = '26'")) die("Problemas con la consulta tipos");
+		echo"<table>";
+		echo"<tr>";
+		echo"<th>Porcentaje</th>";
+		echo"<th>Fecha</th>";
+		echo"<th>Tipo</th>";
+		echo"<th>Responsable</th>";	
+		echo"<th>Eliminar descuento</th>";	
+		echo"</tr>";
+		if(!$descuentos = mysqli_query($conexion_sp, "select Id, Porcentaje, Fecha, Tipo, Responsable from descuentos where Empresa = '".$reg['id']."' and (Tipo = '26'  or Tipo = '27') order by Id desc")) die("Problemas con la consulta descuentos");
+		while ($rowDescuentos = mysqli_fetch_array($descuentos)){ 
+			echo"<tr name='DescuentoEmpresa' id='".$rowDescuentos['Id']."'>";
+			echo"<td><input id='Porcentaje".$rowDescuentos['Id']."' class='input' type='text' size='5' value='".$rowDescuentos['Porcentaje']."' readonly>%</td>";
+			echo"<td><input id='Fecha".$rowDescuentos['Id']."' class='input' type='text' size='10' value='".$rowDescuentos['Fecha']."' readonly></td>";
+			if(!$tipos = mysqli_query($conexion_sp, "select Descripcion from tipos where ID = '".$rowDescuentos['Tipo']."' limit 1")) die("Problemas con la consulta tipos");
+			$rowTipos = mysqli_fetch_array($tipos);
+			echo"<td><input id='Tipo".$rowDescuentos['Id']."' class='input' type='text' size='18' value='".$rowTipos['Descripcion']."' readonly></td>";
+			include_once '../includes/db_connect.php';
+			$conexion_db=mysqli_connect(HOST,USER,PASSWORD,DATABASE) or die("Problemas con la conexión");
+			mysqli_query($conexion_db,"set names 'utf8'");
+			if(!$miembros = mysqli_query($conexion_db, "select Nombre, Apellido from members where id = '".$rowDescuentos['Responsable']."' limit 1")) die("Problemas con la consulta tipos");
+			$rowMiembros = mysqli_fetch_array($miembros);
+			echo"<td><input id='Responsable".$rowDescuentos['Id']."' class='input' type='text' size='18' value='".$rowMiembros['Nombre']." ".$rowMiembros['Apellido']."' readonly></td>";
+			echo"<td><input type='button' name='borraDesc' id='".$rowDescuentos['Id']."' value='X'/></td>";
+			echo"</tr>";
 		}
-		echo"";
+		echo"</table>";	
+		echo"<br />";
+		echo"<input type='button' id='nuevoDescuento' value='Agregar nuevo descuento'/>";	
+		echo"<br />";
 
 		echo"<label>Descuentos y recargos anteriores:</label>";
 		echo"";

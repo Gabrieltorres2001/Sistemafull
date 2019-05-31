@@ -51,9 +51,89 @@ function movimientoArticulo(id){
     data: {idart:id, rnadom:aleatorio},
     dataType: "html",
     success: function (response) {
-      $("#movimientosdearticulo").html(response);
+      $("#detallesdearticulo").html(response);
+      $(".select2").select2();
+      //Nueva forma de cambiar los precios
+      $("#ValorVenta").on("dblclick", function () {
+        //Primero ver si el artículo tiene proveedor
+        aleatorio = Math.random();
+        $.ajax({
+          type: "GET",
+          url: "./php/buscarProveedorArticulo.php",
+          data: {idart:celda.id, rnadom:aleatorio},
+          dataType: "html",
+          success: function (responseEmp) {
+           if(responseEmp=='0'){
+             mostrarAvisos('El artículo no tiene un provedor definido. Primero debe solucionar este problema.');
+           } else {
+              //Segundo ver si el proveedor tiene descuentos
+              aleatorio = Math.random();
+              $.ajax({
+                type: "GET",
+                url: "./php/buscarDescuentosProveedorArticulo.php",
+                data: {idemp:responseEmp, rnadom:aleatorio},
+                dataType: "html",
+                success: function (responseDescEmp) {
+
+                }
+
+                }).fail();
+
+              //Tercero mostrar la ventana de carga de precios
+              document.getElementById("fondoClaro").style.visibility = "visible";
+              document.getElementById("nuevoPrecio").style.visibility = "visible";
+              $("#nuevoPrecio").html("3242343243");
+           }
+          }
+        }).fail();
+
+        });
     }
-  });
+  }).fail();
+
+  $(".card-left .card-body tr")
+  .removeClass('bg-primary');
+  $("#" + celda.id)
+  .parent().addClass('bg-primary');
+}
+
+function movimientoArticulo(id){
+
+  //AHORA LOS MOVIMIENTOS DEL ARTICULO
+  conexion6 = new XMLHttpRequest();
+  conexion6.onreadystatechange = procesarEventos6;
+  aleatorio = Math.random();
+  conexion6.open(
+    "GET",
+    "./php/movimientosarticulo.php?idart=" +
+    id +
+    "&rnadom=" +
+    aleatorio,
+    true
+  );
+  conexion6.send();
+
+}
+
+function procesarEventos6() {
+  if (conexion6.readyState == 4) {
+    if (conexion6.status == 200) {
+      $("#movimientosdearticulo").html(conexion6.responseText);
+      tags_cambios = [];
+      id_actual = "";
+      //AL HACER CLICK
+      //TE LLEVA AL FORMULARIO DEL MOVIMIENTO
+      var tags_td_mov = [];
+      tags_td_mov = document.getElementsByName("xxxx");
+      for (i = 0; i < tags_td_mov.length; i++) {
+        tags_td_mov[i].addEventListener(
+          "click",
+          mostrarDetallesMovimientos,
+          false
+        );
+      }
+    }
+  };
 }
 
 
