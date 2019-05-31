@@ -60,7 +60,7 @@ function movimientoArticulo(id){
         $.ajax({
           type: "GET",
           url: "./php/buscarProveedorArticulo.php",
-          data: {idart:celda.id, rnadom:aleatorio},
+          data: {idart:id, rnadom:aleatorio},
           dataType: "html",
           success: function (responseEmp) {
            if(responseEmp=='0'){
@@ -93,48 +93,10 @@ function movimientoArticulo(id){
 
   $(".card-left .card-body tr")
   .removeClass('bg-primary');
-  $("#" + celda.id)
-  .parent().addClass('bg-primary');
+  $("#" + id)
+  .addClass('bg-primary');
 }
 
-function movimientoArticulo(id){
-
-  //AHORA LOS MOVIMIENTOS DEL ARTICULO
-  conexion6 = new XMLHttpRequest();
-  conexion6.onreadystatechange = procesarEventos6;
-  aleatorio = Math.random();
-  conexion6.open(
-    "GET",
-    "./php/movimientosarticulo.php?idart=" +
-    id +
-    "&rnadom=" +
-    aleatorio,
-    true
-  );
-  conexion6.send();
-
-}
-
-function procesarEventos6() {
-  if (conexion6.readyState == 4) {
-    if (conexion6.status == 200) {
-      $("#movimientosdearticulo").html(conexion6.responseText);
-      tags_cambios = [];
-      id_actual = "";
-      //AL HACER CLICK
-      //TE LLEVA AL FORMULARIO DEL MOVIMIENTO
-      var tags_td_mov = [];
-      tags_td_mov = document.getElementsByName("xxxx");
-      for (i = 0; i < tags_td_mov.length; i++) {
-        tags_td_mov[i].addEventListener(
-          "click",
-          mostrarDetallesMovimientos,
-          false
-        );
-      }
-    }
-  }
-}
 
 
 function actualizoArticulo(event) {
