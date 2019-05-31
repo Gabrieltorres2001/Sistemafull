@@ -133,7 +133,7 @@ function procesarEventos6() {
         );
       }
     }
-  };
+  }
 }
 
 

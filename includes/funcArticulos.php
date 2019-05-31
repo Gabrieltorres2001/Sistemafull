@@ -42,9 +42,9 @@ function tablaArticulos($result)
 		<?php
 		while ($row = mysqli_fetch_array($result)) {
 			?>
-			<tr>
-				<td id="<?php echo $row['IdProducto']; ?>"> <?php echo $row['IdProducto']; ?></td>
-				<td id="<?php echo $row['IdProducto']; ?>"> <?php echo $row['descricpcion']; ?></td>
+			<tr id="<?php echo $row['IdProducto']; ?>">
+				<td> <?php echo $row['IdProducto']; ?></td>
+				<td> <?php echo $row['descricpcion']; ?></td>
 				<?php
 					$sql = "SELECT	Organizacion
 							FROM organizaciones 
@@ -57,9 +57,9 @@ function tablaArticulos($result)
 						$nombreProveedor="(Sin asignar)";
 					}
 				?>
-				<td id="<?php echo $row['IdProducto']; ?>"> <?php echo $nombreProveedor; ?></td>
-				<td id="<?php echo $row['IdProducto']; ?>"><?php echo $row['Simbolo']; ?> <?php echo $row['ValorVenta']; ?></td>
-				<td id="<?php echo $row['IdProducto']; ?>"><?php echo $row['EnStock']; ?></td>
+				<td> <?php echo $nombreProveedor; ?></td>
+				<td><?php echo $row['Simbolo']; ?> <?php echo $row['ValorVenta']; ?></td>
+				<td><?php echo $row['EnStock']; ?></td>
 			</tr>
 		<?php
 	};
