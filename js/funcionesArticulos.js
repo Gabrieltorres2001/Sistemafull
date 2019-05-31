@@ -99,7 +99,42 @@ function mostrarDetalles(celda) {
     dataType: "html",
     success: function (response) {
       $("#detallesdearticulo").html(response);
-        $(".select2").select2();
+      $(".select2").select2();
+      //Nueva forma de cambiar los precios
+      $("#ValorVenta").on("dblclick", function () {
+        //Primero ver si el artículo tiene proveedor
+        aleatorio = Math.random();
+        $.ajax({
+          type: "GET",
+          url: "./php/buscarProveedorArticulo.php",
+          data: {idart:celda.id, rnadom:aleatorio},
+          dataType: "html",
+          success: function (responseEmp) {
+           if(responseEmp=='0'){
+             mostrarAvisos('El artículo no tiene un provedor definido. Primero debe solucionar este problema.');
+           } else {
+              //Segundo ver si el proveedor tiene descuentos
+              aleatorio = Math.random();
+              $.ajax({
+                type: "GET",
+                url: "./php/buscarDescuentosProveedorArticulo.php",
+                data: {idemp:responseEmp, rnadom:aleatorio},
+                dataType: "html",
+                success: function (responseDescEmp) {
+
+                }
+
+                }).fail();
+
+              //Tercero mostrar la ventana de carga de precios
+              document.getElementById("fondoClaro").style.visibility = "visible";
+              document.getElementById("nuevoPrecio").style.visibility = "visible";
+              $("#nuevoPrecio").html("3242343243");
+           }
+          }
+        }).fail();
+
+        });
     }
   }).fail();
 
@@ -203,8 +238,7 @@ function procesarEventos3() {
     if (conexion3.status == 200) {
       //alert ("readyState: "+conexion2.readyState+"status: "+conexion2.status);
       //SI BUSCO LA CAGOOOO. TENGO QUE VER COMO HACER PARA ACTUALIZAR EL LISTADO SIN PERDER EL DETALLE
-      var datosc = document.getElementById("detallesdearticulo");
-      datosc.innerHTML = conexion3.responseText;
+      document.getElementById("detallesdearticulo").innerHTML = conexion3.responseText;
       tags_cambios = [];
       $(".select2").select2();
     }
@@ -232,8 +266,7 @@ function procesarEventos4() {
     if (conexion4.status == 200) {
       //alert ("readyState: "+conexion2.readyState+"status: "+conexion2.status);
       //SI BUSCO LA CAGOOOO. TENGO QUE VER COMO HACER PARA ACTUALIZAR EL LISTADO SIN PERDER EL DETALLE
-      var datosc = document.getElementById("detallesdearticulo");
-      datosc.innerHTML = conexion4.responseText;
+      document.getElementById("detallesdearticulo").innerHTML = conexion4.responseText;
       tags_cambios = [];
     }
   }

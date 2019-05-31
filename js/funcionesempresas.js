@@ -5,7 +5,8 @@ var id_actual="";
 var nCom;
 function inicializarEventos()
 {
-  document.getElementById('botonBuscadorEmpresa').addEventListener('click',busco,false);
+	document.getElementById('botonBuscadorEmpresa').addEventListener('click',busco,false);
+	document.getElementById('cierraMovs').addEventListener('click',cerrarVentanaMovs,false); 
   document.getElementById('buscadorEmpresa').addEventListener('keypress',teclaEnter,false);
   document.getElementById('botonBuscarPor').addEventListener('click',parametrosDeBusqueda,false);
   document.getElementById('botonAceptarBuscarPor').addEventListener('click',aceptarParametrosDeBusqueda,false); 
@@ -94,8 +95,8 @@ var conexion6;
 var conexion7;
 var numeroEmp;
 function mostrarDetalles(celda){
-  document.getElementById('detallesdeempresas').innerHTML="";
-  numeroEmp=celda.target.id;
+	document.getElementById('detallesdeempresas').innerHTML="";
+	if (isNaN(celda)) {numeroEmp=celda.target.id;} else {numeroEmp=celda;}
   id_actual=numeroEmp;
   conexion2=new XMLHttpRequest(); 
   conexion2.onreadystatechange = procesarEventos2;
@@ -103,8 +104,13 @@ function mostrarDetalles(celda){
   conexion2.open('GET','./php/detallesempresa.php?idemp='+numeroEmp+"&rnadom="+aleatorio, true);
   conexion2.send();
 	if(!isNaN(nCom)){if(!(document.getElementById(nCom)==null)){document.getElementById(nCom).style.backgroundColor="transparent";}}
-	document.getElementById(celda.target.id).style.backgroundColor="#809fff";
-	nCom=celda.target.id;
+	if (isNaN(celda)) {
+		document.getElementById(celda.target.id).style.backgroundColor="#809fff";
+		nCom=celda.target.id; 
+	} else {
+			nCom=celda;
+		}
+
 	//Abril 2019. Las acciones también se borran
 	document.getElementById('accionesDetalle').innerHTML="";
 	conexion7=new XMLHttpRequest(); 
@@ -137,7 +143,15 @@ function procesarEventos2()
 	{
 	  if(conexion2.status == 200)
 	  {
-		  document.getElementById('detallesdeempresas').innerHTML=conexion2.responseText;
+			document.getElementById('detallesdeempresas').innerHTML=conexion2.responseText;
+			//Mayo 2019. Listas de precios. Acciones de los botones de listas de precios
+			document.getElementById('nuevoDescuento').addEventListener('click',nuevoDescuento,false);
+			//Borrar descuentos ya cargados
+			var tags_td = new Array();
+			var tags_td=document.getElementsByName('borraDesc');
+			for (i=0; i<tags_td.length; i++) {
+								tags_td[i].addEventListener('click',borrarDescuentos,false);
+			} 
 		  tags_cambios = []; 	
 			//Busco el CUIT
 		  //AHORA LOS DATOS DE LA AFIP
@@ -157,6 +171,87 @@ function procesarEventos2()
   } 
 }
 
+function borrarDescuentos(celda)
+{
+	var numDesc=celda.target.id;
+	var aleatorio=Math.random();
+	$.ajax({
+		type: "GET",
+		url: "./php/elimino_descuento_empresa.php",
+		data: {IdDesc:numDesc, rnadom:aleatorio},
+		dataType: "html",
+		success: function (response) {
+			//por que no borra???
+			mostrarAvisos(response);
+			mostrarDetalles(nCom);
+		}
+	}).fail();
+}
+
+function nuevoDescuento()
+{
+	document.getElementById('Porcentaje').value="";
+	var hoy = new Date();
+	document.getElementById('Fecha').value=("0" + hoy.getDate()).slice(-2)+"/"+("0" + (hoy.getMonth() + 1)).slice(-2)+"/"+hoy.getFullYear();
+	document.getElementById('Tipo').innerHTML="<select id='tipoDescuento' name='xxxxtd'><option value='26' selected='selected'>Lista</option><option value='27'>Flete-Impuestos</option></select>";
+	document.getElementById('fondoClaro').style.visibility='visible';
+	document.getElementById('detallesdemovimientos').style.visibility='visible';
+	document.getElementById('Porcentaje').focus();
+	document.getElementById('botonAgregaDescuento').addEventListener('click',cargoDescuento,false);	
+}
+
+var conexion666;
+function cargoDescuento()
+{
+	 var proc=document.getElementById('Porcentaje').value;
+	 var fecha=document.getElementById('Fecha').value;
+	 var hoy = new Date();
+	 var anno=hoy.getFullYear();
+	 var mes=("0" + (hoy.getMonth() + 1)).slice(-2);
+	 var dia=("0" + hoy.getDate()).slice(-2);
+	 var fecha=anno+"-"+mes+"-"+dia;
+	 var tipo=document.getElementById('tipoDescuento').value;
+	 var obnn=document.getElementById('numberses').value;
+	 var aleatorio=Math.random();
+	 if ((isNaN(proc)||(proc=="")))	{mostrarAvisos("El porcentaje no es numero!");} else {
+		 //Primero tengo que asegurarme que el descuento que quiero cargar no exista para esa empresa
+		 //la empresa es nCom
+		 $.ajax({
+			type: "GET",
+			url: "./php/verifico_descuento_empresa.php",
+			data: {Empresa:nCom, Porcentaje:proc, Tipo:tipo, rnadom:aleatorio},
+			dataType: "text",
+			success: function (response) {
+				if (response=="Existe") {
+					mostrarAvisos("El descuento ya existe para esta empresa");
+				} else {
+						//Todo bien, cargo el descuento nuevo
+						//la empresa es nCom
+						$.ajax({
+							type: "GET",
+							url: "./php/agrego_descuento_empresa.php",
+							data: {Empresa:nCom, Porcentaje:proc, Fecha:fecha, Tipo:tipo, Responsable:obnn, rnadom:aleatorio},
+							dataType: "html",
+							success: function (response) {
+								mostrarAvisos(response);
+								cerrarVentanaMovs();
+								mostrarDetalles(nCom);
+							}
+						}).fail();
+					}
+			}
+		}).fail();
+
+
+
+	 }
+}
+
+function cerrarVentanaMovs()
+{
+	document.getElementById('fondoClaro').style.visibility='hidden';
+	document.getElementById('detallesdemovimientos').style.visibility='hidden';
+}
 
 function procesarEventos6()
 {

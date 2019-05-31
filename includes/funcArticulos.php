@@ -21,6 +21,11 @@ function llenar_listado_articulos()
 function tablaArticulos($result)
 {
 
+	//Creamos la conexión
+	include_once 'sp_connect.php';
+	$conexion_sp = mysqli_connect(HOSTSP, USERSP, PASSWORDSP, DATABASESP) or
+		die("Problemas con la conexión");
+	mysqli_query($conexion_sp, "set names 'utf8'");
 	ob_start();
 	?>
 	<table class='table table-hover table-sm' id='tablaArticulos'>
@@ -39,7 +44,19 @@ function tablaArticulos($result)
 			<tr>
 				<td id="<?php echo $row['IdProducto']; ?>"> <?php echo $row['IdProducto']; ?></td>
 				<td id="<?php echo $row['IdProducto']; ?>"> <?php echo $row['descricpcion']; ?></td>
-				<td id="<?php echo $row['IdProducto']; ?>"> <?php echo $row['idProveedor']; ?></td>
+				<?php
+					$sql = "SELECT	Organizacion
+							FROM organizaciones 
+							WHERE id = '".$row['idProveedor']."'
+							limit 1";
+					if (!$resultOrganicacion = mysqli_query($conexion_sp, $sql)) die("Problemas con la consulta productos");
+					if ($rowOrganicacion = mysqli_fetch_array($resultOrganicacion)){
+						$nombreProveedor=$rowOrganicacion['Organizacion'];
+					} else {
+						$nombreProveedor="(Sin asignar)";
+					}
+				?>
+				<td id="<?php echo $row['IdProducto']; ?>"> <?php echo $nombreProveedor; ?></td>
 				<td id="<?php echo $row['IdProducto']; ?>"><?php echo $row['Simbolo']; ?> <?php echo $row['ValorVenta']; ?></td>
 				<td id="<?php echo $row['IdProducto']; ?>"><?php echo $row['EnStock']; ?></td>
 			</tr>
@@ -179,24 +196,24 @@ function imprimir_detalle_articulos($resultc, $conexion_sp, $readonly = false)
 				<label for='IdProveedor' class="col-12 col-form-label">Proveedor:</label>
 				<select id='IdProveedor' class='select2' style="width: 100%;" name='IdProveedor'>
 					<?php
-					$sql = "SELECT min(contactos2.idContacto) as mindeidContacto, organizaciones.Organizacion from contactos2 INNER JOIN organizaciones ON contactos2.idOrganizacion = organizaciones.id group by organizaciones.Organizacion";
+					$sql = "SELECT id, Organizacion from organizaciones order by Organizacion";
 
 					if (!$resultCP = mysqli_query($conexion_sp, $sql)) die("Problemas con la consulta contactos2 Organizacion");
+					echo "<option selected value='0'>(Sin asignar)</option>";
 					while ($rowCP = mysqli_fetch_array($resultCP)) {
 						$selected = "";
-						if ($reg['IdProveedor'] == $rowCP['Organizacion']) {
+						if ($reg['IdProveedor'] == $rowCP['id']) {
 							$selected = "selected";
 						}
-						echo "<option {$selected} value='{$rowCP['mindeidContacto']}'>" . substr($rowCP['Organizacion'], 0, 23) . "</option>";
+						echo "<option {$selected} value='{$rowCP['id']}'>" . substr($rowCP['Organizacion'], 0, 23) . "</option>";
 					}
 					if ($reg['IdProveedor'] == '' || $reg['IdProveedor'] == '0') {
 						?>
-						<option selected value='0'></option>
+						<option selected value='0'>(Sin asignar)</option>
 					<?php
-				}
+					}
 				?>
 				</select>
-
 			</div>
 
 			<div class="form-group col-md-6">
@@ -270,7 +287,7 @@ function imprimir_detalle_articulos($resultc, $conexion_sp, $readonly = false)
 				<input id='EnStock' class='col-12 form-control' name='EnStock' type='text' size='4' style='text-align:center; background-color:<?php echo $colorFondo; ?>;' value='<?php echo $reg['EnStock']; ?>' readonly>
 			</div>
 			<div class="form-group col-md-4">
-				<label for='UnidadMedida' class="col-12">U nidad Medida:</label>
+				<label for='UnidadMedida' class="col-12">Unidad Medida:</label>
 				<input id='UnidadMedida' class='col-12 form-control' name='UnidadMedida' type='text' size='6' style='text-align:center;' value='<?php echo $reg['UnidadMedida']; ?>' <?php echo $readonly; ?>>
 			</div>
 		</div>

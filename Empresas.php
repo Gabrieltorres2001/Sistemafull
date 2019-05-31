@@ -83,6 +83,54 @@ llenar_listado_empresas();
        <input type='button' id='botonAceptarBuscarPor' value='Aceptar'/>
 </p>
 </div> <!-- /caja2 -->
+
+<div id="fondoClaro">
+
+</div> <!-- /fondoClaro -->
+
+<div id="detallesdemovimientos">
+	<div style="position:absolute;
+              left:0px;
+              top:0px;
+              height:26px;
+		  	      width:498px;
+              border-width:1px;
+              border-style:solid;
+              border-color:#000;
+              background-color:#30F;">
+        <label style="font-size:1.45em; font-weight:normal; color:#FFF">Agregar nuevo descuento</label>
+        <div style="position:absolute;
+                  left:470px;
+                  top:0px;
+                  float=right;"><input type='button' id='cierraMovs' value='X'/>
+        </div>
+	</div>
+    <div style="position:absolute;
+              left:0px;
+              top:27px;
+              height:102px;
+		  	      width:497px;
+              border:1px solid #555;" id="detallesdemovimientosFRMAcciones">
+    <table>
+		<tr>
+		<th>Porcentaje</th>
+		<th>Fecha</th>
+		<th>Tipo</th>
+		</tr>
+		<tr name='DescuentoEmpresa'>
+			<th><input id='Porcentaje' class='input' type='text' size='14' value=''>%</th>
+			<th><input id='Fecha' class='input' type='text' size='20' value='' readonly='readonly'></th>
+			<th id='Tipo'></th>
+			</tr>
+		</table>	
+    <label style="font-size:0.75em;">Porcentaje positivo es descuento, negativo es recargo.</label> 
+		<br />
+        <input type='button' id='botonAgregaDescuento' value='Agregar'/>   
+    </div><!-- /detallesdemovimientosFRMAcciones -->
+    
+    
+</div> <!-- /detallesdemovimientos -->
+
 		 </div> <!-- /container -->
 		 
 <div id="estapsesion" style="visibility:hidden;">

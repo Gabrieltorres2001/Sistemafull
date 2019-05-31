@@ -67,6 +67,11 @@ sec_session_start();
       </div>
       <div id="detallesdemovimientosFRMInf">
       </div>
+      <div id="fondoClaro">
+      </div> <!-- /fondoClaro -->
+      
+      <div id="nuevoPrecio">
+      </div>
 
 
       <div id="estapsesion" style="visibility:hidden;">
