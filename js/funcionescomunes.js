@@ -57,7 +57,7 @@ function noTengoFormaPago(){
 var conexion302;
 function actualizarCPContacto(){
 	var datosc=document.getElementById('CondPago');	
-	if (datosc.value<1){mostrarAvisos("elegi uno!")
+	if (datosc.value<1){mostrarAvisos("elegi uno!");
 	} else {
 		  var cliente=document.getElementById('empresa').value;
 		  conexion302=new XMLHttpRequest(); 
@@ -91,7 +91,7 @@ function noTengoTipoFactura(){
 var conexion302a;
 function actualizarTFContacto(){
 	var datosc=document.getElementById('tipocomprobantesafip');	
-	if (datosc.value<1){mostrarAvisos("elegi uno!")
+	if (datosc.value<1){mostrarAvisos("elegi uno!");
 	} else {
 		  var cliente=document.getElementById('empresa').value;
 		  conexion302a=new XMLHttpRequest(); 
@@ -117,17 +117,18 @@ function procesarEventos302a(){
 //El cliente tiene todo
 var conexion14;
 function cargarCompobante() {
+	var cliente = "";
 	conexion14=new XMLHttpRequest(); 
 	conexion14.onreadystatechange = procesarEventos14;
 	var aleatorio=Math.random();
 	var obnn=document.getElementById('numberses').value;
 	if(tipoComprobante=="Presupuesto") {
 		//Para recibos el descolgable se llama diferente que para remitos y presupuestos.
-		var cliente=document.getElementById('empresa').value;
+		cliente=document.getElementById('empresa').value;
 		conexion14.open('GET','./php/nuevo_presupuesto.php?&rnadom='+aleatorio+"&numempresa="+cliente+"&sesses="+obnn, true);}
 	if(tipoComprobante=="Remito") {
 		//Para recibos el descolgable se llama diferente que para remitos y presupuestos.
-		var cliente=document.getElementById('empresa').value;
+		cliente=document.getElementById('empresa').value;
 		conexion14.open('GET','./php/nuevo_remito.php?&rnadom='+aleatorio+"&numempresa="+cliente+"&sesses="+obnn, true);}
 	//Febrero 2019. Recibos.
 	if(tipoComprobante=="Recibo") {
@@ -137,8 +138,14 @@ function cargarCompobante() {
 	conexion14.send();
 }//El cliente tiene todo
 
-function sortNfilter(url, busqueda = "") {
-  if (!url) return;
+function sortNfilter(url, clear = false) {
+	if (!url) return;
+	var busqueda = "";
+  if (!clear) {
+    busqueda = $("#buscador").val();
+  }else{
+		$("#buscador").val("");
+	}
   $sortdir = $(".sortdir");
   $sortcol = $sortdir
     .parent()
@@ -156,23 +163,99 @@ function sortNfilter(url, busqueda = "") {
     },
     dataType: "html",
     success: function(response) {
-      $("#tablaArticulos").html(response);
+      $(".card-left .card-body").html(response);
       $("." + $sortcol)
         .children()
         .append(' <i class="sortdir fa fa-sort-amount-' + $sortdir + '"></i>');
     }
   }).fail(function(err) {
     console.log("error en procesar busqueda y orden", err);
-  });
+	});
+	$(".card-right .card-body").html("");
 }
 
-function sortChange(obj){
-	$this = $(obj);
+function sortChange($obj){
+	$this = $($obj);
 	if (!$this.children().hasClass("fa-sort-amount-desc")) {
 		$(".sortdir").remove();
-		$(obj).append(' <i class="sortdir fa fa-sort-amount-desc"></i>');
+		$($obj).append(' <i class="sortdir fa fa-sort-amount-desc"></i>');
 	} else {
 		$(".sortdir").remove();
-		$(obj).append(' <i class="sortdir fa fa-sort-amount-asc"></i>');
+		$($obj).append(' <i class="sortdir fa fa-sort-amount-asc"></i>');
 	}
+}
+
+function getDetail($row, url =""){
+	if (!url) return;
+	var aleatorio = Math.random();
+  $.ajax({
+    type: "GET",
+    url: "./php/" + url + ".php",
+    data: {id:$row.id, rnadom:aleatorio},
+    dataType: "html",
+    success: function (response) {
+      $(".card-right .card-body").html(response);
+      $(".select2").select2();
+      if (!$('.card-button').hasClass('collapsed-card')){
+        $('#refresh').trigger('click');
+      }
+    }
+  }).fail(function(){
+    console.log("error");
+  });
+
+  $(".card-left .card-body tr").removeClass('bg-primary');
+  $("#" + $row.id).addClass('bg-primary');
+}
+
+function isExpanded($obj){
+  var result = !$($obj).parents(".card").hasClass("collapsed-card");
+  return result;
+}
+
+function initApp(){
+
+  $(".card-left .card-header").on("click", "#botonBuscador", function () {
+    buscar();
+  });
+  
+  $(".card-left .card-header").on("click","#botonBorrar", function () {
+    buscar(true);
+  });
+  
+  $(".card-left .card-header").on("keypress","#buscador", function (e) {
+    if (e.which == 13) {
+      buscar();
+    }
+  });
+  
+  $(".card-left .card-body").on("click", "table tbody tr", function () {
+    mostrarDetalles(this);
+  });
+
+  $(".card-left .card-body").on("click", ".TableHeader", function () {
+    sortChange(this);
+    buscar();
+  });
+
+  $(".card [data-widget='collapse']").click(function () {
+      if (!isExpanded(this)){
+        refresh();
+      }
+  });
+
+  $('#refresh').on('click',function(){
+    if (isExpanded($(".card [data-widget='collapse']"))){
+      refresh();
+    }
+  });
+
+  $(".card-right .card-body").on("change", "form", function () {
+    $(".select2").select2();
+  });
+
+  $(".container").on("change", "input, textarea, .select2", function (e) {
+    $(this).parent().addClass('bg-warning');
+  });
+
 }

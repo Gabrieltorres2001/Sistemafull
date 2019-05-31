@@ -3,3 +3,4 @@
 .vscode/launch.json
 includes/psl-config-sp.php
 includes/psl-config.php
+/nbproject/private/

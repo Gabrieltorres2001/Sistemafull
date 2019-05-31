@@ -119,7 +119,7 @@ sec_session_start();
     
     <!-- SI ESTOY LOGEADO. BIEN. PUEDO INGRESAR. -->
     <?php if ((login_check($mysqli) == true) && (formulario_habilitado("Recibo") == true)): ?>   
-	<?php echo upperMenu('Recibos') ?>
+	<?php echo upperMenu($app) ?>
 
     <div class="container">
       <!-- CONTENT -->

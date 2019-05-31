@@ -2,80 +2,128 @@
 
 function llenar_listado_empresas() {
    //Creamos la conexión
-include_once 'includes/sp_connect.php';
-$conexion_sp=mysqli_connect(HOSTSP,USERSP,PASSWORDSP,DATABASESP) or
+	include_once 'includes/sp_connect.php';
+	$conexion_sp=mysqli_connect(HOSTSP,USERSP,PASSWORDSP,DATABASESP) or
     die("Problemas con la conexión");
 	mysqli_query($conexion_sp,"set names 'utf8'");
-//generamos la consulta contactos2
-   if(!$result = mysqli_query($conexion_sp, "select id, Organizacion from organizaciones ORDER BY Organizacion asc limit 100")) die("Problemas con la consulta organizaciones");
-echo "<table class='display' id='tablaOrganizaciones'>";  
-echo "<tr>";  
-//echo "<th width='65'>IdContacto</th>";   
-echo "<th  width='170'>Organización</th>";  
-echo "</tr>";  
-while ($row = mysqli_fetch_row($result)){   
-    echo "<tr id=$row[0]>";  
-//    echo "<td id=$row[0]>$row[0]</td>";   
-    echo "<td id=$row[0]>$row[1]</td>";  
-    echo "</tr>";  
-};  
-echo "</table>";
+	//generamos la consulta contactos2
+	$sql ="SELECT id, Organizacion from organizaciones ORDER BY Organizacion asc limit 100";
+	   if(!$result = mysqli_query($conexion_sp, $sql)) die("Problemas con la consulta organizaciones");
+	
+	return tablaEmpresas($result);
+}
+
+function tablaEmpresas($result){
+	ob_start();
+	?>
+		<table class='table table-hover table-sm' id='tablaOrganizaciones'>
+			<thead class=''>
+				<tr>
+					<th class="Organizacion"><a class="TableHeader" href="#">Organización</th>
+				</tr>
+			</thead>
+			<?php
+			while ($row = mysqli_fetch_row($result)){   
+				?>
+				<tr id=<?php echo $row[0]; ?>>
+					<td><?php echo $row[1]; ?></td>
+				</tr>
+			<?php
+			};  
+			?>
+		</table>
+	<?php
+	$html = ob_get_contents();
+	ob_clean();
+	return $html;
 }
 
 function imprimir_detalle_empresas($resultc, $conexion_sp, $idEmpresaTemp) {
 	$reg = mysqli_fetch_array($resultc);  
 	//Primero datos del contacto
-	echo"<label><u>Datos de la Empresa:</u></label>";
-	echo"<br />";
-	//echo"<label for='idEmpresa'>Id del contacto:</label>";
-	echo"<input id='idEmpresa' class='hidden' name='idEmpresa' type='text' size='5' value=".$reg['id']." >";
+	ob_start();
+	?>
+	<form>
+	<div class="form-row">
+		<div class="form-group col-md-4">
+			<label for='idEmpresa' class="col-12 col-form-label">Id Empresa:</label>
+			<input id='idEmpresa' class='col-12 form-control-plaintext' name='idEmpresa' type='text' alue='<?php echo $reg['id']; ?>'>
+		</div>
+		<div class="form-group col-md-4">
+			<label for='CUIT' class="col-12 col-form-label">CUIT:</label>
+			<input id='CUIT' class='col-12 form-control' name='CUIT' type='text' value='<?php echo $reg['CUIT']; ?>'>
+		</div>
+		<div class="form-group col-md-4">
+			<label for='IdTipoContacto' class="col-12 col-form-label">Tipo:</label>
+			<select id='IdTipoContacto' lass='select2' style="width: 100%;" name='IdTipoContacto'>
+			<?php
+			if(!$resultTC = mysqli_query($conexion_sp, "SELECT * from z_tipocontacto")) die("Problemas con la consulta z_tipocontacto");
+			while ($row = mysqli_fetch_row($resultTC)){ 
+				if ($reg['IdTipoContacto']==$row[0]){
+					echo"<option selected value=".$row[0].">".$row[1]."</option>";
+					}else{
+						echo"<option value=".$row[0].">".$row[1]."</option>";
+					}	
+			}
+			if ($reg['IdTipoContacto']=='' or $reg['IdTipoContacto']=='0'){
+			echo"<option selected value=''></option>";
+			}
+			?>
+			</select>
+		</div>
+	</div>
+	<div class="form-row">
+		<label for='Organizacion' class="col-3 col-form-label">Razón social:</label>
+		<div class="col-9">
+			<input id='Organizacion' class='form-control' name='Organizacion' type='text' value='<?php echo $reg['Organizacion']; ?>'>
+		</div>
+	</div>
+	<div class="form-row">
+		<label for='ActividEmpresa' class="col-3 col-form-label">Actividad Empresa:</label>
+		<div class="col-9">
+			<input id='ActividEmpresa' class='form-control' name='ActividEmpresa' type='text' value='<?php echo $reg['ActividEmpresa']; ?>'>
+		</div>
+	</div>
+	<div class="form-row">
+		<label for='Observaciones' class="col-3 col-form-label">Observaciones:</label>
+		<div class="col-9">
+			<textarea id='Observaciones' class='form-control' name='Observaciones' rows='3' cols='90'><?php echo $reg['Observaciones']; ?></textarea> 
+		</div>
+	</div>
+	<div class="form-row">
+		<label for='Informacion' class="col-3 col-form-label">Rubro:</label>
+		<div class="col-9">
+			<input id='Informacion' class='form-control' name='Informacion' type='text' value='<?php echo $reg['Informacion']; ?>'>
+		</div>
+	</div>
+	<div class="form-row">
+		<label for='Horarios' class="col-3 col-form-label">Horarios de trabajo:</label>
+		<div class="col-9">
+			<input id='Horarios' class='form-control' name='Horarios' type='text' value='<?php echo $reg['Horarios']; ?>'>
+		</div>
+	</div>
+	<div class="form-row">
+		<label for='DiasDePago' class="col-3 col-form-label">Dias y horarios de pago:</label>
+		<div class="col-9">
+			<input id='DiasDePago' class='form-control' name='DiasDePago' type='text' value='<?php echo $reg['DiasDePago']; ?>'>
+		</div>
+	</div>
+	<div class="form-row">
+		<label for='EntregaFactura' class="col-3 col-form-label">Entrega de facturas:</label>
+		<div class="col-9">
+			<input id='EntregaFactura' class='form-control' name='EntregaFactura' type='text' value='<?php echo $reg['EntregaFactura']; ?>'>
+		</div>
+	</div>
+
 	
-	echo"<label for='CUIT'>CUIT:</label>";
-	echo"<input id='CUIT' class='input' name='CUIT' type='text' size='12' value='".$reg['CUIT']."'>";	
-	
-	echo"<label for='Organizacion'>Razón social:</label>";
-	echo"<input id='Organizacion' class='input' name='Organizacion' type='text' size='72' value='".$reg['Organizacion']."'> <br />";	
-	
-	if(!$resultTC = mysqli_query($conexion_sp, "select * from z_tipocontacto")) die("Problemas con la consulta z_tipocontacto");
-	echo"<label for='IdTipoContacto'>Tipo:</label>";
-	echo"<select id='IdTipoContacto' class='input' name='IdTipoContacto'>";
-	while ($row = mysqli_fetch_row($resultTC)){ 
-		if ($reg['IdTipoContacto']==$row[0]){
-			echo"<option selected value=".$row[0].">".$row[1]."</option>";
-			}else{
-				echo"<option value=".$row[0].">".$row[1]."</option>";
-			}	
-	}
-	if ($reg['IdTipoContacto']=='' or $reg['IdTipoContacto']=='0'){
-	echo"<option selected value=''></option>";
-	}
-    echo"</select>";
-	
-	echo"<label for='ActividEmpresa'>Actividad de la empresa:</label>";
-	echo"<input id='ActividEmpresa' class='input' name='ActividEmpresa' type='text' size='55' value='".$reg['ActividEmpresa']."'><br />";
-		
-	echo"<label for='Observaciones'>Observaciones:</label>";
-	echo"<textarea id='Observaciones' class='input' name='Observaciones' rows='6' cols='90'>".$reg['Observaciones']."</textarea> <br />";
-		
-	echo"<label for='Informacion'>Rubro:</label>";
-	echo"<input id='Informacion' class='input' name='Informacion' type='text' size='34' value='".$reg['Informacion']."'><br />";
-	
-	echo"<label for='Horarios'>Horarios de trabajo:</label>";
-	echo"<input id='Horarios' class='input' name='Horarios' type='text' size='89' value='".$reg['Horarios']."'><br />";	
-	
-	echo"<label for='DiasDePago'>Dias y horarios de pago:</label>";
-	echo"<input id='DiasDePago' class='input' name='DiasDePago' type='text' size='85' value='".$reg['DiasDePago']."'><br />";	
-	
-	echo"<label for='EntregaFactura'>Entrega de facturas:</label>";
-	echo"<input id='EntregaFactura' class='input' name='EntregaFactura' type='text' size='88' value='".$reg['EntregaFactura']."'><br />";
-	
+	<label for='CondDePago'>Condición de pago:</label>
+	<select id='CondDePago' class='input' name='CondDePago'>
+	<option selected value=''></option>
+	<?php
 	//cambio la condicion de pago. ahora voy a guardar el id, ya no guardo el texto
 	//Vuelvo a cambiar, ahora la voy a leer del panel de control (y la tengo que separar de la coma).
 	//Padre 17 es la forma de pago. No lo puedo cambiar
-	if(!$resultCpago = mysqli_query($conexion_sp, "select Descripcion, ContenidoValor from controlpanel where padre='17' order by ContenidoValor")) die("Problemas con la consulta forma de pago en controlpanel");
-	echo"<label for='CondDePago'>Condición de pago:</label>";
-	echo"<select id='CondDePago' class='input' name='CondDePago'>";
-	echo"<option selected value=''></option>";
+	if(!$resultCpago = mysqli_query($conexion_sp, "SELECT Descripcion, ContenidoValor from controlpanel where padre='17' order by ContenidoValor")) die("Problemas con la consulta forma de pago en controlpanel");
 	while ($rowresultCpago = mysqli_fetch_array($resultCpago)){ 
 		$tmpCpago = explode(',', $rowresultCpago['ContenidoValor']);
 		if ($reg['CondDePago']==$rowresultCpago['Descripcion']){
@@ -84,11 +132,14 @@ function imprimir_detalle_empresas($resultc, $conexion_sp, $idEmpresaTemp) {
 				echo"<option value='".$rowresultCpago['Descripcion']."'>".$tmpCpago[0]."</option>";
 			}	
 	}
-    echo"</select><br />";
+	?>
+	</select>
 	
+	<label for='CondicionIVA'>Condicion de IVA:</label>
+	<select id='CondicionIVA' class='input' name='CondicionIVA'>
+	<?php
+
 	if(!$resultCIVA = mysqli_query($conexion_sp, "select ConddeIva from z_conddeiva")) die("Problemas con la consulta z_conddeiva");
-	echo"<label for='CondicionIVA'>Condicion de IVA:</label>";
-	echo"<select id='CondicionIVA' class='input' name='CondicionIVA'>";
 	while ($row = mysqli_fetch_array($resultCIVA)){ 
 		if ($reg['CondicionIVA']==$row['ConddeIva']){
 			echo"<option selected value='".$row['ConddeIva']."'>".$row['ConddeIva']."</option>";
@@ -99,7 +150,7 @@ function imprimir_detalle_empresas($resultc, $conexion_sp, $idEmpresaTemp) {
 	if ($reg['CondicionIVA']=='' or $reg['CondicionIVA']=='0'){
 	echo"<option selected value=''></option>";
 	}
-    echo"</select><br />";		
+    echo"</select>";		
 
 	//Nueva 2018. Tipo de factura (A o B), para que el sistema lo seleccione solo a la hora de facturar
 	if(!$tipocomprobantesafip = mysqli_query($conexion_sp, "select Codigo, Denominacion from tipocomprobantesafip where id = 1 or id = 6")) die("Problemas con la consulta tipocomprobantesafip");
@@ -115,13 +166,14 @@ function imprimir_detalle_empresas($resultc, $conexion_sp, $idEmpresaTemp) {
 	if ($reg['tipoComprobante']=='' or $reg['tipoComprobante']=='0'){
 	echo"<option selected value=''></option>";
 	}
-	echo"</select><br />";
+	echo"</select>";
 	//Abril 2019. Precios y descuentos
 	//Hago una tabla para separar visualmente
-	echo"<label><u>Descuentos y recargos:</u></label><br />";
+	echo"<label><u>Descuentos y recargos:</u></label>";
 	if ($reg['IdTipoContacto']=='2'){$tipoContacto="red";} else {$tipoContacto="black";}
 	//Grafico explicativo (costo del producto)
-	echo "<table style='padding: 1px; border-collapse: separate;' >
+	?>
+	<table style='padding: 1px; border-collapse: separate;' >
 		<tr>
 			<td style='border: 1px solid black;' rowspan='2' align='center'>Precio artículo<br>(lista o neto)</td>
 			<td style='border-bottom: 1px solid black;'></td>
@@ -144,14 +196,16 @@ function imprimir_detalle_empresas($resultc, $conexion_sp, $idEmpresaTemp) {
 			<td></td>
 		</tr>
 	 </table>
-	 </br>";
+	 </br>
+	 <?php
 	//Grafico explicativo (precio final del producto)
 	if ($reg['IdTipoContacto']=='1'){$tipoContacto="red";} else {$tipoContacto="black";}
-	echo "<table style='padding: 1px; border-collapse: separate;' >
+	?>
+	<table style='padding: 1px; border-collapse: separate;' >
 	<tr>
 		<td style='border: 1px solid black;' rowspan='2' align='center'>PVP<br>(precio de venta)</td>
 		<td style='border-bottom: 1px solid black;'></td>
-		<td style='border: 1px solid ".$tipoContacto.";' rowspan='2' align='center'>Descuento habitual<br>cliente</td>
+		<td style='border: 1px solid <?php echo $tipoContacto; ?>;' rowspan='2' align='center'>Descuento habitual<br>cliente</td>
 		<td style='border-bottom: 1px solid black;'></td>
 		<td style='border: 1px solid black;' rowspan='2' align='center'>Descuento especial<br>por única vez</td>
 		<td style='border-bottom: 1px solid black;'></td>
@@ -165,15 +219,16 @@ function imprimir_detalle_empresas($resultc, $conexion_sp, $idEmpresaTemp) {
 
 		<td></td>
 	</tr>
- </table>";
+ </table>
+ <?php
 	//ver si es cliente o proveedor
 	//1: Cliente. Los descuentos/recargos se aplicarán al comprobante
 	//2: Proveedor. Los descuentos/recargos se aplicarán al artículo
 	//3 y 4: Varios o Cli/prov. NO SE. Por ahora nada.
 
-	echo "<label>Cliente:</label> Los descuentos/recargos se aplicarán al comprobante (presupuesto/venta) al momento de generarlo.<br />";
-	echo "<label>Proveedor:</label> Los descuentos/recargos se aplicarán a todos los artículos de este proveedor. También se aplicarán los de tipo Lista a las OC.<br />";
-	echo "<label>Varios o Cli/prov:</label> No se aplicarán descuentos o recargos automáticos.<br />";
+	echo "<label>Cliente:</label> Los descuentos/recargos se aplicarán al comprobante (presupuesto/venta) al momento de generarlo.";
+	echo "<label>Proveedor:</label> Los descuentos/recargos se aplicarán a todos los artículos de este proveedor. También se aplicarán los de tipo Lista a las OC.";
+	echo "<label>Varios o Cli/prov:</label> No se aplicarán descuentos o recargos automáticos.";
 
 	if (($reg['IdTipoContacto']=='2')||($reg['IdTipoContacto']=='1')){
 		echo"<label>Descuentos y recargos vigentes:</label><br />";
@@ -208,14 +263,14 @@ function imprimir_detalle_empresas($resultc, $conexion_sp, $idEmpresaTemp) {
 		echo"<input type='button' id='nuevoDescuento' value='Agregar nuevo descuento'/>";	
 		echo"<br />";
 
-		echo"<label>Descuentos y recargos anteriores:</label><br />";
-		echo"<br />";
+		echo"<label>Descuentos y recargos anteriores:</label>";
+		echo"";
 	}
 	
 	//Siguen las direcciones. Hacer una tabla.
 	if(!$resultDirec = mysqli_query($conexion_sp, "select id, Direccion, Ciudad, Codigopostal, Provoestado, Pais from direcciones where CUIT = '".$reg['id']."' and Direccion not Like '%@%' and ((Direccion is not null) and (Ciudad is not null) and (Codigopostal is not null) and (Provoestado is not null) and (Pais is not null)) order by id asc")) die("Problemas con la consulta Direcciones");
 	echo"<label><u>Direccion(es) de la empresa:</u></label>";
-	echo"<br />";
+	echo"";
 	echo"<table>";
 	echo"<tr>";
 	echo"<th>Direccion</th>";
@@ -227,28 +282,28 @@ function imprimir_detalle_empresas($resultc, $conexion_sp, $idEmpresaTemp) {
 	$contadortd=0;
 	while ($rowDir = mysqli_fetch_row($resultDirec)){ 
 		echo"<tr name='DireccionEmpresa' id='".$rowDir[0]."'>";
-		echo"<td><input id='Direccion".$contadortd."' class='input' type='text' size='34' value='".$rowDir[1]."'></td>";
-		echo"<td><input id='Ciudad".$contadortd."' class='input' type='text' size='10' value='".$rowDir[2]."'></td>";
-		echo"<td><input id='CP".$contadortd."' class='input' type='text' size='4' value='".$rowDir[3]."'></td>";
-		echo"<td><input id='Provincia".$contadortd."' class='input' type='text' size='14' value='".$rowDir[4]."'></td>";
-		echo"<td><input id='pais".$contadortd."' class='input' type='text' size='10' value='".$rowDir[5]."'></td>";		
-		if ($contadortd==0) {echo"<td><input id='id".$contadortd."' class='input' type='hidden' size='34' value='".$rowDir[0]."'>Facturación</td>";} else {echo"<td><input id='id".$contadortd."' class='input' type='hidden' size='34' value='".$rowDir[0]."'></td>";}
+		echo"<td><input id='Direccion".$contadortd."' class='input' type='text' value='".$rowDir[1]."'></td>";
+		echo"<td><input id='Ciudad".$contadortd."' class='input' type='text' value='".$rowDir[2]."'></td>";
+		echo"<td><input id='CP".$contadortd."' class='input' type='text' alue='".$rowDir[3]."'></td>";
+		echo"<td><input id='Provincia".$contadortd."' class='input' type='text' value='".$rowDir[4]."'></td>";
+		echo"<td><input id='pais".$contadortd."' class='input' type='text' value='".$rowDir[5]."'></td>";		
+		if ($contadortd==0) {echo"<td><input id='id".$contadortd."' class='input' type='hidden' value='".$rowDir[0]."'>Facturación</td>";} else {echo"<td><input id='id".$contadortd."' class='input' type='hidden' value='".$rowDir[0]."'></td>";}
 		echo"</tr>";
 		$contadortd++;
 	}
 		echo"<tr name='DireccionEmpresa' id='0'>";
-		echo"<td><input id='Direccion".$contadortd."' class='input' type='text' size='34' value=''></td>";
-		echo"<td><input id='Ciudad".$contadortd."' class='input' type='text' size='10' value=''></td>";
-		echo"<td><input id='CP".$contadortd."' class='input' type='text' size='4' value=''></td>";
-		echo"<td><input id='Provincia".$contadortd."' class='input' type='text' size='14' value=''></td>";
-		echo"<td><input id='pais".$contadortd."' class='input' type='text' size='10' value=''></td>";
-		echo"<td><input id='id".$contadortd."' class='input' type='hidden' size='34' value='0'></td>";		
+		echo"<td><input id='Direccion".$contadortd."' class='input' type='text' value=''></td>";
+		echo"<td><input id='Ciudad".$contadortd."' class='input' type='text' value=''></td>";
+		echo"<td><input id='CP".$contadortd."' class='input' type='text' alue=''></td>";
+		echo"<td><input id='Provincia".$contadortd."' class='input' type='text' value=''></td>";
+		echo"<td><input id='pais".$contadortd."' class='input' type='text' value=''></td>";
+		echo"<td><input id='id".$contadortd."' class='input' type='hidden' value='0'></td>";		
 		echo"</tr>";
 	echo"</table>";			
 	//Por ultimo los empleados de la empresa
 	if(!$resultEmpleados = mysqli_query($conexion_sp, "select NombreCompleto, FuncionEnLaEmpresa, PalabrasClave, PoderDecision from contactos2 where idOrganizacion = '".$reg['id']."' order by NombreCompleto")) die("Problemas con la consulta contactos2");
 	echo"<label><u>Empleados de la Empresa:</u></label>";
-	echo"<br />";
+	echo"";
 	echo"<table>";
 	echo"<tr>";
 	echo"<th>Nombre</th>";
@@ -258,13 +313,13 @@ function imprimir_detalle_empresas($resultc, $conexion_sp, $idEmpresaTemp) {
 	echo"</tr>";
 	while ($rowDir = mysqli_fetch_row($resultEmpleados)){ 
 		echo"<tr>";
-		echo"<td><input class='input' type='text' size='34' value='".$rowDir[0]."' disabled></td>";
-		echo"<td><input class='input' type='text' size='30' value='".$rowDir[1]."' disabled></td>";
-		echo"<td><input class='input' type='text' size='30' value='".$rowDir[2]."' disabled></td>";
-		if ($rowDir[3]=='1') {echo"<td><input class='input' type='text' size='2' value='Si' disabled></td>";} else {echo"<td><input class='input' type='text' size='2' value='No' disabled></td>";}
+		echo"<td><input class='input' type='text' value='".$rowDir[0]."' disabled></td>";
+		echo"<td><input class='input' type='text' value='".$rowDir[1]."' disabled></td>";
+		echo"<td><input class='input' type='text' value='".$rowDir[2]."' disabled></td>";
+		if ($rowDir[3]=='1') {echo"<td><input class='input' type='text' alue='Si' disabled></td>";} else {echo"<td><input class='input' type='text' alue='No' disabled></td>";}
 		echo"</tr>";
 	}
-	echo"</table>";	
+	echo"</table></form>";	
 }
 
 	

@@ -6,14 +6,14 @@ include 'php/globalFunctions.php';
   ob_start();
   ?>
   <div class="input-group">
-    <input id="buscador<?php echo $tn ?>" type="text" class="form-control" placeholder="ingrese su búsqueda..." aria-label="ingrese su búsqueda..." aria-describedby="buscar">
+    <input id="buscador" type="text" class="form-control" placeholder="ingrese su búsqueda..." aria-label="ingrese su búsqueda..." aria-describedby="buscar">
     <div class="input-group-append">
       <button id="botonBuscador" class="btn btn-secondary" type="button" id="buscar" value="Buscar"><i class="fa fa-search"></i></button>
       <button id="botonBorrar" class="btn btn-secondary" type="button" id="borrar" value="Borrar"><i class="fa fa-close"></i></button>
     </div>
   </div>
   <script>
-    $('#buscador<?php echo $tn ?>').focus();
+    $('#buscador').focus();
   </script>
   <?php
   $ret = ob_get_contents();
@@ -58,7 +58,7 @@ function upperMenu($current)
     $active = "";
     if (!$link['navBar']) continue;
     if (!isset($link['url']) || !isset($link['title'])) continue;
-    $active = $link['title'] == $current ? "active" : "";
+    $active = $link['title'] == $current['title'] ? "active border border-warning" : "";
     $title =  ucwords(strtolower($link['title']));
     $html .= '<li class="nav-item ' . $active . '">';
     $html .= '    <a class="nav-link" href="' . $link['url'] . '" title="' . $link['description'] . '">';
@@ -110,4 +110,28 @@ function upperMenu($current)
   $nav = ob_get_contents();
   ob_clean();
   return $nav;
+}
+
+function selectCombo($conexion_sp,$selected,$text,$id){
+  ob_start();
+  ?>
+  <select id='IdTipoContacto' class='input' name='IdTipoContacto'>
+	<?php
+	if(!$resultTC = mysqli_query($conexion_sp, "SELECT * from z_tipocontacto")) die("Problemas con la consulta z_tipocontacto");
+	while ($row = mysqli_fetch_row($resultTC)){ 
+		if ($selected==$row[0]){
+			echo"<option selected value=".$row[0].">".$row[1]."</option>";
+			}else{
+				echo"<option value=".$row[0].">".$row[1]."</option>";
+			}	
+	}
+	if ($selected=='' or $selected=='0'){
+	echo"<option selected value=''></option>";
+	}
+	?>
+    </select>
+    <?php
+  $html = ob_get_contents();
+  ob_clean();
+  return $html;
 }

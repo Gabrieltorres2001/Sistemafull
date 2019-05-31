@@ -19,7 +19,7 @@ sec_session_start();
 	<?php
 	if (login_check($mysqli) == true) {
 		// SI ESTOY LOGEADO. BIEN. PUEDO INGRESAR
-		echo upperMenu($app['title']);
+		echo upperMenu($app);
 		?>
 		<div class="container">
 			<div class="card-deck">
@@ -33,7 +33,7 @@ sec_session_start();
 						</div>
 						<hr>
 						<div class="row">
-							<div class="col-md-6">
+							<div class="offset-2 col-md-8">
 								<p>
 									Username: <label id="userActualizado"><?php echo htmlentities($_SESSION['username']); ?></label>
 								</p>
@@ -46,15 +46,13 @@ sec_session_start();
 								<p>
 									Horarios: <label id="horariosActualizado"> <?php echo htmlentities($_SESSION['Horarios']); ?></label>
 								</p>
-							</div>
-							<div class="col-md-6">
 								<p>
 									FechaActualizacion: <label id="horaActualizacion"> <?php echo htmlentities($_SESSION['FechaActualizacion']); ?>
 								</p>
 								<p>
 									Ultimo Login (anterior a este): <?php ultimo_inicio_sesion($_SESSION['user_id']); ?>
 								</p>
-								<p style="margin-right:0; margin-left:0; padding-right: 2px; padding-left: 2px;" ;>
+								<p>
 									eMail (usado para el inicio de sesión): <label id="eMailActualizado"> <?php echo htmlentities($_SESSION['email']); ?> </label>
 								</p>
 							</div>

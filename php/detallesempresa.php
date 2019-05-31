@@ -8,6 +8,6 @@ $conexion_sp=mysqli_connect(HOSTSP,USERSP,PASSWORDSP,DATABASESP) or
 	mysqli_query($conexion_sp,"set names 'utf8'");
 //generamos la consulta
 
-	if(!$resultc = mysqli_query($conexion_sp, "select * from organizaciones where id = '".$_REQUEST['idemp']."' limit 1")) die("Problemas con la consulta");  
+	if(!$resultc = mysqli_query($conexion_sp, "select * from organizaciones where id = '".$_REQUEST['id']."' limit 1")) die("Problemas con la consulta");  
 
 imprimir_detalle_empresas($resultc, $conexion_sp, '');
