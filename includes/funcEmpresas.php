@@ -227,44 +227,53 @@ function imprimir_detalle_empresas($resultc, $conexion_sp, $idEmpresaTemp) {
 	//3 y 4: Varios o Cli/prov. NO SE. Por ahora nada.
 
 	if (($reg['IdTipoContacto']=='2')||($reg['IdTipoContacto']=='1')){
-		echo"<label>Descuentos y recargos vigentes:</label><br />";
 		if(!$tiposDescuentos = mysqli_query($conexion_sp, "select ID, Descripcion from tipos where ID = '26'")) die("Problemas con la consulta tipos");
-		echo"<table>";
-		echo"<tr>";
-		echo"<th>Porcentaje</th>";
-		echo"<th>Fecha</th>";
-		echo"<th>Tipo</th>";
-		echo"<th>Responsable</th>";	
-		echo"<th>Eliminar descuento</th>";	
-		echo"</tr>";
+		?>
+		<label>Descuentos y recargos vigentes:</label><br />
+		<table>
+		<tr>
+		<th>Porcentaje</th>
+		<th>Fecha</th>
+		<th>Tipo</th>
+		<th>Responsable</th>
+		<th>Eliminar descuento</th>
+		</tr>
+		<?php
 		if(!$descuentos = mysqli_query($conexion_sp, "select Id, Porcentaje, Fecha, Tipo, Responsable from descuentos where Empresa = '".$reg['id']."' and (Tipo = '26'  or Tipo = '27') order by Id desc")) die("Problemas con la consulta descuentos");
 		while ($rowDescuentos = mysqli_fetch_array($descuentos)){ 
-			echo"<tr name='DescuentoEmpresa' id='".$rowDescuentos['Id']."'>";
-			echo"<td><input id='Porcentaje".$rowDescuentos['Id']."' class='input' type='text' size='5' value='".$rowDescuentos['Porcentaje']."' readonly>%</td>";
-			echo"<td><input id='Fecha".$rowDescuentos['Id']."' class='input' type='text' size='10' value='".$rowDescuentos['Fecha']."' readonly></td>";
 			if(!$tipos = mysqli_query($conexion_sp, "select Descripcion from tipos where ID = '".$rowDescuentos['Tipo']."' limit 1")) die("Problemas con la consulta tipos");
 			$rowTipos = mysqli_fetch_array($tipos);
-			echo"<td><input id='Tipo".$rowDescuentos['Id']."' class='input' type='text' size='18' value='".$rowTipos['Descripcion']."' readonly></td>";
 			include_once '../includes/db_connect.php';
 			$conexion_db=mysqli_connect(HOST,USER,PASSWORD,DATABASE) or die("Problemas con la conexión");
 			mysqli_query($conexion_db,"set names 'utf8'");
 			if(!$miembros = mysqli_query($conexion_db, "select Nombre, Apellido from members where id = '".$rowDescuentos['Responsable']."' limit 1")) die("Problemas con la consulta tipos");
 			$rowMiembros = mysqli_fetch_array($miembros);
-			echo"<td><input id='Responsable".$rowDescuentos['Id']."' class='input' type='text' size='18' value='".$rowMiembros['Nombre']." ".$rowMiembros['Apellido']."' readonly></td>";
-			echo"<td><input type='button' name='borraDesc' id='".$rowDescuentos['Id']."' value='X'/></td>";
-			echo"</tr>";
+			?>
+			<tr name='DescuentoEmpresa' id='<?php echo $rowDescuentos['Id']; ?>'>
+			<td><?php echo $rowDescuentos['Porcentaje']; ?> %</td>
+			<td><?php echo $rowDescuentos['Fecha']; ?></td>
+			<td><?php echo $rowTipos['Descripcion']; ?></td>
+			<td><?php echo $rowMiembros['Nombre']." ".$rowMiembros['Apellido']; ?></td>
+			<td><input value='X'/></td>
+			</tr>";
+			<?php
 		}
-		echo"</table>";	
-		echo"<br />";
-		echo"<input data-toggle='modal' data-target='#detallesdemovimientos' type='button' id='nuevoDescuento' value='Agregar nuevo descuento'/>";	
-		echo"<br />";
-
-		echo"<label>Descuentos y recargos anteriores:</label>";
-		echo"";
+		?>
+		</table>
+		<br />
+		<input data-toggle='modal' data-target='#detallesdemovimientos' type='button' id='nuevoDescuento' value='Agregar nuevo descuento'/>
+		<br />
+		<label>Descuentos y recargos anteriores:</label>
+		<?php
 	}
 	
 	//Siguen las direcciones. Hacer una tabla.
-	if(!$resultDirec = mysqli_query($conexion_sp, "select id, Direccion, Ciudad, Codigopostal, Provoestado, Pais from direcciones where CUIT = '".$reg['id']."' and Direccion not Like '%@%' and ((Direccion is not null) and (Ciudad is not null) and (Codigopostal is not null) and (Provoestado is not null) and (Pais is not null)) order by id asc")) die("Problemas con la consulta Direcciones");
+	$sql= "SELECT id, Direccion, Ciudad, Codigopostal, Provoestado, Pais 
+	from direcciones 
+	where CUIT = '".$reg['id']."' and Direccion not Like '%@%' and ((Direccion is not null) and (Ciudad is not null) and (Codigopostal is not null) and (Provoestado is not null) and (Pais is not null)) order by id asc";
+
+	if(!$resultDirec = mysqli_query($conexion_sp, $sql)) die("Problemas con la consulta Direcciones");
+	echo $sql;
 	?>
 	<label><u>Direccion(es) de la empresa:</u></label>
 	<table>
@@ -279,36 +288,31 @@ function imprimir_detalle_empresas($resultc, $conexion_sp, $idEmpresaTemp) {
 		$contadortd=0;
 		while ($rowDir = mysqli_fetch_row($resultDirec)){ 
 			?>
-			<tr name='DireccionEmpresa' id='".$rowDir[0]."'>
-			<td><input id='Direccion".$contadortd."' class='input' type='text' value='".$rowDir[1]."'></td>
-			<td><input id='Ciudad".$contadortd."' class='input' type='text' value='".$rowDir[2]."'></td>
-			<td><input id='CP".$contadortd."' class='input' type='text' alue='".$rowDir[3]."'></td>
-			<td><input id='Provincia".$contadortd."' class='input' type='text' value='".$rowDir[4]."'></td>
-			<td><input id='pais".$contadortd."' class='input' type='text' value='".$rowDir[5]."'></td>
+			<tr name='DireccionEmpresa' id='<?php echo $rowDir[0]; ?>'>
+			<td><input id='Direccion<?php echo $contadortd; ?>' class='input' type='text' value='<?php echo $rowDir[1]; ?>'></td>
+			<td><input id='Ciudad<?php echo $contadortd; ?>' class='input' type='text' value='<?php echo $rowDir[2]; ?>'></td>
+			<td><input id='CP<?php echo $contadortd; ?>' class='input' type='text' alue='<?php echo $rowDir[3]; ?>'></td>
+			<td><input id='Provincia<?php echo $contadortd; ?>' class='input' type='text' value='<?php echo $rowDir[4]; ?>'></td>
+			<td><input id='pais<?php echo $contadortd; ?>' class='input' type='text' value='<?php echo $rowDir[5]; ?>'></td>
 			<?php
-			if ($contadortd==0) {
-				echo"<td><input id='id".$contadortd."' class='input' type='hidden' value='".$rowDir[0]."'>Facturación</td>";
-			} else {
-				echo"<td><input id='id".$contadortd."' class='input' type='hidden' value='".$rowDir[0]."'></td>";
-			}
-			$contadortd++;
+
 			?>
 				</tr>
 			<?php
 			}
 			?>
 		<tr name='DireccionEmpresa' id='0'>
-		<td><input id='Direccion".$contadortd."' class='input' type='text' value=''></td>
-		<td><input id='Ciudad".$contadortd."' class='input' type='text' value=''></td>
-		<td><input id='CP".$contadortd."' class='input' type='text' alue=''></td>
-		<td><input id='Provincia".$contadortd."' class='input' type='text' value=''></td>
-		<td><input id='pais".$contadortd."' class='input' type='text' value=''></td>
-		<td><input id='id".$contadortd."' class='input' type='hidden' value='0'></td>
+		<td><input id='Direccion<?php echo $contadortd; ?>' class='input' type='text' value=''></td>
+		<td><input id='Ciudad<?php echo $contadortd; ?>' class='input' type='text' value=''></td>
+		<td><input id='CP<?php echo $contadortd; ?>' class='input' type='text' alue=''></td>
+		<td><input id='Provincia<?php echo $contadortd; ?>' class='input' type='text' value=''></td>
+		<td><input id='pais<?php echo $contadortd; ?>' class='input' type='text' value=''></td>
+		<td><input id='id<?php echo $contadortd; ?>' class='input' type='hidden' value='0'></td>
 		</tr>
 	</table>			
 	<?php
 	//Por ultimo los empleados de la empresa
-	if(!$resultEmpleados = mysqli_query($conexion_sp, "select NombreCompleto, FuncionEnLaEmpresa, PalabrasClave, PoderDecision from contactos2 where idOrganizacion = '".$reg['id']."' order by NombreCompleto")) die("Problemas con la consulta contactos2");
+	if(!$resultEmpleados = mysqli_query($conexion_sp, "SELECT NombreCompleto, FuncionEnLaEmpresa, PalabrasClave, PoderDecision from contactos2 where idOrganizacion = '".$reg['id']."' order by NombreCompleto")) die("Problemas con la consulta contactos2");
 	?>
 	<label><u>Empleados de la Empresa:</u></label>
 	<table>
@@ -335,6 +339,7 @@ function imprimir_detalle_empresas($resultc, $conexion_sp, $idEmpresaTemp) {
 	?>
 	</table></form>
 	<?php
+
 }
 
 	
