@@ -41,7 +41,7 @@ function tablaArticulos($result)
 				<td><?php echo $row['IdProducto']; ?></td>
 				<td><?php echo $row['descricpcion']; ?></td>
 				<td><?php echo $row['idProveedor']; ?></td>
-				<td><?php echo $row['Simbolo']; ?><?php echo $row['ValorVenta']; ?></td>
+				<td><?php echo $row['Simbolo']; ?> <?php echo $row['ValorVenta']; ?></td>
 				<td><?php echo $row['EnStock']; ?></td>
 			</tr>
 		<?php
