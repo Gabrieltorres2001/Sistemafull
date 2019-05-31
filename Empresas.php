@@ -78,18 +78,11 @@ sec_session_start();
         </div>
       </div>
 
-
-
-
-
       <div id="empresas">
         <?php
 
         ?>
       </div> <!-- /empresas -->
-      <div id="fondoClaro">
-
-      </div> <!-- /fondoClaro -->
 
       <div class="modal" id="detallesdemovimientos">
         <div class="modal-dialog" role="document">

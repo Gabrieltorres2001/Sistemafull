@@ -38,7 +38,7 @@ function buscar(clear = false) {
   sortNfilter("buscoarticulo", clear);
 
 }
-
+//detalle del articulo
 function mostrarDetalles($row) { 
   getDetail($row,'detallesarticulo');
 }
