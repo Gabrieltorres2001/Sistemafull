@@ -273,7 +273,6 @@ function imprimir_detalle_empresas($resultc, $conexion_sp, $idEmpresaTemp) {
 	where CUIT = '".$reg['id']."' and Direccion not Like '%@%' and ((Direccion is not null) and (Ciudad is not null) and (Codigopostal is not null) and (Provoestado is not null) and (Pais is not null)) order by id asc";
 
 	if(!$resultDirec = mysqli_query($conexion_sp, $sql)) die("Problemas con la consulta Direcciones");
-	echo $sql;
 	?>
 	<label><u>Direccion(es) de la empresa:</u></label>
 	<table>
